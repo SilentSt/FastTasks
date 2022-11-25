@@ -12,7 +12,6 @@ import 'charts/tabled_chart_model.dart';
 import 'charts/total_chart_model.dart';
 import 'charts/total_progress_chart_model.dart';
 import 'charts/total_tabled_chart_model.dart';
-import 'charts/user_tabled_chart_model.dart';
 import 'chat/chat_dto.dart';
 import 'chat/chat_model.dart';
 import 'message/mesage_model.dart';
@@ -60,7 +59,6 @@ var _mappers = <BaseMapper>{
   TotalProgressChartModelMapper._(),
   SmallTableModelMapper._(),
   TabledChartModelMapper._(),
-  UserTabledChartModelMapper._(),
   TotalTabledChartModelMapper._(),
   ChartsUserChartModelMapper._(),
   // enum mappers
@@ -953,7 +951,7 @@ class TabledChartModelMapper extends BaseMapper<TabledChartModel> {
 
   @override Function get decoder => decode;
   TabledChartModel decode(dynamic v) => checked(v, (Map<String, dynamic> map) => fromMap(map));
-  TabledChartModel fromMap(Map<String, dynamic> map) => TabledChartModel(table: Mapper.i.$getOpt(map, 'table'), chart: Mapper.i.$getOpt(map, 'chart'));
+  TabledChartModel fromMap(Map<String, dynamic> map) => TabledChartModel(table: Mapper.i.$getOpt(map, 'table'), chart: Mapper.i.$get(map, 'chart'));
 
   @override Function get encoder => (TabledChartModel v) => encode(v);
   dynamic encode(TabledChartModel v) => toMap(v);
@@ -975,8 +973,8 @@ extension TabledChartModelMapperExtension  on TabledChartModel {
 abstract class TabledChartModelCopyWith<$R> {
   factory TabledChartModelCopyWith(TabledChartModel value, Then<TabledChartModel, $R> then) = _TabledChartModelCopyWithImpl<$R>;
   SmallTableModelCopyWith<$R>? get table;
-  ChartModelCopyWith<$R>? get chart;
-  $R call({SmallTableModel? table, ChartModel? chart});
+  ListCopyWith<$R, ChartsUserChartModel, ChartsUserChartModelCopyWith<$R>> get chart;
+  $R call({SmallTableModel? table, List<ChartsUserChartModel>? chart});
   $R apply(TabledChartModel Function(TabledChartModel) transform);
 }
 
@@ -984,48 +982,8 @@ class _TabledChartModelCopyWithImpl<$R> extends BaseCopyWith<TabledChartModel, $
   _TabledChartModelCopyWithImpl(TabledChartModel value, Then<TabledChartModel, $R> then) : super(value, then);
 
   @override SmallTableModelCopyWith<$R>? get table => $value.table != null ? SmallTableModelCopyWith($value.table!, (v) => call(table: v)) : null;
-  @override ChartModelCopyWith<$R>? get chart => $value.chart != null ? ChartModelCopyWith($value.chart!, (v) => call(chart: v)) : null;
-  @override $R call({Object? table = $none, Object? chart = $none}) => $then(TabledChartModel(table: or(table, $value.table), chart: or(chart, $value.chart)));
-}
-
-class UserTabledChartModelMapper extends BaseMapper<UserTabledChartModel> {
-  UserTabledChartModelMapper._();
-
-  @override Function get decoder => decode;
-  UserTabledChartModel decode(dynamic v) => checked(v, (Map<String, dynamic> map) => fromMap(map));
-  UserTabledChartModel fromMap(Map<String, dynamic> map) => UserTabledChartModel(user: Mapper.i.$getOpt(map, 'user'), tabledChart: Mapper.i.$get(map, 'tabledChart'));
-
-  @override Function get encoder => (UserTabledChartModel v) => encode(v);
-  dynamic encode(UserTabledChartModel v) => toMap(v);
-  Map<String, dynamic> toMap(UserTabledChartModel u) => {'user': Mapper.i.$enc(u.user, 'user'), 'tabledChart': Mapper.i.$enc(u.tabledChart, 'tabledChart')};
-
-  @override String stringify(UserTabledChartModel self) => 'UserTabledChartModel(user: ${Mapper.asString(self.user)}, tabledChart: ${Mapper.asString(self.tabledChart)})';
-  @override int hash(UserTabledChartModel self) => Mapper.hash(self.user) ^ Mapper.hash(self.tabledChart);
-  @override bool equals(UserTabledChartModel self, UserTabledChartModel other) => Mapper.isEqual(self.user, other.user) && Mapper.isEqual(self.tabledChart, other.tabledChart);
-
-  @override Function get typeFactory => (f) => f<UserTabledChartModel>();
-}
-
-extension UserTabledChartModelMapperExtension  on UserTabledChartModel {
-  String toJson() => Mapper.toJson(this);
-  Map<String, dynamic> toMap() => Mapper.toMap(this);
-  UserTabledChartModelCopyWith<UserTabledChartModel> get copyWith => UserTabledChartModelCopyWith(this, $identity);
-}
-
-abstract class UserTabledChartModelCopyWith<$R> {
-  factory UserTabledChartModelCopyWith(UserTabledChartModel value, Then<UserTabledChartModel, $R> then) = _UserTabledChartModelCopyWithImpl<$R>;
-  ChartUserModelCopyWith<$R>? get user;
-  ListCopyWith<$R, TabledChartModel, TabledChartModelCopyWith<$R>> get tabledChart;
-  $R call({ChartUserModel? user, List<TabledChartModel>? tabledChart});
-  $R apply(UserTabledChartModel Function(UserTabledChartModel) transform);
-}
-
-class _UserTabledChartModelCopyWithImpl<$R> extends BaseCopyWith<UserTabledChartModel, $R> implements UserTabledChartModelCopyWith<$R> {
-  _UserTabledChartModelCopyWithImpl(UserTabledChartModel value, Then<UserTabledChartModel, $R> then) : super(value, then);
-
-  @override ChartUserModelCopyWith<$R>? get user => $value.user != null ? ChartUserModelCopyWith($value.user!, (v) => call(user: v)) : null;
-  @override ListCopyWith<$R, TabledChartModel, TabledChartModelCopyWith<$R>> get tabledChart => ListCopyWith($value.tabledChart, (v, t) => TabledChartModelCopyWith(v, t), (v) => call(tabledChart: v));
-  @override $R call({Object? user = $none, List<TabledChartModel>? tabledChart}) => $then(UserTabledChartModel(user: or(user, $value.user), tabledChart: tabledChart ?? $value.tabledChart));
+  @override ListCopyWith<$R, ChartsUserChartModel, ChartsUserChartModelCopyWith<$R>> get chart => ListCopyWith($value.chart, (v, t) => ChartsUserChartModelCopyWith(v, t), (v) => call(chart: v));
+  @override $R call({Object? table = $none, List<ChartsUserChartModel>? chart}) => $then(TabledChartModel(table: or(table, $value.table), chart: chart ?? $value.chart));
 }
 
 class TotalTabledChartModelMapper extends BaseMapper<TotalTabledChartModel> {
@@ -1054,15 +1012,15 @@ extension TotalTabledChartModelMapperExtension  on TotalTabledChartModel {
 
 abstract class TotalTabledChartModelCopyWith<$R> {
   factory TotalTabledChartModelCopyWith(TotalTabledChartModel value, Then<TotalTabledChartModel, $R> then) = _TotalTabledChartModelCopyWithImpl<$R>;
-  ListCopyWith<$R, UserTabledChartModel, UserTabledChartModelCopyWith<$R>>? get chart;
-  $R call({List<UserTabledChartModel>? chart});
+  ListCopyWith<$R, TabledChartModel, TabledChartModelCopyWith<$R>>? get chart;
+  $R call({List<TabledChartModel>? chart});
   $R apply(TotalTabledChartModel Function(TotalTabledChartModel) transform);
 }
 
 class _TotalTabledChartModelCopyWithImpl<$R> extends BaseCopyWith<TotalTabledChartModel, $R> implements TotalTabledChartModelCopyWith<$R> {
   _TotalTabledChartModelCopyWithImpl(TotalTabledChartModel value, Then<TotalTabledChartModel, $R> then) : super(value, then);
 
-  @override ListCopyWith<$R, UserTabledChartModel, UserTabledChartModelCopyWith<$R>>? get chart => $value.chart != null ? ListCopyWith($value.chart!, (v, t) => UserTabledChartModelCopyWith(v, t), (v) => call(chart: v)) : null;
+  @override ListCopyWith<$R, TabledChartModel, TabledChartModelCopyWith<$R>>? get chart => $value.chart != null ? ListCopyWith($value.chart!, (v, t) => TabledChartModelCopyWith(v, t), (v) => call(chart: v)) : null;
   @override $R call({Object? chart = $none}) => $then(TotalTabledChartModel(chart: or(chart, $value.chart)));
 }
 

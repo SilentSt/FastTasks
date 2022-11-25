@@ -8,5 +8,5 @@ class TotalTabledChartModel with Mappable {
     this.chart,
   });
 
-  final List<UserTabledChartModel>? chart;
+  final List<TabledChartModel>? chart;
 }

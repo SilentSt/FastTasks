@@ -23,7 +23,7 @@ class ChartsViewModel extends BaseViewModel {
 
   List<ChartsUserChartModel> selectedUserChart = [];
 
-  List<UserTabledChartModel> selectedTableChart = [];
+  List<TabledChartModel> selectedTableChart = [];
   
 
   
@@ -36,7 +36,9 @@ class ChartsViewModel extends BaseViewModel {
   ];
 
   List<RadarDataSet> radarData = [];
+  List<RadarDataSet> radarTabledData = [];
   List<Color> colors = [];
+  List<Color> colorsTabled = [];
 
   Future<void> onReady() async {
     setBusy(true);
@@ -71,8 +73,49 @@ class ChartsViewModel extends BaseViewModel {
       ),
     ];
   }
-  void buildTabledRadar(UserTabledChartModel? value){
-    
+  void buildTabledRadar(TabledChartModel? value){
+    if (value == null) {
+      selectedUserChart.clear();
+    } else if (selectedTableChart.contains(value)) {
+      selectedTableChart.remove(value);
+    } else {
+      selectedTableChart.add(value);
+    }
+    colorsTabled.clear();
+    radarTabledData = selectedTableChart.expand((element) => element.chart.map(
+      (user) {
+        final color = Color.fromRGBO(
+          Random().nextInt(255) + 50,
+          Random().nextInt(255) + 50,
+          Random().nextInt(255) + 50,
+          1,
+        );
+        colorsTabled.add(color);
+        return RadarDataSet(
+          fillColor: color.withOpacity(.1),
+          borderColor: color,
+          borderWidth: 2,
+          dataEntries: [
+            RadarEntry(
+              value: (user.chart?.authoredTaskCount ?? 0).toDouble(),
+            ),
+            RadarEntry(
+              value: (user.chart?.closedTaskCount ?? 0).toDouble(),
+            ),
+            RadarEntry(
+              value: (user.chart?.completedTaskCount ?? 0).toDouble(),
+            ),
+            // RadarEntry(
+            //   value: (user.chart?.totalPrice ?? 0).toDouble(),
+            // ),
+            RadarEntry(
+              value: (user.chart?.totalTaskCount ?? 0).toDouble(),
+            ),
+          ],
+        );
+      },
+    )).toList();
+    notifyListeners();
   }
   void buildRadar(ChartsUserChartModel? value) {
     if (value == null) {

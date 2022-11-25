@@ -225,15 +225,14 @@ class ChartsView extends StatelessWidget {
                 style: AppTypography.sf.s18.w500.black,
               ),
               const SizedBox(height: 20),
-              AppMultiFilterWidget<UserTabledChartModel>(
+              AppMultiFilterWidget<TabledChartModel>(
                 availableValues: model.totalTabledChartModel?.chart ?? [],
                 tooltip: 'Выберите доску'.tr(),
                 callback: model.buildTabledRadar,
                 buildName: (item) =>
-                    '${item?.user?.userName}\n${item?.user?.email}',
-                buildTitle: (selectedItems) => selectedItems
-                    .map((e) => e?.user?.userName ?? '')
-                    .join(', '),
+                    '${item?.table?.title}\n${item?.table?.id}',
+                buildTitle: (selectedItems) =>
+                    selectedItems.map((e) => e?.table?.title ?? '').join(', '),
                 selectedItems: model.selectedTableChart,
                 title: 'Выберите доску'.tr(),
                 clear: () => model.buildTabledRadar(null),
@@ -257,7 +256,7 @@ class ChartsView extends StatelessWidget {
                               tickCount: 1,
                               titleTextStyle: AppTypography.sf.s14.w600.red,
                               radarBackgroundColor: Colors.transparent,
-                              dataSets: model.radarData,
+                              dataSets: model.radarTabledData,
                               getTitle: (index, angle) {
                                 String title = '';
                                 switch (index) {
@@ -299,34 +298,55 @@ class ChartsView extends StatelessWidget {
                                   15,
                           child: ListView.separated(
                             itemBuilder: (context, index) {
-                              final color = model.colors[index];
-                              final item = model.selectedUserChart[index];
-                              return Row(
+                              
+                              final table = model.selectedTableChart[index];
+                              return Column(
                                 children: [
                                   SizedBox(
-                                    width: 10,
-                                    height: 10,
-                                    child: ColoredBox(color: color),
-                                  ),
-                                  const SizedBox(width: 5),
-                                  SizedBox(
-                                    width: (MediaQuery.of(context).size.width -
-                                                32) *
-                                            .4 -
-                                        35,
                                     child: Text(
-                                      '${item.user?.userName ?? ''}\n${'Всего поинтов'.tr()}:${item.chart?.totalPrice ?? 0}',
-                                      style: AppTypography.sf.s14.w400.black,
+                                      table.table?.title ?? '',
                                     ),
                                   ),
+                                  Column(
+                                    children: List.generate(
+                                      table.chart.length,
+                                      
+                                      (index)  {
+                                        final color = model.colorsTabled[index];
+                                        return Row(
+                                        
+                                        children: [
+                                          SizedBox(
+                                            width: 10,
+                                            height: 10,
+                                            child: ColoredBox(color: color),
+                                          ),
+                                          const SizedBox(width: 5),
+                                          SizedBox(
+                                            width: (MediaQuery.of(context)
+                                                            .size
+                                                            .width -
+                                                        32) *
+                                                    .4 -
+                                                35,
+                                            child: Text(
+                                              '${table.chart[index].user?.userName ?? ''}\n${'Всего поинтов'.tr()}:${table.chart[index].chart?.totalPrice ?? 0}',
+                                              style: AppTypography
+                                                  .sf.s14.w400.black,
+                                            ),
+                                          ),
+                                        ],
+                                      );},
+                                    ),
+                                  )
                                 ],
                               );
                             },
                             separatorBuilder: (context, index) =>
                                 const SizedBox(height: 5),
                             itemCount: min(
-                              model.selectedUserChart.length,
-                              model.colors.length,
+                              model.selectedTableChart.length,
+                              model.colorsTabled.length,
                             ),
                           ),
                         ),
