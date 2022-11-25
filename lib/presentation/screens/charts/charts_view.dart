@@ -64,10 +64,11 @@ class ChartsView extends StatelessWidget {
                       ),
                     ),
                     const Expanded(
-                        flex: 1,
-                        child: SizedBox(
-                          width: 10,
-                        )),
+                      flex: 1,
+                      child: SizedBox(
+                        width: 40,
+                      ),
+                    ),
                     Expanded(
                       flex: 3,
                       child: Column(
@@ -122,79 +123,89 @@ class ChartsView extends StatelessWidget {
                   height: 400,
                   child: Row(
                     children: [
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width < 740
-                            ? (MediaQuery.of(context).size.width - 32) * .5
-                            : 400,
-                        height: 400,
-                        child: RadarChart(
-                          RadarChartData(
-                            tickCount: 1,
-                            titleTextStyle: AppTypography.sf.s14.w600.red,
-                            radarBackgroundColor: Colors.transparent,
-                            dataSets: model.radarData,
-                            getTitle: (index, angle) {
-                              String title = '';
-                              switch (index) {
-                                case 0:
-                                  title = 'Выдал';
-                                  break;
-                                case 1:
-                                  title = 'Отмененные';
-                                  break;
-                                case 2:
-                                  title = 'Выполнил';
-                                  break;
-                                case 3:
-                                  title = 'Получил';
-                                  break;
-                              }
-                              return RadarChartTitle(
-                                text: title,
-                                angle: angle == 180 ? 0 : angle,
-                              );
-                            },
+                      Expanded(
+                        flex: 3,
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width < 740
+                              ? (MediaQuery.of(context).size.width - 32) * .5
+                              : 400,
+                          height: 400,
+                          child: RadarChart(
+                            RadarChartData(
+                              tickCount: 1,
+                              titleTextStyle: AppTypography.sf.s14.w600.red,
+                              radarBackgroundColor: Colors.transparent,
+                              dataSets: model.radarData,
+                              getTitle: (index, angle) {
+                                String title = '';
+                                switch (index) {
+                                  case 0:
+                                    title = 'Выдал';
+                                    break;
+                                  case 1:
+                                    title = 'Отмененные';
+                                    break;
+                                  case 2:
+                                    title = 'Выполнил';
+                                    break;
+                                  case 3:
+                                    title = 'Получил';
+                                    break;
+                                }
+                                return RadarChartTitle(
+                                  text: title,
+                                  angle: angle == 180 ? 0 : angle,
+                                );
+                              },
+                            ),
+                            swapAnimationCurve: Curves.easeIn,
+                            swapAnimationDuration:
+                                const Duration(milliseconds: 150),
                           ),
-                          swapAnimationCurve: Curves.easeIn,
-                          swapAnimationDuration:
-                              const Duration(milliseconds: 150),
                         ),
                       ),
-                      const SizedBox(width: 40),
-                      SizedBox(
-                        height: 400,
-                        width: ((MediaQuery.of(context).size.width - 32) * .4) -
-                            15,
-                        child: ListView.separated(
-                          itemBuilder: (context, index) {
-                            final color = model.colors[index];
-                            final item = model.selectedUserChart[index];
-                            return Row(
-                              children: [
-                                SizedBox(
-                                  width: 10,
-                                  height: 10,
-                                  child: ColoredBox(color: color),
-                                ),
-                                const SizedBox(width: 5),
-                                SizedBox(
-                                  width:
-                                      (MediaQuery.of(context).size.width - 32) *
-                                              .4 -
-                                          35,
-                                  child: Text(
-                                    '${item.user?.userName ?? ''}\n${'Всего поинтов'.tr()}:${item.chart?.totalPrice ?? 0}',
-                                    style: AppTypography.sf.s14.w400.black,
+                      const Expanded(
+                        flex: 1,
+                        child: SizedBox(width: 40),
+                      ),
+                      Expanded(
+                        flex: 3,
+                        child: SizedBox(
+                          height: 400,
+                          width:
+                              ((MediaQuery.of(context).size.width - 32) * .4) -
+                                  15,
+                          child: ListView.separated(
+                            itemBuilder: (context, index) {
+                              final color = model.colors[index];
+                              final item = model.selectedUserChart[index];
+                              return Row(
+                                children: [
+                                  SizedBox(
+                                    width: 10,
+                                    height: 10,
+                                    child: ColoredBox(color: color),
                                   ),
-                                ),
-                              ],
-                            );
-                          },
-                          separatorBuilder: (context, index) =>
-                              const SizedBox(height: 5),
-                          itemCount: min(
-                            model.selectedUserChart.length,
-                            model.colors.length,
+                                  const SizedBox(width: 5),
+                                  SizedBox(
+                                    width: (MediaQuery.of(context).size.width -
+                                                32) *
+                                            .4 -
+                                        35,
+                                    child: Text(
+                                      '${item.user?.userName ?? ''}\n${'Всего поинтов'.tr()}:${item.chart?.totalPrice ?? 0}',
+                                      style: AppTypography.sf.s14.w400.black,
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
+                            separatorBuilder: (context, index) =>
+                                const SizedBox(height: 5),
+                            itemCount: min(
+                              model.selectedUserChart.length,
+                              model.colors.length,
+                            ),
                           ),
                         ),
                       )
