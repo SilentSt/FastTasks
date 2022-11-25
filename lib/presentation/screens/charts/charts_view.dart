@@ -48,45 +48,50 @@ class ChartsView extends StatelessWidget {
                 style: AppTypography.sf.s18.w500.black,
               ),
               SizedBox(
-                width: 400,
                 height: 400,
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    SizedBox(
-                      width: 350,
+                    Expanded(
+                      flex: 3,
                       child: PieChart(
                         PieChartData(
                           sections: model.data,
-                          centerSpaceRadius: 80,
+                          centerSpaceRadius:
+                              MediaQuery.of(context).size.width * .07,
                           sectionsSpace: 1,
                         ),
                       ),
                     ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ChartsDetailsText(
-                          color: ColorName.grey,
-                          text: LocaleKeys.neW.tr(),
-                        ),
-                        ChartsDetailsText(
-                          color: ColorName.green,
-                          text: LocaleKeys.doing.tr(),
-                        ),
-                        ChartsDetailsText(
-                          color: ColorName.red,
-                          text: LocaleKeys.review.tr(),
-                        ),
-                        ChartsDetailsText(
-                          color: ColorName.blue,
-                          text: LocaleKeys.done.tr(),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      width: 16,
+                    const Expanded(
+                        flex: 1,
+                        child: SizedBox(
+                          width: 10,
+                        )),
+                    Expanded(
+                      flex: 3,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ChartsDetailsText(
+                            color: ColorName.grey,
+                            text: LocaleKeys.neW.tr(),
+                          ),
+                          ChartsDetailsText(
+                            color: ColorName.green,
+                            text: LocaleKeys.doing.tr(),
+                          ),
+                          ChartsDetailsText(
+                            color: ColorName.red,
+                            text: LocaleKeys.review.tr(),
+                          ),
+                          ChartsDetailsText(
+                            color: ColorName.blue,
+                            text: LocaleKeys.done.tr(),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -101,8 +106,11 @@ class ChartsView extends StatelessWidget {
                 availableValues: model.totalChartModel?.chart ?? [],
                 tooltip: 'Выберите пользователя'.tr(),
                 callback: model.buildRadar,
-                buildName: (item) => '${item?.user?.userName}\n${item?.user?.email}',
-                buildTitle: (selectedItems) => selectedItems.map((e) => e?.user?.userName ?? '').join(', '),
+                buildName: (item) =>
+                    '${item?.user?.userName}\n${item?.user?.email}',
+                buildTitle: (selectedItems) => selectedItems
+                    .map((e) => e?.user?.userName ?? '')
+                    .join(', '),
                 selectedItems: model.selectedUserChart,
                 title: 'Выберите пользователя'.tr(),
                 clear: () => model.buildRadar(null),
@@ -143,18 +151,20 @@ class ChartsView extends StatelessWidget {
                               }
                               return RadarChartTitle(
                                 text: title,
-                                angle: angle,
+                                angle: angle == 180 ? 0 : angle,
                               );
                             },
                           ),
                           swapAnimationCurve: Curves.easeIn,
-                          swapAnimationDuration: const Duration(milliseconds: 150),
+                          swapAnimationDuration:
+                              const Duration(milliseconds: 150),
                         ),
                       ),
                       const SizedBox(width: 40),
                       SizedBox(
                         height: 400,
-                        width: ((MediaQuery.of(context).size.width - 32) * .4) - 15,
+                        width: ((MediaQuery.of(context).size.width - 32) * .4) -
+                            15,
                         child: ListView.separated(
                           itemBuilder: (context, index) {
                             final color = model.colors[index];
@@ -168,7 +178,10 @@ class ChartsView extends StatelessWidget {
                                 ),
                                 const SizedBox(width: 5),
                                 SizedBox(
-                                  width: (MediaQuery.of(context).size.width - 32) * .4 - 35,
+                                  width:
+                                      (MediaQuery.of(context).size.width - 32) *
+                                              .4 -
+                                          35,
                                   child: Text(
                                     '${item.user?.userName ?? ''}\n${'Всего поинтов'.tr()}:${item.chart?.totalPrice ?? 0}',
                                     style: AppTypography.sf.s14.w400.black,
@@ -177,7 +190,8 @@ class ChartsView extends StatelessWidget {
                               ],
                             );
                           },
-                          separatorBuilder: (context, index) => const SizedBox(height: 5),
+                          separatorBuilder: (context, index) =>
+                              const SizedBox(height: 5),
                           itemCount: min(
                             model.selectedUserChart.length,
                             model.colors.length,
