@@ -371,7 +371,7 @@ class DashboardsView extends StatelessWidget {
                                                     ).title,
                                                     style: AppTypography.sf.s14,
                                                   ),
-                                                  if (item.status != 3)
+                                                  if (item.status != 4)
                                                     AppIconButton(
                                                       onTap: () => model
                                                           .updateTaskStatus(
