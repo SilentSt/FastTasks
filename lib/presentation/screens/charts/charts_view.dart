@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:tasklet/data/models/charts/charts_user_chart_model.dart';
@@ -14,6 +15,7 @@ import 'package:tasklet/presentation/screens/charts/widgets/charts_widgets.dart'
 import 'package:tasklet/presentation/theme/app_typography.dart';
 import 'package:tasklet/presentation/widgets/app_loading.dart';
 import 'package:tasklet/presentation/widgets/app_multi_filter_widget.dart';
+import 'package:tasklet/presentation/widgets/app_single_filter_widget.dart';
 
 import 'widgets/test.dart';
 
@@ -58,8 +60,7 @@ class ChartsView extends StatelessWidget {
                       child: PieChart(
                         PieChartData(
                           sections: model.data,
-                          centerSpaceRadius:
-                              MediaQuery.of(context).size.width * .07,
+                          centerSpaceRadius: MediaQuery.of(context).size.width * .07,
                           sectionsSpace: 1,
                         ),
                       ),
@@ -108,11 +109,8 @@ class ChartsView extends StatelessWidget {
                 availableValues: model.totalChartModel?.chart ?? [],
                 tooltip: 'Выберите пользователя'.tr(),
                 callback: model.buildRadar,
-                buildName: (item) =>
-                    '${item?.user?.userName}\n${item?.user?.email}',
-                buildTitle: (selectedItems) => selectedItems
-                    .map((e) => e?.user?.userName ?? '')
-                    .join(', '),
+                buildName: (item) => '${item?.user?.userName}\n${item?.user?.email}',
+                buildTitle: (selectedItems) => selectedItems.map((e) => e?.user?.userName ?? '').join(', '),
                 selectedItems: model.selectedUserChart,
                 title: 'Выберите пользователя'.tr(),
                 clear: () => model.buildRadar(null),
@@ -160,8 +158,7 @@ class ChartsView extends StatelessWidget {
                               },
                             ),
                             swapAnimationCurve: Curves.easeIn,
-                            swapAnimationDuration:
-                                const Duration(milliseconds: 150),
+                            swapAnimationDuration: const Duration(milliseconds: 150),
                           ),
                         ),
                       ),
@@ -173,9 +170,7 @@ class ChartsView extends StatelessWidget {
                         flex: 3,
                         child: SizedBox(
                           height: 400,
-                          width:
-                              ((MediaQuery.of(context).size.width - 32) * .4) -
-                                  15,
+                          width: ((MediaQuery.of(context).size.width - 32) * .4) - 15,
                           child: ListView.separated(
                             itemBuilder: (context, index) {
                               final color = model.colors[index];
@@ -189,10 +184,7 @@ class ChartsView extends StatelessWidget {
                                   ),
                                   const SizedBox(width: 5),
                                   SizedBox(
-                                    width: (MediaQuery.of(context).size.width -
-                                                32) *
-                                            .4 -
-                                        35,
+                                    width: (MediaQuery.of(context).size.width - 32) * .4 - 35,
                                     child: Text(
                                       '${item.user?.userName ?? ''}\n${'Всего поинтов'.tr()}:${item.chart?.totalPrice ?? 0}',
                                       style: AppTypography.sf.s14.w400.black,
@@ -201,8 +193,7 @@ class ChartsView extends StatelessWidget {
                                 ],
                               );
                             },
-                            separatorBuilder: (context, index) =>
-                                const SizedBox(height: 5),
+                            separatorBuilder: (context, index) => const SizedBox(height: 5),
                             itemCount: min(
                               model.selectedUserChart.length,
                               model.colors.length,
@@ -218,8 +209,7 @@ class ChartsView extends StatelessWidget {
                   'Выберите хотя бы одного пользователя для отображения данных',
                   style: AppTypography.sf.s18.w500.red,
                 ),
-              const SizedBox(height: 20),
-              const SizedBox(height: 40),
+              const SizedBox(height: 60),
               Text(
                 'Статистика по доскам'.tr(),
                 style: AppTypography.sf.s18.w500.black,
@@ -229,10 +219,8 @@ class ChartsView extends StatelessWidget {
                 availableValues: model.totalTabledChartModel?.chart ?? [],
                 tooltip: 'Выберите доску'.tr(),
                 callback: model.buildTabledRadar,
-                buildName: (item) =>
-                    '${item?.table?.title}\n${item?.table?.id}',
-                buildTitle: (selectedItems) =>
-                    selectedItems.map((e) => e?.table?.title ?? '').join(', '),
+                buildName: (item) => '${item?.table?.title}\n${item?.table?.id}',
+                buildTitle: (selectedItems) => selectedItems.map((e) => e?.table?.title ?? '').join(', '),
                 selectedItems: model.selectedTableChart,
                 title: 'Выберите доску'.tr(),
                 clear: () => model.buildTabledRadar(null),
@@ -280,8 +268,7 @@ class ChartsView extends StatelessWidget {
                               },
                             ),
                             swapAnimationCurve: Curves.easeIn,
-                            swapAnimationDuration:
-                                const Duration(milliseconds: 150),
+                            swapAnimationDuration: const Duration(milliseconds: 150),
                           ),
                         ),
                       ),
@@ -293,9 +280,7 @@ class ChartsView extends StatelessWidget {
                         flex: 3,
                         child: SizedBox(
                           height: 400,
-                          width:
-                              ((MediaQuery.of(context).size.width - 32) * .4) -
-                                  15,
+                          width: ((MediaQuery.of(context).size.width - 32) * .4) - 15,
                           child: ListView.separated(
                             itemBuilder: (context, index) {
                               final table = model.selectedTableChart[index];
@@ -322,16 +307,10 @@ class ChartsView extends StatelessWidget {
                                             ),
                                             const SizedBox(width: 5),
                                             SizedBox(
-                                              width: (MediaQuery.of(context)
-                                                              .size
-                                                              .width -
-                                                          32) *
-                                                      .4 -
-                                                  35,
+                                              width: (MediaQuery.of(context).size.width - 32) * .4 - 35,
                                               child: Text(
                                                 '${table.chart[index].user?.userName ?? ''}\n${'Всего поинтов'.tr()}:${table.chart[index].chart?.totalPrice ?? 0}',
-                                                style: AppTypography
-                                                    .sf.s14.w400.black,
+                                                style: AppTypography.sf.s14.w400.black,
                                               ),
                                             ),
                                           ],
@@ -342,8 +321,7 @@ class ChartsView extends StatelessWidget {
                                 ],
                               );
                             },
-                            separatorBuilder: (context, index) =>
-                                const SizedBox(height: 5),
+                            separatorBuilder: (context, index) => const SizedBox(height: 5),
                             itemCount: min(
                               model.selectedTableChart.length,
                               model.colorsTabled.length,
@@ -359,8 +337,130 @@ class ChartsView extends StatelessWidget {
                   'Выберите хотя бы одну доску для отображения данных',
                   style: AppTypography.sf.s18.w500.red,
                 ),
+              const SizedBox(height: 60),
+              Text(
+                'Временная статистика'.tr(),
+                style: AppTypography.sf.s18.w500.black,
+              ),
               const SizedBox(height: 20),
-              const SizedBox(height: 40),
+              AppSingleFilterWidget<ChartTimeduserstotalModel>(
+                availableValues: model.lineChartModel,
+                callback: model.fillLine,
+                value: model.selectedChartModel,
+                tooltip: 'Выберите пользователя',
+                buildName: (item) => item?.user?.userName??'-',
+                title: 'Выберите пользовтаеля',
+                clear: (){},
+              ),
+              const SizedBox(height: 20),
+              Wrap(
+                alignment: WrapAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      const SizedBox(
+                        width: 15,
+                        height: 15,
+                        child: ColoredBox(color: ColorName.blue),
+                      ),
+                      const SizedBox(width: 5),
+                      SizedBox(
+                        width: 120,
+                        child: Text(
+                          'Полученые'.tr(),
+                          style: AppTypography.sf.s14.w400.black,
+                        ),
+                      ),
+                      CupertinoSwitch(
+                        value: model.totalTaskCountEnabled,
+                        activeColor: ColorName.red,
+                        onChanged: (_) => model.enableDisabeTotal(),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      const SizedBox(
+                        width: 15,
+                        height: 15,
+                        child: ColoredBox(color: ColorName.green),
+                      ),
+                      const SizedBox(width: 5),
+                      SizedBox(
+                        width: 120,
+                        child: Text(
+                          'Выполненные'.tr(),
+                          style: AppTypography.sf.s14.w400.black,
+                        ),
+                      ),
+                      CupertinoSwitch(
+                        value: model.completedTaskCounEnabled,
+                        activeColor: ColorName.red,
+                        onChanged: (_) => model.enableDisabeCompleted(),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      const SizedBox(
+                        width: 15,
+                        height: 15,
+                        child: ColoredBox(color: ColorName.red),
+                      ),
+                      const SizedBox(width: 5),
+                      SizedBox(
+                        width: 120,
+                        child: Text(
+                          'Закрытые'.tr(),
+                          style: AppTypography.sf.s14.w400.black,
+                        ),
+                      ),
+                      CupertinoSwitch(
+                        value: model.closedTaskCountEnabled,
+                        activeColor: ColorName.red,
+                        onChanged: (_) => model.enableDisabeClosed(),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      const SizedBox(
+                        width: 15,
+                        height: 15,
+                        child: ColoredBox(color: ColorName.darkGrey),
+                      ),
+                      const SizedBox(width: 5),
+                      SizedBox(
+                        width: 120,
+                        child: Text(
+                          'Выданные'.tr(),
+                          style: AppTypography.sf.s14.w400.black,
+                        ),
+                      ),
+                      CupertinoSwitch(
+                        value: model.authoredTaskCountEnabled,
+                        activeColor: ColorName.red,
+                        onChanged: (_) => model.enableDisabeAuthored(),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.only(right: 40),
+                child: AspectRatio(
+                  aspectRatio: 2.5,
+                  child: LineChart(
+                    swapAnimationDuration: const Duration(milliseconds: 300),
+                    swapAnimationCurve: Curves.easeIn,
+                    LineChartData(
+                      lineBarsData: model.lineData,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 120),
             ],
           ),
         );

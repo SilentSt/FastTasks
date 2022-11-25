@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:grouped_list/grouped_list.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
@@ -9,7 +8,6 @@ import 'package:tasklet/domain/di/user_dependency.dart';
 import 'package:tasklet/gen/assets.gen.dart';
 import 'package:tasklet/gen/colors.gen.dart';
 import 'package:tasklet/gen/locale_keys.g.dart';
-import 'package:tasklet/presentation/app/app.dart';
 import 'package:tasklet/presentation/screens/chats/chat/shimmers/chat_messages_shimmer.dart';
 import 'package:tasklet/presentation/screens/chats/chat/shimmers/chat_title_shimmer.dart';
 import 'package:tasklet/presentation/screens/root/providers/hide_provider.dart';
@@ -42,9 +40,9 @@ class ChatView extends StatelessWidget {
             if (model.isBusy)
               Scaffold(
                 appBar: AppBar(
-                  leading: AppBackButton(
-                    onTap: () => model.pop(context),
-                  ),
+                  // leading: AppBackButton(
+                  //   onTap: () => model.pop(context),
+                  // ),
                   title: const ChatTitleShimmer(),
                 ),
                 body: const ChatMessagesShimmer(),

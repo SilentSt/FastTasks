@@ -1,13 +1,12 @@
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/material.dart';
 import 'package:tasklet/data/data_sources/chart/remote_chart_ds.dart';
 import 'package:tasklet/data/data_sources/core/app_local_ds.dart';
+import 'package:tasklet/data/models/charts/chart_timeduserstotal_model.dart';
 import 'package:tasklet/data/models/charts/charts.dart';
 import 'package:tasklet/domain/services/core/app_service.dart';
 import 'package:tasklet/domain/services/core/error_checker_mixin.dart';
 
-class ChartService
-    extends AppService<BaseLocalDataSource, RemoteChartDataSource>
-    with ErrorChecker {
+class ChartService extends AppService<BaseLocalDataSource, RemoteChartDataSource> with ErrorChecker {
   ChartService(super.lds, super.rds, super.errorService);
 
   @override
@@ -44,6 +43,17 @@ class ChartService
       );
     }
     return res.body;
+  }
+
+  Future<List<ChartTimeduserstotalModel>> timeduserstotal() async {
+    final res = await rds.timeduserstotal();
+    final checked = errorChecker(res, nullableBody: false);
+    if (!checked) {
+      await errorService.showEror(
+        error: '[${res.statusCode}] ${res.base.reasonPhrase}',
+      );
+    }
+    return res.body ?? [];
   }
 
   @override

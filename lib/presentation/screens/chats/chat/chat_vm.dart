@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:stacked/stacked.dart';
 import 'package:tasklet/data/models/models.dart';
@@ -47,7 +48,7 @@ class ChatViewModel extends BaseViewModel {
     setBusy(false);
     await fetchMessages();
     fetcher = Timer.periodic(
-      const Duration(seconds: 3),
+      const Duration(seconds: 1),
       (_) => fetchMessages(),
     );
   }
@@ -62,7 +63,7 @@ class ChatViewModel extends BaseViewModel {
   }
 
   void pop(BuildContext context) {
-    App.router.navigateBack();
+    context.router.pop('chats');
   }
 
 

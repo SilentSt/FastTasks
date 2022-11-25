@@ -9,6 +9,7 @@ class ChartModel with Mappable {
     required this.closedTaskCount,
     required this.authoredTaskCount,
     required this.totalPrice,
+    this.date,
   });
 
   final int totalTaskCount;
@@ -16,4 +17,5 @@ class ChartModel with Mappable {
   final int closedTaskCount;
   final int authoredTaskCount;
   final int totalPrice;
+  final DateTime? date;
 }

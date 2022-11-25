@@ -120,6 +120,7 @@ class ChatsView extends StatelessWidget {
                                           width: 200,
                                           child: Text(
                                             (chat.lastMessage ?? '').trim(),
+                                            maxLines: 1,
                                             style: AppTypography.sf.s22.w400.black,
                                             overflow: TextOverflow.fade,
                                           ),

@@ -45,7 +45,7 @@ class AddChatDialogModel extends BaseViewModel {
     if (selectedUsers.length > 2) {
       chatService.add(
         ChatDto(
-          name: titleController.text,
+          title: titleController.text,
           userIds: selectedUsers.map((e) => e.id).toList(),
           private: false,
         ),

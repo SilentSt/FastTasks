@@ -4,7 +4,6 @@ import 'package:stacked/stacked.dart';
 import 'package:tasklet/data/models/models.dart';
 import 'package:tasklet/domain/services/chat_service.dart';
 import 'package:tasklet/presentation/app/app.dart';
-import 'package:tasklet/presentation/navigation/app_router.dart';
 
 class ChatsViewModel extends BaseViewModel {
   ChatsViewModel({
@@ -22,14 +21,13 @@ class ChatsViewModel extends BaseViewModel {
     await fetchChats();
     setBusy(false);
     fetcher = Timer.periodic(
-      const Duration(seconds: 5),
-      (_) => fetchChats,
+      const Duration(seconds: 2),
+      (_) => fetchChats(),
     );
   }
 
   Future<void> onChatTapped(String chatId) async {
-
-    App.router.navigate(ChatViewRoute(id: chatId));
+    App.router.pushNamed('chats/$chatId');
   }
 
   Future<void> fetchChats() async {

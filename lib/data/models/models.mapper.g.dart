@@ -5,6 +5,7 @@ import 'auth/auth_model.dart';
 import 'auth/sign_in_mode.dart';
 import 'auth/sign_up_model.dart';
 import 'charts/chart_model.dart';
+import 'charts/chart_timeduserstotal_model.dart';
 import 'charts/chart_user_model.dart';
 import 'charts/charts_user_chart_model.dart';
 import 'charts/small_table_model.dart';
@@ -61,6 +62,7 @@ var _mappers = <BaseMapper>{
   TabledChartModelMapper._(),
   TotalTabledChartModelMapper._(),
   ChartsUserChartModelMapper._(),
+  ChartTimeduserstotalModelMapper._(),
   // enum mappers
   // custom mappers
 };
@@ -361,15 +363,15 @@ class ChatDtoMapper extends BaseMapper<ChatDto> {
 
   @override Function get decoder => decode;
   ChatDto decode(dynamic v) => checked(v, (Map<String, dynamic> map) => fromMap(map));
-  ChatDto fromMap(Map<String, dynamic> map) => ChatDto(name: Mapper.i.$getOpt(map, 'name'), userIds: Mapper.i.$get(map, 'userIds'), private: Mapper.i.$get(map, 'private'));
+  ChatDto fromMap(Map<String, dynamic> map) => ChatDto(title: Mapper.i.$getOpt(map, 'title'), userIds: Mapper.i.$get(map, 'userIds'), private: Mapper.i.$get(map, 'private'));
 
   @override Function get encoder => (ChatDto v) => encode(v);
   dynamic encode(ChatDto v) => toMap(v);
-  Map<String, dynamic> toMap(ChatDto c) => {'name': Mapper.i.$enc(c.name, 'name'), 'userIds': Mapper.i.$enc(c.userIds, 'userIds'), 'private': Mapper.i.$enc(c.private, 'private')};
+  Map<String, dynamic> toMap(ChatDto c) => {'title': Mapper.i.$enc(c.title, 'title'), 'userIds': Mapper.i.$enc(c.userIds, 'userIds'), 'private': Mapper.i.$enc(c.private, 'private')};
 
-  @override String stringify(ChatDto self) => 'ChatDto(name: ${Mapper.asString(self.name)}, userIds: ${Mapper.asString(self.userIds)}, private: ${Mapper.asString(self.private)})';
-  @override int hash(ChatDto self) => Mapper.hash(self.name) ^ Mapper.hash(self.userIds) ^ Mapper.hash(self.private);
-  @override bool equals(ChatDto self, ChatDto other) => Mapper.isEqual(self.name, other.name) && Mapper.isEqual(self.userIds, other.userIds) && Mapper.isEqual(self.private, other.private);
+  @override String stringify(ChatDto self) => 'ChatDto(title: ${Mapper.asString(self.title)}, userIds: ${Mapper.asString(self.userIds)}, private: ${Mapper.asString(self.private)})';
+  @override int hash(ChatDto self) => Mapper.hash(self.title) ^ Mapper.hash(self.userIds) ^ Mapper.hash(self.private);
+  @override bool equals(ChatDto self, ChatDto other) => Mapper.isEqual(self.title, other.title) && Mapper.isEqual(self.userIds, other.userIds) && Mapper.isEqual(self.private, other.private);
 
   @override Function get typeFactory => (f) => f<ChatDto>();
 }
@@ -382,14 +384,14 @@ extension ChatDtoMapperExtension  on ChatDto {
 
 abstract class ChatDtoCopyWith<$R> {
   factory ChatDtoCopyWith(ChatDto value, Then<ChatDto, $R> then) = _ChatDtoCopyWithImpl<$R>;
-  $R call({String? name, List<String>? userIds, bool? private});
+  $R call({String? title, List<String>? userIds, bool? private});
   $R apply(ChatDto Function(ChatDto) transform);
 }
 
 class _ChatDtoCopyWithImpl<$R> extends BaseCopyWith<ChatDto, $R> implements ChatDtoCopyWith<$R> {
   _ChatDtoCopyWithImpl(ChatDto value, Then<ChatDto, $R> then) : super(value, then);
 
-  @override $R call({Object? name = $none, List<String>? userIds, bool? private}) => $then(ChatDto(name: or(name, $value.name), userIds: userIds ?? $value.userIds, private: private ?? $value.private));
+  @override $R call({Object? title = $none, List<String>? userIds, bool? private}) => $then(ChatDto(title: or(title, $value.title), userIds: userIds ?? $value.userIds, private: private ?? $value.private));
 }
 
 class ChatModelMapper extends BaseMapper<ChatModel> {
@@ -843,15 +845,15 @@ class ChartModelMapper extends BaseMapper<ChartModel> {
 
   @override Function get decoder => decode;
   ChartModel decode(dynamic v) => checked(v, (Map<String, dynamic> map) => fromMap(map));
-  ChartModel fromMap(Map<String, dynamic> map) => ChartModel(totalTaskCount: Mapper.i.$get(map, 'totalTaskCount'), completedTaskCount: Mapper.i.$get(map, 'completedTaskCount'), closedTaskCount: Mapper.i.$get(map, 'closedTaskCount'), authoredTaskCount: Mapper.i.$get(map, 'authoredTaskCount'), totalPrice: Mapper.i.$get(map, 'totalPrice'));
+  ChartModel fromMap(Map<String, dynamic> map) => ChartModel(totalTaskCount: Mapper.i.$get(map, 'totalTaskCount'), completedTaskCount: Mapper.i.$get(map, 'completedTaskCount'), closedTaskCount: Mapper.i.$get(map, 'closedTaskCount'), authoredTaskCount: Mapper.i.$get(map, 'authoredTaskCount'), totalPrice: Mapper.i.$get(map, 'totalPrice'), date: Mapper.i.$getOpt(map, 'date'));
 
   @override Function get encoder => (ChartModel v) => encode(v);
   dynamic encode(ChartModel v) => toMap(v);
-  Map<String, dynamic> toMap(ChartModel c) => {'totalTaskCount': Mapper.i.$enc(c.totalTaskCount, 'totalTaskCount'), 'completedTaskCount': Mapper.i.$enc(c.completedTaskCount, 'completedTaskCount'), 'closedTaskCount': Mapper.i.$enc(c.closedTaskCount, 'closedTaskCount'), 'authoredTaskCount': Mapper.i.$enc(c.authoredTaskCount, 'authoredTaskCount'), 'totalPrice': Mapper.i.$enc(c.totalPrice, 'totalPrice')};
+  Map<String, dynamic> toMap(ChartModel c) => {'totalTaskCount': Mapper.i.$enc(c.totalTaskCount, 'totalTaskCount'), 'completedTaskCount': Mapper.i.$enc(c.completedTaskCount, 'completedTaskCount'), 'closedTaskCount': Mapper.i.$enc(c.closedTaskCount, 'closedTaskCount'), 'authoredTaskCount': Mapper.i.$enc(c.authoredTaskCount, 'authoredTaskCount'), 'totalPrice': Mapper.i.$enc(c.totalPrice, 'totalPrice'), 'date': Mapper.i.$enc(c.date, 'date')};
 
-  @override String stringify(ChartModel self) => 'ChartModel(totalTaskCount: ${Mapper.asString(self.totalTaskCount)}, completedTaskCount: ${Mapper.asString(self.completedTaskCount)}, closedTaskCount: ${Mapper.asString(self.closedTaskCount)}, authoredTaskCount: ${Mapper.asString(self.authoredTaskCount)}, totalPrice: ${Mapper.asString(self.totalPrice)})';
-  @override int hash(ChartModel self) => Mapper.hash(self.totalTaskCount) ^ Mapper.hash(self.completedTaskCount) ^ Mapper.hash(self.closedTaskCount) ^ Mapper.hash(self.authoredTaskCount) ^ Mapper.hash(self.totalPrice);
-  @override bool equals(ChartModel self, ChartModel other) => Mapper.isEqual(self.totalTaskCount, other.totalTaskCount) && Mapper.isEqual(self.completedTaskCount, other.completedTaskCount) && Mapper.isEqual(self.closedTaskCount, other.closedTaskCount) && Mapper.isEqual(self.authoredTaskCount, other.authoredTaskCount) && Mapper.isEqual(self.totalPrice, other.totalPrice);
+  @override String stringify(ChartModel self) => 'ChartModel(totalTaskCount: ${Mapper.asString(self.totalTaskCount)}, completedTaskCount: ${Mapper.asString(self.completedTaskCount)}, closedTaskCount: ${Mapper.asString(self.closedTaskCount)}, authoredTaskCount: ${Mapper.asString(self.authoredTaskCount)}, totalPrice: ${Mapper.asString(self.totalPrice)}, date: ${Mapper.asString(self.date)})';
+  @override int hash(ChartModel self) => Mapper.hash(self.totalTaskCount) ^ Mapper.hash(self.completedTaskCount) ^ Mapper.hash(self.closedTaskCount) ^ Mapper.hash(self.authoredTaskCount) ^ Mapper.hash(self.totalPrice) ^ Mapper.hash(self.date);
+  @override bool equals(ChartModel self, ChartModel other) => Mapper.isEqual(self.totalTaskCount, other.totalTaskCount) && Mapper.isEqual(self.completedTaskCount, other.completedTaskCount) && Mapper.isEqual(self.closedTaskCount, other.closedTaskCount) && Mapper.isEqual(self.authoredTaskCount, other.authoredTaskCount) && Mapper.isEqual(self.totalPrice, other.totalPrice) && Mapper.isEqual(self.date, other.date);
 
   @override Function get typeFactory => (f) => f<ChartModel>();
 }
@@ -864,14 +866,14 @@ extension ChartModelMapperExtension  on ChartModel {
 
 abstract class ChartModelCopyWith<$R> {
   factory ChartModelCopyWith(ChartModel value, Then<ChartModel, $R> then) = _ChartModelCopyWithImpl<$R>;
-  $R call({int? totalTaskCount, int? completedTaskCount, int? closedTaskCount, int? authoredTaskCount, int? totalPrice});
+  $R call({int? totalTaskCount, int? completedTaskCount, int? closedTaskCount, int? authoredTaskCount, int? totalPrice, DateTime? date});
   $R apply(ChartModel Function(ChartModel) transform);
 }
 
 class _ChartModelCopyWithImpl<$R> extends BaseCopyWith<ChartModel, $R> implements ChartModelCopyWith<$R> {
   _ChartModelCopyWithImpl(ChartModel value, Then<ChartModel, $R> then) : super(value, then);
 
-  @override $R call({int? totalTaskCount, int? completedTaskCount, int? closedTaskCount, int? authoredTaskCount, int? totalPrice}) => $then(ChartModel(totalTaskCount: totalTaskCount ?? $value.totalTaskCount, completedTaskCount: completedTaskCount ?? $value.completedTaskCount, closedTaskCount: closedTaskCount ?? $value.closedTaskCount, authoredTaskCount: authoredTaskCount ?? $value.authoredTaskCount, totalPrice: totalPrice ?? $value.totalPrice));
+  @override $R call({int? totalTaskCount, int? completedTaskCount, int? closedTaskCount, int? authoredTaskCount, int? totalPrice, Object? date = $none}) => $then(ChartModel(totalTaskCount: totalTaskCount ?? $value.totalTaskCount, completedTaskCount: completedTaskCount ?? $value.completedTaskCount, closedTaskCount: closedTaskCount ?? $value.closedTaskCount, authoredTaskCount: authoredTaskCount ?? $value.authoredTaskCount, totalPrice: totalPrice ?? $value.totalPrice, date: or(date, $value.date)));
 }
 
 class TotalProgressChartModelMapper extends BaseMapper<TotalProgressChartModel> {
@@ -1062,6 +1064,46 @@ class _ChartsUserChartModelCopyWithImpl<$R> extends BaseCopyWith<ChartsUserChart
   @override ChartUserModelCopyWith<$R>? get user => $value.user != null ? ChartUserModelCopyWith($value.user!, (v) => call(user: v)) : null;
   @override ChartModelCopyWith<$R>? get chart => $value.chart != null ? ChartModelCopyWith($value.chart!, (v) => call(chart: v)) : null;
   @override $R call({Object? user = $none, Object? chart = $none}) => $then(ChartsUserChartModel(user: or(user, $value.user), chart: or(chart, $value.chart)));
+}
+
+class ChartTimeduserstotalModelMapper extends BaseMapper<ChartTimeduserstotalModel> {
+  ChartTimeduserstotalModelMapper._();
+
+  @override Function get decoder => decode;
+  ChartTimeduserstotalModel decode(dynamic v) => checked(v, (Map<String, dynamic> map) => fromMap(map));
+  ChartTimeduserstotalModel fromMap(Map<String, dynamic> map) => ChartTimeduserstotalModel(user: Mapper.i.$getOpt(map, 'user'), chart: Mapper.i.$get(map, 'chart'));
+
+  @override Function get encoder => (ChartTimeduserstotalModel v) => encode(v);
+  dynamic encode(ChartTimeduserstotalModel v) => toMap(v);
+  Map<String, dynamic> toMap(ChartTimeduserstotalModel c) => {'user': Mapper.i.$enc(c.user, 'user'), 'chart': Mapper.i.$enc(c.chart, 'chart')};
+
+  @override String stringify(ChartTimeduserstotalModel self) => 'ChartTimeduserstotalModel(user: ${Mapper.asString(self.user)}, chart: ${Mapper.asString(self.chart)})';
+  @override int hash(ChartTimeduserstotalModel self) => Mapper.hash(self.user) ^ Mapper.hash(self.chart);
+  @override bool equals(ChartTimeduserstotalModel self, ChartTimeduserstotalModel other) => Mapper.isEqual(self.user, other.user) && Mapper.isEqual(self.chart, other.chart);
+
+  @override Function get typeFactory => (f) => f<ChartTimeduserstotalModel>();
+}
+
+extension ChartTimeduserstotalModelMapperExtension  on ChartTimeduserstotalModel {
+  String toJson() => Mapper.toJson(this);
+  Map<String, dynamic> toMap() => Mapper.toMap(this);
+  ChartTimeduserstotalModelCopyWith<ChartTimeduserstotalModel> get copyWith => ChartTimeduserstotalModelCopyWith(this, $identity);
+}
+
+abstract class ChartTimeduserstotalModelCopyWith<$R> {
+  factory ChartTimeduserstotalModelCopyWith(ChartTimeduserstotalModel value, Then<ChartTimeduserstotalModel, $R> then) = _ChartTimeduserstotalModelCopyWithImpl<$R>;
+  ChartUserModelCopyWith<$R>? get user;
+  ListCopyWith<$R, ChartModel, ChartModelCopyWith<$R>> get chart;
+  $R call({ChartUserModel? user, List<ChartModel>? chart});
+  $R apply(ChartTimeduserstotalModel Function(ChartTimeduserstotalModel) transform);
+}
+
+class _ChartTimeduserstotalModelCopyWithImpl<$R> extends BaseCopyWith<ChartTimeduserstotalModel, $R> implements ChartTimeduserstotalModelCopyWith<$R> {
+  _ChartTimeduserstotalModelCopyWithImpl(ChartTimeduserstotalModel value, Then<ChartTimeduserstotalModel, $R> then) : super(value, then);
+
+  @override ChartUserModelCopyWith<$R>? get user => $value.user != null ? ChartUserModelCopyWith($value.user!, (v) => call(user: v)) : null;
+  @override ListCopyWith<$R, ChartModel, ChartModelCopyWith<$R>> get chart => ListCopyWith($value.chart, (v, t) => ChartModelCopyWith(v, t), (v) => call(chart: v));
+  @override $R call({Object? user = $none, List<ChartModel>? chart}) => $then(ChartTimeduserstotalModel(user: or(user, $value.user), chart: chart ?? $value.chart));
 }
 
 

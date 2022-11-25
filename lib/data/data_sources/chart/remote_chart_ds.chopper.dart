@@ -49,4 +49,16 @@ class _$RemoteChartDataSource extends RemoteChartDataSource {
     );
     return client.send<TotalTabledChartModel, TotalTabledChartModel>($request);
   }
+
+  @override
+  Future<Response<List<ChartTimeduserstotalModel>>> timeduserstotal() {
+    final String $url = 'Charts/timeduserstotal';
+    final Request $request = Request(
+      'GET',
+      $url,
+      client.baseUrl,
+    );
+    return client.send<List<ChartTimeduserstotalModel>,
+        ChartTimeduserstotalModel>($request);
+  }
 }

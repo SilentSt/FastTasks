@@ -4,11 +4,11 @@ import 'package:tasklet/data/models/models.dart';
 @MappableClass()
 class ChatDto with Mappable {
   ChatDto({
-    this.name,
+    this.title,
     required this.userIds,
     required this.private,
   });
-  final String? name;
+  final String? title;
   final List<String> userIds;
   final bool private;
 }

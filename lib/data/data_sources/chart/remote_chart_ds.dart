@@ -1,5 +1,6 @@
 import 'package:chopper/chopper.dart';
 import 'package:tasklet/data/data_sources/core/app_remote_ds.dart';
+import 'package:tasklet/data/models/charts/chart_timeduserstotal_model.dart';
 import 'package:tasklet/data/models/models.dart';
 
 part 'remote_chart_ds.chopper.dart';
@@ -18,4 +19,7 @@ abstract class RemoteChartDataSource extends ChopperService
 
   @Get(path: 'userstabledtotal')
   Future<Response<TotalTabledChartModel>> userstabledtotal();
+
+  @Get(path: 'timeduserstotal')
+  Future<Response<List<ChartTimeduserstotalModel>>> timeduserstotal();
 }
