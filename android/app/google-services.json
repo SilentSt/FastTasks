@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "285417917451",
+    "project_id": "sbeutasklet",
+    "storage_bucket": "sbeutasklet.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:285417917451:android:a8aaf9148a1e9169010b0e",
+        "android_client_info": {
+          "package_name": "com.sbeu.tasklet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "285417917451-6131df8m5kbuk226qdettv852t9pf9sp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlowQF2HaK8crW-eu9EoslFL54kER6GwY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "285417917451-6131df8m5kbuk226qdettv852t9pf9sp.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "285417917451-ui80ab7nf28n0u9ett1pea0a8sj80ap9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.sbeu.tasklet"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
