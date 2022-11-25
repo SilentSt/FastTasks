@@ -56,6 +56,9 @@ abstract class  LocaleKeys {
   static const mostActiveUsers = 'mostActiveUsers';
   static const mostActiveTables = 'mostActiveTables';
   static const countOfTasksInDifferentCategories = 'countOfTasksInDifferentCategories';
+  static const mainChart = 'mainChart';
+  static const userStatsChart = 'userStatsChart';
+  static const tablesStatsCharts = 'tablesStatsCharts';
   static const introText11 = 'introText11';
   static const introText12 = 'introText12';
   static const enterRegPhone = 'enterRegPhone';
