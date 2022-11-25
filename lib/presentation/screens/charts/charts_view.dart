@@ -298,45 +298,45 @@ class ChartsView extends StatelessWidget {
                                   15,
                           child: ListView.separated(
                             itemBuilder: (context, index) {
-                              
                               final table = model.selectedTableChart[index];
                               return Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   SizedBox(
                                     child: Text(
                                       table.table?.title ?? '',
+                                      style: AppTypography.sf.s18.w500.black,
                                     ),
                                   ),
                                   Column(
                                     children: List.generate(
                                       table.chart.length,
-                                      
-                                      (index)  {
+                                      (index) {
                                         final color = model.colorsTabled[index];
                                         return Row(
-                                        
-                                        children: [
-                                          SizedBox(
-                                            width: 10,
-                                            height: 10,
-                                            child: ColoredBox(color: color),
-                                          ),
-                                          const SizedBox(width: 5),
-                                          SizedBox(
-                                            width: (MediaQuery.of(context)
-                                                            .size
-                                                            .width -
-                                                        32) *
-                                                    .4 -
-                                                35,
-                                            child: Text(
-                                              '${table.chart[index].user?.userName ?? ''}\n${'Всего поинтов'.tr()}:${table.chart[index].chart?.totalPrice ?? 0}',
-                                              style: AppTypography
-                                                  .sf.s14.w400.black,
+                                          children: [
+                                            SizedBox(
+                                              width: 10,
+                                              height: 10,
+                                              child: ColoredBox(color: color),
                                             ),
-                                          ),
-                                        ],
-                                      );},
+                                            const SizedBox(width: 5),
+                                            SizedBox(
+                                              width: (MediaQuery.of(context)
+                                                              .size
+                                                              .width -
+                                                          32) *
+                                                      .4 -
+                                                  35,
+                                              child: Text(
+                                                '${table.chart[index].user?.userName ?? ''}\n${'Всего поинтов'.tr()}:${table.chart[index].chart?.totalPrice ?? 0}',
+                                                style: AppTypography
+                                                    .sf.s14.w400.black,
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      },
                                     ),
                                   )
                                 ],
@@ -359,6 +359,8 @@ class ChartsView extends StatelessWidget {
                   'Выберите хотя бы одну доску для отображения данных',
                   style: AppTypography.sf.s18.w500.red,
                 ),
+              const SizedBox(height: 20),
+              const SizedBox(height: 40),
             ],
           ),
         );
