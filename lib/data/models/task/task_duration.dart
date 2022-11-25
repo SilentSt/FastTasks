@@ -23,7 +23,7 @@ extension Title on TaskDuration {
   }
 }
 
-enum TaskStatus { n, i, r, d }
+enum TaskStatus { n, i, r, d, c,}
 
 extension ToString on TaskStatus {
   String get title {
@@ -36,6 +36,8 @@ extension ToString on TaskStatus {
         return LocaleKeys.review.tr();
       case TaskStatus.d:
         return LocaleKeys.done.tr();
+      case TaskStatus.c:
+        return 'closed'.tr();
     }
   }
 }

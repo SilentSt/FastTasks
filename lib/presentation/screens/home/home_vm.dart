@@ -106,6 +106,8 @@ class HomeViewModel extends BaseViewModel {
         return ColorName.red;
       case TaskStatus.d:
         return ColorName.purple;
+      case TaskStatus.c:
+        return ColorName.blue;
     }
   }
 

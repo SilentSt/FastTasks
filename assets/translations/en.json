@@ -54,6 +54,11 @@
     "mostActiveUsers": "Most active users",
     "mostActiveTables": "Most active tables",
     "countOfTasksInDifferentCategories": "Count of tasks in different categories",
+    "mainChart": "All tasks",
+    "userStatsChart": "User statistics",
+    "tablesStatsCharts": "Statistics by boards and by users",
+
+
     
     "introText11": "Семейный локатор, который поможет всегда быть радом с семьей!",
     "introText12": "Оставайтесь на связи с близкими ради их безопасности",
