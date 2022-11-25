@@ -993,15 +993,15 @@ class UserTabledChartModelMapper extends BaseMapper<UserTabledChartModel> {
 
   @override Function get decoder => decode;
   UserTabledChartModel decode(dynamic v) => checked(v, (Map<String, dynamic> map) => fromMap(map));
-  UserTabledChartModel fromMap(Map<String, dynamic> map) => UserTabledChartModel(table: Mapper.i.$getOpt(map, 'table'), tabledChart: Mapper.i.$get(map, 'tabledChart'));
+  UserTabledChartModel fromMap(Map<String, dynamic> map) => UserTabledChartModel(user: Mapper.i.$getOpt(map, 'user'), tabledChart: Mapper.i.$get(map, 'tabledChart'));
 
   @override Function get encoder => (UserTabledChartModel v) => encode(v);
   dynamic encode(UserTabledChartModel v) => toMap(v);
-  Map<String, dynamic> toMap(UserTabledChartModel u) => {'table': Mapper.i.$enc(u.table, 'table'), 'tabledChart': Mapper.i.$enc(u.tabledChart, 'tabledChart')};
+  Map<String, dynamic> toMap(UserTabledChartModel u) => {'user': Mapper.i.$enc(u.user, 'user'), 'tabledChart': Mapper.i.$enc(u.tabledChart, 'tabledChart')};
 
-  @override String stringify(UserTabledChartModel self) => 'UserTabledChartModel(table: ${Mapper.asString(self.table)}, tabledChart: ${Mapper.asString(self.tabledChart)})';
-  @override int hash(UserTabledChartModel self) => Mapper.hash(self.table) ^ Mapper.hash(self.tabledChart);
-  @override bool equals(UserTabledChartModel self, UserTabledChartModel other) => Mapper.isEqual(self.table, other.table) && Mapper.isEqual(self.tabledChart, other.tabledChart);
+  @override String stringify(UserTabledChartModel self) => 'UserTabledChartModel(user: ${Mapper.asString(self.user)}, tabledChart: ${Mapper.asString(self.tabledChart)})';
+  @override int hash(UserTabledChartModel self) => Mapper.hash(self.user) ^ Mapper.hash(self.tabledChart);
+  @override bool equals(UserTabledChartModel self, UserTabledChartModel other) => Mapper.isEqual(self.user, other.user) && Mapper.isEqual(self.tabledChart, other.tabledChart);
 
   @override Function get typeFactory => (f) => f<UserTabledChartModel>();
 }
@@ -1014,18 +1014,18 @@ extension UserTabledChartModelMapperExtension  on UserTabledChartModel {
 
 abstract class UserTabledChartModelCopyWith<$R> {
   factory UserTabledChartModelCopyWith(UserTabledChartModel value, Then<UserTabledChartModel, $R> then) = _UserTabledChartModelCopyWithImpl<$R>;
-  ChartUserModelCopyWith<$R>? get table;
+  ChartUserModelCopyWith<$R>? get user;
   ListCopyWith<$R, TabledChartModel, TabledChartModelCopyWith<$R>> get tabledChart;
-  $R call({ChartUserModel? table, List<TabledChartModel>? tabledChart});
+  $R call({ChartUserModel? user, List<TabledChartModel>? tabledChart});
   $R apply(UserTabledChartModel Function(UserTabledChartModel) transform);
 }
 
 class _UserTabledChartModelCopyWithImpl<$R> extends BaseCopyWith<UserTabledChartModel, $R> implements UserTabledChartModelCopyWith<$R> {
   _UserTabledChartModelCopyWithImpl(UserTabledChartModel value, Then<UserTabledChartModel, $R> then) : super(value, then);
 
-  @override ChartUserModelCopyWith<$R>? get table => $value.table != null ? ChartUserModelCopyWith($value.table!, (v) => call(table: v)) : null;
+  @override ChartUserModelCopyWith<$R>? get user => $value.user != null ? ChartUserModelCopyWith($value.user!, (v) => call(user: v)) : null;
   @override ListCopyWith<$R, TabledChartModel, TabledChartModelCopyWith<$R>> get tabledChart => ListCopyWith($value.tabledChart, (v, t) => TabledChartModelCopyWith(v, t), (v) => call(tabledChart: v));
-  @override $R call({Object? table = $none, List<TabledChartModel>? tabledChart}) => $then(UserTabledChartModel(table: or(table, $value.table), tabledChart: tabledChart ?? $value.tabledChart));
+  @override $R call({Object? user = $none, List<TabledChartModel>? tabledChart}) => $then(UserTabledChartModel(user: or(user, $value.user), tabledChart: tabledChart ?? $value.tabledChart));
 }
 
 class TotalTabledChartModelMapper extends BaseMapper<TotalTabledChartModel> {

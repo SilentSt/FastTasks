@@ -5,10 +5,10 @@ import 'package:tasklet/data/models/models.dart';
 @MappableClass()
 class UserTabledChartModel with Mappable {
   UserTabledChartModel({
-    this.table,
+    this.user,
     required this.tabledChart,
   });
 
-  final ChartUserModel? table;
+  final ChartUserModel? user;
   final List<TabledChartModel> tabledChart;
 }

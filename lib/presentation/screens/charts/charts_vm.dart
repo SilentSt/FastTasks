@@ -23,6 +23,11 @@ class ChartsViewModel extends BaseViewModel {
 
   List<ChartsUserChartModel> selectedUserChart = [];
 
+  List<UserTabledChartModel> selectedTableChart = [];
+  
+
+  
+
   List<PieChartSectionData> data = [
     PieChartSectionData(title: LocaleKeys.neW.tr(), color: ColorName.grey),
     PieChartSectionData(title: LocaleKeys.doing.tr(), color: ColorName.green),
@@ -66,7 +71,9 @@ class ChartsViewModel extends BaseViewModel {
       ),
     ];
   }
-
+  void buildTabledRadar(UserTabledChartModel? value){
+    
+  }
   void buildRadar(ChartsUserChartModel? value) {
     if (value == null) {
       selectedUserChart.clear();
