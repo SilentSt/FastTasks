@@ -16,6 +16,7 @@ class AppTextField extends StatefulWidget {
     this.onEnterText,
     this.outlinedBorder,
     this.hint = '',
+    this.minLines,
   }) : super(key: key);
 
   final String title;
@@ -24,6 +25,7 @@ class AppTextField extends StatefulWidget {
   final bool obscure;
   final int? maxLength;
   final int? maxLines;
+  final int? minLines;
   final bool enabled;
   final TextInputType keyboardType;
   final double height;
@@ -111,13 +113,13 @@ class _AppTextFieldState extends State<AppTextField> {
               (widget.maxLines != null
                   ? const OutlineInputBorder(
                       borderSide: BorderSide(
-                        color: ColorName.black,
+                        color: ColorName.darkGrey,
                       ),
                     )
                   : const UnderlineInputBorder(
                       borderSide: BorderSide(
                         width: 2,
-                        color: ColorName.black,
+                        color: ColorName.darkGrey,
                       ),
                     )),
           errorBorder: widget.outlinedBorder ??
@@ -139,13 +141,13 @@ class _AppTextFieldState extends State<AppTextField> {
                   ? const OutlineInputBorder(
                       borderSide: BorderSide(
                         width: 2,
-                        color: ColorName.black,
+                        color: ColorName.darkGrey,
                       ),
                     )
                   : const UnderlineInputBorder(
                       borderSide: BorderSide(
                         width: 2,
-                        color: ColorName.black,
+                        color: ColorName.darkGrey,
                       ),
                     )),
           focusedErrorBorder: widget.outlinedBorder ??
@@ -167,13 +169,13 @@ class _AppTextFieldState extends State<AppTextField> {
                   ? const OutlineInputBorder(
                       borderSide: BorderSide(
                         width: 2,
-                        color: ColorName.black,
+                        color: ColorName.darkGrey,
                       ),
                     )
                   : const UnderlineInputBorder(
                       borderSide: BorderSide(
                         width: 2,
-                        color: ColorName.black,
+                        color: ColorName.darkGrey,
                       ),
                     )),
           focusedBorder: widget.outlinedBorder ??
@@ -194,6 +196,7 @@ class _AppTextFieldState extends State<AppTextField> {
         // expands: true,
         maxLength: widget.maxLength,
         maxLines: widget.obscure ? 1 : widget.maxLines,
+        minLines: widget.minLines,
         enabled: widget.enabled,
         keyboardType: widget.keyboardType,
         obscureText: widget.obscure ? isObscured : false,

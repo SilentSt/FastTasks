@@ -5,7 +5,6 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:tasklet/data/models/charts/charts_user_chart_model.dart';
 import 'package:tasklet/data/models/models.dart';
 import 'package:tasklet/domain/di/user_dependency.dart';
 import 'package:tasklet/gen/colors.gen.dart';
@@ -17,7 +16,6 @@ import 'package:tasklet/presentation/widgets/app_loading.dart';
 import 'package:tasklet/presentation/widgets/app_multi_filter_widget.dart';
 import 'package:tasklet/presentation/widgets/app_single_filter_widget.dart';
 
-import 'widgets/test.dart';
 
 class ChartsView extends StatelessWidget {
   const ChartsView({Key? key}) : super(key: key);
@@ -107,12 +105,12 @@ class ChartsView extends StatelessWidget {
               const SizedBox(height: 20),
               AppMultiFilterWidget<ChartsUserChartModel>(
                 availableValues: model.totalChartModel?.chart ?? [],
-                tooltip: 'Выберите пользователя'.tr(),
+                tooltip: LocaleKeys.selectUsers.tr(),
                 callback: model.buildRadar,
                 buildName: (item) => '${item?.user?.userName}\n${item?.user?.email}',
                 buildTitle: (selectedItems) => selectedItems.map((e) => e?.user?.userName ?? '').join(', '),
                 selectedItems: model.selectedUserChart,
-                title: 'Выберите пользователя'.tr(),
+                title: LocaleKeys.selectUsers.tr(),
                 clear: () => model.buildRadar(null),
               ),
               const SizedBox(height: 20),
@@ -206,23 +204,23 @@ class ChartsView extends StatelessWidget {
                 )
               else
                 Text(
-                  'Выберите хотя бы одного пользователя для отображения данных',
+                  LocaleKeys.selectAtLeastOneUser.tr(),
                   style: AppTypography.sf.s18.w500.red,
                 ),
               const SizedBox(height: 60),
               Text(
-                'Статистика по доскам'.tr(),
+                LocaleKeys.deskStats.tr(),
                 style: AppTypography.sf.s18.w500.black,
               ),
               const SizedBox(height: 20),
               AppMultiFilterWidget<TabledChartModel>(
                 availableValues: model.totalTabledChartModel?.chart ?? [],
-                tooltip: 'Выберите доску'.tr(),
+                tooltip: LocaleKeys.selectdesk.tr(),
                 callback: model.buildTabledRadar,
                 buildName: (item) => '${item?.table?.title}\n${item?.table?.id}',
                 buildTitle: (selectedItems) => selectedItems.map((e) => e?.table?.title ?? '').join(', '),
                 selectedItems: model.selectedTableChart,
-                title: 'Выберите доску'.tr(),
+                title: LocaleKeys.selectdesk.tr(),
                 clear: () => model.buildTabledRadar(null),
               ),
               const SizedBox(height: 20),
@@ -334,12 +332,12 @@ class ChartsView extends StatelessWidget {
                 )
               else
                 Text(
-                  'Выберите хотя бы одну доску для отображения данных',
+                  LocaleKeys.selectAtLeastOneTask.tr(),
                   style: AppTypography.sf.s18.w500.red,
                 ),
               const SizedBox(height: 60),
               Text(
-                'Временная статистика'.tr(),
+                LocaleKeys.timeStats.tr(),
                 style: AppTypography.sf.s18.w500.black,
               ),
               const SizedBox(height: 20),
@@ -347,10 +345,10 @@ class ChartsView extends StatelessWidget {
                 availableValues: model.lineChartModel,
                 callback: model.fillLine,
                 value: model.selectedChartModel,
-                tooltip: 'Выберите пользователя',
-                buildName: (item) => item?.user?.userName??'-',
-                title: 'Выберите пользовтаеля',
-                clear: (){},
+                tooltip: LocaleKeys.chooseUser.tr(),
+                buildName: (item) => item?.user?.userName ?? '-',
+                title: LocaleKeys.chooseUser.tr(),
+                clear: () {},
               ),
               const SizedBox(height: 20),
               Wrap(
@@ -367,7 +365,7 @@ class ChartsView extends StatelessWidget {
                       SizedBox(
                         width: 120,
                         child: Text(
-                          'Полученые'.tr(),
+                          LocaleKeys.getedTasks.tr(),
                           style: AppTypography.sf.s14.w400.black,
                         ),
                       ),
@@ -389,7 +387,7 @@ class ChartsView extends StatelessWidget {
                       SizedBox(
                         width: 120,
                         child: Text(
-                          'Выполненные'.tr(),
+                          LocaleKeys.doneTasks.tr(),
                           style: AppTypography.sf.s14.w400.black,
                         ),
                       ),
@@ -411,7 +409,7 @@ class ChartsView extends StatelessWidget {
                       SizedBox(
                         width: 120,
                         child: Text(
-                          'Закрытые'.tr(),
+                          LocaleKeys.closedTasks.tr(),
                           style: AppTypography.sf.s14.w400.black,
                         ),
                       ),
@@ -433,7 +431,7 @@ class ChartsView extends StatelessWidget {
                       SizedBox(
                         width: 120,
                         child: Text(
-                          'Выданные'.tr(),
+                          LocaleKeys.authoredTasks.tr(),
                           style: AppTypography.sf.s14.w400.black,
                         ),
                       ),

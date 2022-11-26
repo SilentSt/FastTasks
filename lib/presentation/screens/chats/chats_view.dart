@@ -33,13 +33,13 @@ class ChatsView extends StatelessWidget {
               title: Text(LocaleKeys.chats.tr()),
               automaticallyImplyLeading: false,
             ),
-            
             body: const ChatsShimmer(),
           );
         }
         return Scaffold(
           appBar: AppBar(
             title: Text(LocaleKeys.chats.tr()),
+            automaticallyImplyLeading: false,
             actions: [
               AppIconButton(
                 onTap: model.showDialog,
@@ -129,14 +129,6 @@ class ChatsView extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                                // Text(
-                                //   chat.lastMessage?.createdAt == null
-                                //       ? DateFormat('dd.MM.yy')
-                                //           .format(DateTime.now())
-                                //       : DateFormat('dd.MM.yy')
-                                //           .format(chat.lastMessage!.createdAt),
-                                //   style: AppTypography.sf.s12.w300.grey,
-                                // )
                               ],
                             ),
                           ),
@@ -146,7 +138,11 @@ class ChatsView extends StatelessWidget {
                   },
                   separatorBuilder: (_, __) => const SizedBox(height: 20),
                   itemCount: model.chats.length,
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  padding: EdgeInsets.only(
+                    left: 16,
+                    right: 16,
+                    bottom: MediaQuery.of(context).padding.bottom + 110,
+                  ),
                 ),
               if (model.creatingDialogVisible) const AddChatDialog(),
             ],

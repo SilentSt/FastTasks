@@ -37,7 +37,7 @@ extension ToString on TaskStatus {
       case TaskStatus.d:
         return LocaleKeys.done.tr();
       case TaskStatus.c:
-        return 'closed'.tr();
+        return 'Завершена'.tr();
     }
   }
 }

@@ -31,6 +31,7 @@ class HomeView extends StatelessWidget {
           return Scaffold(
             appBar: AppBar(
               title: Text(LocaleKeys.home.tr()),
+              automaticallyImplyLeading: false,
             ),
             body: const Center(
               child: AppLoading(),
@@ -40,112 +41,121 @@ class HomeView extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             title: Text(LocaleKeys.home.tr()),
+            automaticallyImplyLeading: false,
           ),
-          body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: SizedBox(
-              height: MediaQuery.of(context).size.height,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
+          body: SizedBox(
+            height: MediaQuery.of(context).size.height,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Text(
                     LocaleKeys.mainPageInfo.tr(),
                     style: AppTypography.sf.s18.w400,
                   ),
-                  Expanded(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        if (model.myTasks.isEmpty) ...[
-                          LottieBuilder.asset(
+                ),
+                Expanded(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      if (model.myTasks.isEmpty) ...[
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: LottieBuilder.asset(
                             Assets.animations.empty,
                             height: 200,
                           ),
-                          const SizedBox(height: 20),
-                          Text(
+                        ),
+                        const SizedBox(height: 20),
+                        Padding(
+                           padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Text(
                             LocaleKeys.myDeskIsEmpty.tr(),
                             textAlign: TextAlign.center,
                             style: AppTypography.sf.grey.s18.w400,
                           ),
-                        ] else
-                          Expanded(
-                            child: ListView(
-                              controller: model.scrollController,
-                              children: [
-                                for (final item in model.myTasks)
-                                  ListTile(
-                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                                    onTap: () => App.router.push(TaskViewRoute(id: item.id)),
-                                    title: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        ConstrainedBox(
-                                          constraints: BoxConstraints(
-                                            maxWidth: MediaQuery.of(context).size.width * .49,
-                                          ),
-                                          child: Text(
-                                            item.title,
-                                            overflow: TextOverflow.fade,
-                                            style: AppTypography.sf.s24.w600.black.copyWith(
-                                              color: model.colorBuilder(
-                                                taskStatusfromInt(
-                                                  item.status,
-                                                ),
+                        ),
+                      ] else
+                        Expanded(
+                          child: ListView(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            controller: model.scrollController,
+                            children: [
+                              for (final item in model.myTasks)
+                                ListTile(
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                                  onTap: () => App.router.push(TaskViewRoute(id: item.id)),
+                                  title: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      ConstrainedBox(
+                                        constraints: BoxConstraints(
+                                          maxWidth: MediaQuery.of(context).size.width * .49,
+                                        ),
+                                        child: Text(
+                                          item.title,
+                                          overflow: TextOverflow.fade,
+                                          style: AppTypography.sf.s24.w600.black.copyWith(
+                                            color: model.colorBuilder(
+                                              taskStatusfromInt(
+                                                item.status,
                                               ),
                                             ),
                                           ),
                                         ),
-                                        if (item.isExecutor)
-                                          AppIconButton(
-                                            onTap: () => model.addNote(
-                                              context,
-                                              item,
-                                            ),
-                                            iconWidget: const Padding(
-                                              padding: EdgeInsets.only(top: 3),
-                                              child: Icon(
-                                                size: 20,
-                                                CupertinoIcons.pin,
-                                                color: ColorName.green,
-                                              ),
+                                      ),
+                                      if (item.isExecutor)
+                                        AppIconButton(
+                                          onTap: () => model.addNote(
+                                            context,
+                                            item,
+                                          ),
+                                          iconWidget: const Padding(
+                                            padding: EdgeInsets.only(top: 3),
+                                            child: Icon(
+                                              size: 20,
+                                              CupertinoIcons.pin,
+                                              color: ColorName.green,
                                             ),
                                           ),
-                                      ],
-                                    ),
-                                    contentPadding: const EdgeInsets.symmetric(vertical: 5),
-                                    minLeadingWidth: 20,
-                                    leading: item.links.isNotEmpty
-                                        ? SizedBox(
-                                            width: 40,
-                                            child: AppIconButton(
-                                              onTap: () => model.downloadAll(item.links),
-                                              iconWidget: Icon(
-                                                Icons.file_download,
-                                                color: ColorName.red.withOpacity(0.7),
-                                              ),
-                                            ),
-                                          )
-                                        : const SizedBox(
-                                            width: 40,
-                                          ),
-                                    subtitle: Text(
-                                      '${item.executor.userName} (${item.executor.email})',
-                                      style: AppTypography.sf.s14.black,
-                                    ),
+                                        ),
+                                    ],
                                   ),
-                                if (model.isLoadingMore) const AppLoading(),
-                              ],
-                            ),
+                                  contentPadding: const EdgeInsets.symmetric(vertical: 5),
+                                  minLeadingWidth: 20,
+                                  leading: item.links.isNotEmpty
+                                      ? SizedBox(
+                                          width: 40,
+                                          child: AppIconButton(
+                                            onTap: () => model.downloadAll(item.links),
+                                            iconWidget: Icon(
+                                              Icons.file_download,
+                                              color: ColorName.red.withOpacity(0.7),
+                                            ),
+                                          ),
+                                        )
+                                      : const SizedBox(
+                                          width: 40,
+                                        ),
+                                  subtitle: Text(
+                                    '${item.executor.userName} (${item.executor.email})',
+                                    style: AppTypography.sf.s14.black,
+                                  ),
+                                ),
+                              if (model.isLoadingMore) const AppLoading(),
+                            ],
                           ),
-                        const SizedBox(height: 90),
-                      ],
-                    ),
+                        ),
+                      const SizedBox(height: 90),
+                    ],
                   ),
-                  const SizedBox(),
-                ],
-              ),
+                ),
+                const SizedBox(),
+              ],
             ),
           ),
         );

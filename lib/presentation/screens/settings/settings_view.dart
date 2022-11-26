@@ -32,11 +32,13 @@ class SettingsView extends StatelessWidget {
         }
         return Scaffold(
           appBar: AppBar(
+            automaticallyImplyLeading: false,
             title: Text(
               LocaleKeys.settings.tr(),
             ),
           ),
           body: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
                 child: ListView(

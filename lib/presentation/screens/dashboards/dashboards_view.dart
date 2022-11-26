@@ -39,6 +39,7 @@ class DashboardsView extends StatelessWidget {
           return Scaffold(
             appBar: AppBar(
               title: Text(LocaleKeys.dashboard.tr()),
+              automaticallyImplyLeading: false,
             ),
             body: const Center(
               child: AppLoading(),
@@ -54,6 +55,7 @@ class DashboardsView extends StatelessWidget {
                 title: Text(
                   LocaleKeys.dashboard.tr(),
                 ),
+                automaticallyImplyLeading: false,
                 actions: [
                   if (model.tables.isNotEmpty)
                     AppIconButton(
@@ -138,46 +140,48 @@ class DashboardsView extends StatelessWidget {
               ),
               body: Padding(
                 padding: EdgeInsets.only(
-                  left: 16,
-                  right: 16,
                   bottom: MediaQuery.of(context).padding.bottom + 90,
                 ),
                 child: Center(
                   child: model.currentTable?.tasks == null || model.currentTable!.tasks!.isEmpty
-                      ? Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            LottieBuilder.asset(
-                              Assets.animations.empty,
-                              height: 200,
-                            ),
-                            const SizedBox(height: 20),
-                            Text(
-                              model.tables.isEmpty
-                                  ? LocaleKeys.emptyDashboardList.tr()
-                                  : LocaleKeys.emptyDashboard.tr(),
-                              textAlign: TextAlign.center,
-                              style: AppTypography.sf.grey.s18.w400,
-                            ),
-                            const SizedBox(height: 20),
-                            if (model.tables.isEmpty)
-                              AppButton(
-                                onTap: model.onAddDashShow,
-                                buttonColor: ColorName.purple,
-                                text: LocaleKeys.addDashboard.tr(),
-                              )
-                            else if (model.tasks.isEmpty)
-                              AppButton(
-                                onTap: model.onAddTaskShow,
-                                buttonColor: ColorName.purple,
-                                text: LocaleKeys.addTask.tr(),
+                      ? Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              LottieBuilder.asset(
+                                Assets.animations.empty,
+                                height: 200,
                               ),
-                          ],
+                              const SizedBox(height: 20),
+                              Text(
+                                model.tables.isEmpty
+                                    ? LocaleKeys.emptyDashboardList.tr()
+                                    : LocaleKeys.emptyDashboard.tr(),
+                                textAlign: TextAlign.center,
+                                style: AppTypography.sf.grey.s18.w400,
+                              ),
+                              const SizedBox(height: 20),
+                              if (model.tables.isEmpty)
+                                AppButton(
+                                  onTap: model.onAddDashShow,
+                                  buttonColor: ColorName.purple,
+                                  text: LocaleKeys.addDashboard.tr(),
+                                )
+                              else if (model.tasks.isEmpty)
+                                AppButton(
+                                  onTap: model.onAddTaskShow,
+                                  buttonColor: ColorName.purple,
+                                  text: LocaleKeys.addTask.tr(),
+                                ),
+                            ],
+                          ),
                         )
                       : SizedBox(
                           height: MediaQuery.of(context).size.height,
                           child: ListView(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
                             children: [
                               for (final item in model.currentTable!.tasks!)
                                 ListTile(

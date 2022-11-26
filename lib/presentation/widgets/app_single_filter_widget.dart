@@ -12,7 +12,7 @@ class AppSingleFilterWidget<T> extends StatefulWidget {
     required this.callback,
     required this.buildName,
     required this.title,
-    required this.clear,
+    this.clear,
   }) : super(key: key);
 
   final List<T> availableValues;
@@ -22,7 +22,7 @@ class AppSingleFilterWidget<T> extends StatefulWidget {
   final String Function(T? item) buildName;
   final String title;
 
-  final VoidCallback clear;
+  final VoidCallback? clear;
 
   @override
   State<AppSingleFilterWidget<T>> createState() => _AppSingleFilterWidgetState<T>();
@@ -61,7 +61,7 @@ class _AppSingleFilterWidgetState<T> extends State<AppSingleFilterWidget<T>> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Wrap(
       children: [
         SizedBox(
           width: 140,
@@ -75,6 +75,7 @@ class _AppSingleFilterWidgetState<T> extends State<AppSingleFilterWidget<T>> {
           child: PopupMenuButton<T>(
             initialValue: widget.value,
             splashRadius: 0,
+            color: ColorName.lightGrey,
             constraints: const BoxConstraints(
               minWidth: 158,
             ),
@@ -165,16 +166,17 @@ class _AppSingleFilterWidgetState<T> extends State<AppSingleFilterWidget<T>> {
           ),
         ),
         const SizedBox(width: 20),
-        CupertinoButton(
-          onPressed: widget.clear,
-          padding: EdgeInsets.zero,
-          minSize: 0,
-          child: const Icon(
-            Icons.clear,
-            color: ColorName.black,
-            size: 32,
+        if (widget.clear != null)
+          CupertinoButton(
+            onPressed: widget.clear,
+            padding: EdgeInsets.zero,
+            minSize: 0,
+            child: const Icon(
+              Icons.clear,
+              color: ColorName.black,
+              size: 32,
+            ),
           ),
-        ),
       ],
     );
   }

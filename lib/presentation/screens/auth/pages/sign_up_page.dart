@@ -18,7 +18,7 @@ class SignUpPage extends ViewModelWidget<AuthViewModel> {
   @override
   Widget build(BuildContext context, AuthViewModel viewModel) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar(automaticallyImplyLeading: false,
         leading: AppBackButton(onTap: viewModel.pop),
       ),
       body: ListView(

@@ -58,6 +58,26 @@
     "userStatsChart": "Статистика по пользователям",
     "tablesStatsCharts": "Статистика по доскам и по пользователям",
 
+    "chooseUser":"Выберите пользователя",
+    "timeStats":"Временная статистика",
+    "getedTasks":"Полученные",
+    "doneTasks":"Выполненные",
+    "closedTasks":"Закрытые",
+    "authoredTasks":"Выданные",
+    "selectAtLeastOneTask":"Выберите хотя бы одну доску",
+    "selectdesk":"Выберите доску",
+    "deskStats":"Статистика по доскам",
+    "selectAtLeastOneUser":"Выберите хотя бы одного пользователя для отображения данных",
+    "author":"Автор",
+    "timeToDo":"Время на выполнение",
+    "priceInPoints":"Цена в поинтах",
+    "points":"поинтов",
+    "createdAt":"Создана",
+    "taskMaterials":"Материалы задачи",
+    "downloadAll":"Скачать все",    
+    "task":"Задача",
+    "hours":"часов",
+
 
 
     "introText11": "Семейный локатор, который поможет всегда быть радом с семьей!",

@@ -1,22 +1,21 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:tasklet/data/models/models.dart';
+import 'package:tasklet/domain/services/error_service.dart';
 import 'package:tasklet/domain/services/task_service.dart';
 import 'package:tasklet/gen/colors.gen.dart';
-import 'package:tasklet/gen/locale_keys.g.dart';
-import 'package:tasklet/presentation/theme/app_typography.dart';
-import 'package:tasklet/presentation/widgets/app_text_button.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class TaskViewModel extends BaseViewModel {
   TaskViewModel({
     required this.taskService,
     required this.id,
+    required this.errorService,
   });
 
   final TaskService taskService;
+  final ErrorService errorService;
   final TextEditingController noteController = TextEditingController();
   final String id;
   TaskModel? task;
@@ -24,16 +23,22 @@ class TaskViewModel extends BaseViewModel {
   Future<void> onReady() async {
     setBusy(true);
     await fetchtask();
+    noteController.addListener(() => notifyListeners());
     setBusy(false);
   }
 
   Future<void> fetchtask() async {
     task = await taskService.fetchTaskId(id);
+    noteController.text = task?.note ?? '';
     notifyListeners();
   }
 
-  Future<void> downloadAll(List<String> urls) async {
-    for (final uri in urls) {
+  Future<void> downloadAll() async {
+    if (task?.links.isEmpty ?? false) {
+      errorService.showEror(error: 'В этой задачи нет вложений');
+      return;
+    }
+    for (final uri in task!.links) {
       await launchUrlString(uri, mode: LaunchMode.externalApplication);
     }
   }
@@ -43,47 +48,7 @@ class TaskViewModel extends BaseViewModel {
   }
 
   Future<void> addNote(BuildContext context) async {
-    final res = await showCupertinoDialog<String>(
-      context: context,
-      builder: (context) {
-        return CupertinoAlertDialog(
-          title: Text(
-            LocaleKeys.noteCreating.tr(),
-            style: AppTypography.sf.s18.w500.black,
-          ),
-          content: Card(
-            elevation: 0,
-            child: CupertinoTextField(
-              controller: noteController,
-              maxLines: 4,
-            ),
-          ),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5),
-              child: AppTextButton(
-                onTap: Navigator.of(context).pop,
-                text: LocaleKeys.cancel.tr(),
-                textStyle: AppTypography.sf.s14.blue,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5),
-              child: AppTextButton(
-                onTap: () => Navigator.of(context).pop(noteController.text),
-                text: LocaleKeys.yes.tr(),
-                textStyle: AppTypography.sf.s14.green,
-              ),
-            ),
-          ],
-        );
-      },
-    );
-    noteController.clear();
-    if (res == null) {
-      return;
-    }
-    await taskService.addNote(NoteDto(text: res, taskId: id));
+    await taskService.addNote(NoteDto(text: noteController.text, taskId: id));
     fetchtask();
   }
 

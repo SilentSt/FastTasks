@@ -40,16 +40,15 @@ class ChatView extends StatelessWidget {
             if (model.isBusy)
               Scaffold(
                 appBar: AppBar(
-                  // leading: AppBackButton(
-                  //   onTap: () => model.pop(context),
-                  // ),
                   title: const ChatTitleShimmer(),
+                  automaticallyImplyLeading: false,
                 ),
                 body: const ChatMessagesShimmer(),
               )
             else if (model.messages.isEmpty)
               Scaffold(
                 appBar: AppBar(
+                  automaticallyImplyLeading: false,
                   leading: AppBackButton(
                     onTap: () => model.pop(context),
                   ),
@@ -82,6 +81,7 @@ class ChatView extends StatelessWidget {
             else
               Scaffold(
                 appBar: AppBar(
+                  automaticallyImplyLeading: false,
                   leading: AppBackButton(
                     onTap: () => model.pop(context),
                   ),
@@ -98,14 +98,11 @@ class ChatView extends StatelessWidget {
                   itemBuilder: (context, index) {
                     final message = model.messages.toList()[index];
                     return Align(
-                      alignment: (message.self ?? false)
-                          ? Alignment.centerRight
-                          : Alignment.centerLeft,
+                      alignment: (message.self ?? false) ? Alignment.centerRight : Alignment.centerLeft,
                       child: DecoratedBox(
                         decoration: BoxDecoration(
-                          color: (message.self ?? false)
-                              ? ColorName.purple.withOpacity(.2)
-                              : ColorName.blue.withOpacity(.2),
+                          color:
+                              (message.self ?? false) ? ColorName.red.withOpacity(.1) : ColorName.red.withOpacity(.2),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Padding(
@@ -113,22 +110,33 @@ class ChatView extends StatelessWidget {
                             vertical: 10,
                             horizontal: 10,
                           ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.end,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              SizedBox(
-                                width: 250,
-                                child: Text(message.text),
-                              ),
-                              Align(
-                                alignment: Alignment.bottomCenter,
-                                child: Text(
-                                  DateFormat('hh:mm').format(
-                                    message.time.toLocal(),
-                                  ),
+                              if (!(message.self ?? true))
+                                Text(
+                                  message.from?.userName ?? '-',
+                                  textAlign: TextAlign.left,
+                                  style: AppTypography.sf.s15.w600.black,
                                 ),
-                              )
+                              Row(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  SizedBox(
+                                    width: 250,
+                                    child: Text(message.text),
+                                  ),
+                                  Align(
+                                    alignment: Alignment.bottomCenter,
+                                    child: Text(
+                                      DateFormat('hh:mm').format(
+                                        message.time.toLocal(),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
                             ],
                           ),
                         ),
@@ -136,8 +144,7 @@ class ChatView extends StatelessWidget {
                     );
                   },
                   reverse: true,
-                  separatorBuilder: (context, index) =>
-                      const SizedBox(height: 10),
+                  separatorBuilder: (context, index) => const SizedBox(height: 10),
                   itemCount: model.messages.length,
                 ),
               ),
@@ -153,7 +160,6 @@ class ChatView extends StatelessWidget {
                   children: [
                     SizedBox(
                       width: 340 > MediaQuery.of(context).size.width ? MediaQuery.of(context).size.width : 340,
-
                       child: TextField(
                         maxLines: model.maxLines,
                         controller: model.messageController,

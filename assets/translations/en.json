@@ -59,6 +59,27 @@
     "tablesStatsCharts": "Statistics by boards and by users",
 
 
+    "chooseUser":"Select a user",
+    "timeStats":"Temporary statistics",
+    "getedTasks":"Received",
+    "doneTasks":"Completed",
+    "closedTasks":"Closed",
+    "authoredTasks":"Issued",
+    "selectAtLeastOneTask":"Select at least one dashboard",
+    "selectdesk":"Choose a board",
+    "deskStats":"Statistics by boards",
+    "selectAtLeastOneUser":"Select at least one user to display the data",
+    "author":"Author",
+    "timeToDo":"Time to complete",
+    "priceInPoints":"Price in points",
+    "points":"points",
+    "createdAt":"Created",
+    "taskMaterials":"Task materials",
+    "downloadAll":"Download everything", 
+    "task":"Task",
+    "hours":"hours",
+
+
     
     "introText11": "Семейный локатор, который поможет всегда быть радом с семьей!",
     "introText12": "Оставайтесь на связи с близкими ради их безопасности",

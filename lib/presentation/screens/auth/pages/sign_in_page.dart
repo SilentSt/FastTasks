@@ -1,11 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:pinput/pinput.dart';
 import 'package:stacked/stacked.dart';
 import 'package:tasklet/gen/assets.gen.dart';
-import 'package:tasklet/gen/colors.gen.dart';
 import 'package:tasklet/gen/locale_keys.g.dart';
 import 'package:tasklet/presentation/screens/auth/auth_vm.dart';
 import 'package:tasklet/presentation/theme/app_typography.dart';
@@ -21,6 +18,7 @@ class SignInPage extends ViewModelWidget<AuthViewModel> {
   Widget build(BuildContext context, AuthViewModel viewModel) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         leading: AppBackButton(onTap: viewModel.pop),
       ),
       body: ListView(
@@ -45,8 +43,7 @@ class SignInPage extends ViewModelWidget<AuthViewModel> {
           const SizedBox(height: 20),
           LottieBuilder.asset(
             Assets.animations.hello,
-            height: MediaQuery.of(context).size.height*.32,
-            
+            height: MediaQuery.of(context).size.height * .32,
           ),
           const SizedBox(height: 45),
           AppTextField.auth(
@@ -72,9 +69,7 @@ class SignInPage extends ViewModelWidget<AuthViewModel> {
                 const SizedBox(height: 25),
               ],
             ),
-            crossFadeState: viewModel.codeSended
-                ? CrossFadeState.showSecond
-                : CrossFadeState.showFirst,
+            crossFadeState: viewModel.codeSended ? CrossFadeState.showSecond : CrossFadeState.showFirst,
             duration: const Duration(milliseconds: 300),
             reverseDuration: const Duration(milliseconds: 300),
             firstCurve: Curves.easeIn,
@@ -83,12 +78,8 @@ class SignInPage extends ViewModelWidget<AuthViewModel> {
             alignment: Alignment.topCenter,
           ),
           AppButton.black(
-            onTap: viewModel.codeSended
-                ? viewModel.approveCode
-                : viewModel.requestCode,
-            text: viewModel.codeSended
-                ? LocaleKeys.signIn.tr()
-                : LocaleKeys.sendCode.tr(),
+            onTap: viewModel.codeSended ? viewModel.approveCode : viewModel.requestCode,
+            text: viewModel.codeSended ? LocaleKeys.signIn.tr() : LocaleKeys.sendCode.tr(),
           ),
         ],
       ),
