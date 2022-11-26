@@ -29,7 +29,6 @@ class DashboardsViewModel extends BaseViewModel {
   final AuthService authService;
   final TextEditingController noteController = TextEditingController();
 
-
   bool addDashVisible = false;
   bool addTaskVisible = false;
   bool isLoadingMore = false;
@@ -37,8 +36,6 @@ class DashboardsViewModel extends BaseViewModel {
   TaskModel? ediatableTask;
   Timer? fetcher;
   TableModel? currentTable;
-
-
 
   Future<void> onReady() async {
     await fetchDashboards();
@@ -65,7 +62,10 @@ class DashboardsViewModel extends BaseViewModel {
       return;
     }
     final res = await taskService.fetchById(currentTable!.id, tasks.length, 30);
-    currentTable = currentTable!.copyWith(tasks: res);
+    currentTable = currentTable!.copyWith(tasks: [
+      ...tasks,
+      ...res,
+    ]);
     tasks.addAll(currentTable?.tasks ?? []);
     tasks.sort(
       (a, b) => a.status.compareTo(b.status),
@@ -184,7 +184,7 @@ class DashboardsViewModel extends BaseViewModel {
   }
 
   void selectTable(TableModel table) {
-    currentTable = table;    
+    currentTable = table;
     tasks.clear();
     fetchTasksFromCurrentTable();
     notifyListeners();
