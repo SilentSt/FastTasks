@@ -67,6 +67,21 @@ class _$AppRouter extends RootStackRouter {
         barrierDismissible: false,
       );
     },
+    TaskViewRoute.name: (routeData) {
+      final pathParams = routeData.inheritedPathParams;
+      final args = routeData.argsAs<TaskViewRouteArgs>(
+          orElse: () => TaskViewRouteArgs(id: pathParams.getString('id')));
+      return CustomPage<dynamic>(
+        routeData: routeData,
+        child: TaskView(
+          key: args.key,
+          id: args.id,
+        ),
+        transitionsBuilder: fadeInTransition,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
     ChatsRouter.name: (routeData) {
       return CustomPage<dynamic>(
         routeData: routeData,
@@ -142,6 +157,11 @@ class _$AppRouter extends RootStackRouter {
             RouteConfig(
               ChartsViewRoute.name,
               path: 'charts',
+              parent: RootViewRoute.name,
+            ),
+            RouteConfig(
+              TaskViewRoute.name,
+              path: 'tasks/:id',
               parent: RootViewRoute.name,
             ),
             RouteConfig(
@@ -237,6 +257,41 @@ class ChartsViewRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'ChartsViewRoute';
+}
+
+/// generated route for
+/// [TaskView]
+class TaskViewRoute extends PageRouteInfo<TaskViewRouteArgs> {
+  TaskViewRoute({
+    Key? key,
+    required String id,
+  }) : super(
+          TaskViewRoute.name,
+          path: 'tasks/:id',
+          args: TaskViewRouteArgs(
+            key: key,
+            id: id,
+          ),
+          rawPathParams: {'id': id},
+        );
+
+  static const String name = 'TaskViewRoute';
+}
+
+class TaskViewRouteArgs {
+  const TaskViewRouteArgs({
+    this.key,
+    required this.id,
+  });
+
+  final Key? key;
+
+  final String id;
+
+  @override
+  String toString() {
+    return 'TaskViewRouteArgs{key: $key, id: $id}';
+  }
 }
 
 /// generated route for

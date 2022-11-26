@@ -6,6 +6,7 @@ import 'package:tasklet/presentation/screens/charts/charts_view.dart';
 import 'package:tasklet/presentation/screens/chats/chat/chat_view.dart';
 import 'package:tasklet/presentation/screens/chats/chats_view.dart';
 import 'package:tasklet/presentation/screens/dashboards/dashboards_view.dart';
+import 'package:tasklet/presentation/screens/dashboards/widgets/task_view.dart';
 import 'package:tasklet/presentation/screens/home/home_view.dart';
 import 'package:tasklet/presentation/screens/root/root_view.dart';
 import 'package:tasklet/presentation/screens/settings/settings_view.dart';
@@ -41,6 +42,10 @@ part 'app_router.gr.dart';
         AutoRoute(
           page: ChartsView,
           path: 'charts',
+        ),
+        AutoRoute(
+          page: TaskView,
+          path: 'tasks/:id'
         ),
         AutoRoute(
           page: EmptyRouterPage,

@@ -16,24 +16,39 @@ class HomeViewModel extends BaseViewModel {
   });
 
   Future<void> onReady() async {
+    setBusy(true);
     await fetchMyTasks();
+    setBusy(false);
+    scrollController.addListener(() {
+      scrollController.addListener(() {
+        if (!(scrollController.offset >= scrollController.position.maxScrollExtent &&
+            !scrollController.position.outOfRange)) return;
+        fetchMyTasks();
+      });
+    });
   }
 
   final TaskService taskService;
   final TextEditingController noteController = TextEditingController();
+  final ScrollController scrollController = ScrollController();
+  bool isLoadingMore = false;
   List<TaskModel> myTasks = [];
   List<bool> expansions = [];
 
   Future<void> fetchMyTasks() async {
-    setBusy(true);
-    myTasks = await taskService.fetch();
+    if (isLoadingMore) return;
+    isLoadingMore = true;
+    notifyListeners();
+    final newTasks = await taskService.fetch(myTasks.length, 30);
+    myTasks.addAll(newTasks);
     myTasks.sort(
       (a, b) => a.status.compareTo(b.status),
     );
     for (final _ in myTasks) {
       expansions.add(false);
     }
-    setBusy(false);
+    isLoadingMore = false;
+    notifyListeners();
   }
 
   void updateExp(int index) {
@@ -114,5 +129,12 @@ class HomeViewModel extends BaseViewModel {
   Future<void> updateTaskStatus(int taskStatus, String id) async {
     await taskService.patchStatus(StatusDto(status: taskStatus, id: id));
     fetchMyTasks();
+  }
+
+  @override
+  void dispose() {
+    noteController.dispose();
+    scrollController.dispose();
+    super.dispose();
   }
 }

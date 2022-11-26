@@ -17,25 +17,53 @@ class _$RemoteTaskDataSource extends RemoteTaskDataSource {
   final definitionType = RemoteTaskDataSource;
 
   @override
-  Future<Response<List<TaskModel>>> fetch() {
+  Future<Response<List<TaskModel>>> fetch(
+    int skip,
+    int take,
+  ) {
     final String $url = 'Task';
+    final Map<String, dynamic> $params = <String, dynamic>{
+      'skip': skip,
+      'take': take,
+    };
     final Request $request = Request(
       'GET',
       $url,
       client.baseUrl,
+      parameters: $params,
     );
     return client.send<List<TaskModel>, TaskModel>($request);
   }
 
   @override
-  Future<Response<List<TaskModel>>> getByTableId(String tableId) {
-    final String $url = 'Task/${tableId}';
+  Future<Response<List<TaskModel>>> getByTableId(
+    String tableId,
+    int skip,
+    int take,
+  ) {
+    final String $url = 'Task/table/${tableId}';
+    final Map<String, dynamic> $params = <String, dynamic>{
+      'skip': skip,
+      'take': take,
+    };
+    final Request $request = Request(
+      'GET',
+      $url,
+      client.baseUrl,
+      parameters: $params,
+    );
+    return client.send<List<TaskModel>, TaskModel>($request);
+  }
+
+  @override
+  Future<Response<TaskModel>> getTaskById(String id) {
+    final String $url = 'Task/${id}';
     final Request $request = Request(
       'GET',
       $url,
       client.baseUrl,
     );
-    return client.send<List<TaskModel>, TaskModel>($request);
+    return client.send<TaskModel, TaskModel>($request);
   }
 
   @override

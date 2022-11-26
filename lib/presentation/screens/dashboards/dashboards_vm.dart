@@ -3,9 +3,7 @@ import 'dart:async';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:signalr_core/signalr_core.dart';
 import 'package:stacked/stacked.dart';
-import 'package:tasklet/data/data_sources/auth/local_auth_ds.dart';
 import 'package:tasklet/data/models/models.dart';
 import 'package:tasklet/domain/services/auth_service.dart';
 import 'package:tasklet/domain/services/table_service.dart';
@@ -25,52 +23,31 @@ class DashboardsViewModel extends BaseViewModel {
   List<TableModel> tables = [];
   List<TaskModel> tasks = [];
   List<bool> expansions = [];
-  static const _signalRAddress = 'https://sbeusilent.space/taskhub';
+  // static const _signalRAddress = 'https://sbeusilent.space/taskhub';
   final TableService tableService;
   final TaskService taskService;
   final AuthService authService;
   final TextEditingController noteController = TextEditingController();
-  final HubConnection _signalRConnection = HubConnectionBuilder()
-      .withUrl(
-        _signalRAddress,
-        HttpConnectionOptions(
-          logging: (level, message) {
-            print(message.toString());
-            print(level.toString());
-          },
-          accessTokenFactory: () async {
-            return LocalAuthDataSource.session?.token;
-          },
-        ),
-      )
-      .build();
+  final ScrollController scrollController = ScrollController();
+
 
   bool addDashVisible = false;
   bool addTaskVisible = false;
+  bool isLoadingMore = false;
   TableModel? editableTable;
   TaskModel? ediatableTask;
   Timer? fetcher;
   TableModel? currentTable;
 
+  
+
   Future<void> onReady() async {
     await fetchDashboards();
-    fetcher = Timer.periodic(
-      const Duration(seconds: 10),
-      (_) => silentFetch(),
-    );
-    // _signalRConnection.start();
-    // _signalRConnection.on(
-    //   'NewTask',
-    //   (_) => fetchDashboards(),
-    // );
-    // _signalRConnection.on(
-    //   'UpdateTask',
-    //   (_) => fetchDashboards(),
-    // );
-    // _signalRConnection.onclose((exception) {
-    //   _signalRConnection.stop();
-    //   _signalRConnection.start();
-    // });
+    scrollController.addListener(() {
+      if (!(scrollController.offset >= scrollController.position.maxScrollExtent &&
+          !scrollController.position.outOfRange)) return;
+      fetchTasksFromCurrentTable();
+    });
   }
 
   Future<void> fetchDashboards() async {
@@ -84,33 +61,17 @@ class DashboardsViewModel extends BaseViewModel {
     setBusy(false);
   }
 
-  Future<void> silentFetch() async {
-    if (currentTable == null) {
-      setBusy(false);
-      return;
-    }
-    final res = await taskService.fetchById(currentTable!.id);
-    currentTable = currentTable!.copyWith(tasks: res);
-    tasks = currentTable?.tasks ?? [];
-    tasks.sort(
-      (a, b) => a.status.compareTo(b.status),
-    );
-    expansions.clear();
-    for (final _ in tasks) {
-      expansions.add(false);
-    }
-    notifyListeners();
-  }
-
   Future<void> fetchTasksFromCurrentTable() async {
-    setBusy(true);
+    if (isLoadingMore) return;
+    isLoadingMore = true;
+    notifyListeners();
     if (currentTable == null) {
       setBusy(false);
       return;
     }
-    final res = await taskService.fetchById(currentTable!.id);
+    final res = await taskService.fetchById(currentTable!.id, tasks.length, 30);
     currentTable = currentTable!.copyWith(tasks: res);
-    tasks = currentTable?.tasks ?? [];
+    tasks.addAll(currentTable?.tasks ?? []);
     tasks.sort(
       (a, b) => a.status.compareTo(b.status),
     );
@@ -118,7 +79,8 @@ class DashboardsViewModel extends BaseViewModel {
     for (final _ in tasks) {
       expansions.add(false);
     }
-    setBusy(false);
+    isLoadingMore = false;
+    notifyListeners();
   }
 
   void onAddDashShow({TableModel? task}) {
@@ -235,6 +197,7 @@ class DashboardsViewModel extends BaseViewModel {
   @override
   void dispose() {
     noteController.dispose();
+    scrollController.dispose();
     fetcher?.cancel();
     fetcher = null;
     //_signalRConnection.stop();

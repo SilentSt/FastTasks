@@ -66,9 +66,7 @@ class AddEditTaskDialog extends ViewModelWidget<DashboardsViewModel> {
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            model.taskModel != null
-                                ? LocaleKeys.editTask.tr()
-                                : LocaleKeys.addTask.tr(),
+                            model.taskModel != null ? LocaleKeys.editTask.tr() : LocaleKeys.addTask.tr(),
                             style: AppTypography.sf.s24.w500.black,
                           ),
                         ),
@@ -101,24 +99,14 @@ class AddEditTaskDialog extends ViewModelWidget<DashboardsViewModel> {
                               maxLines: 4,
                             ),
                             const SizedBox(height: 20),
-                            Text(
-                              LocaleKeys.taskDuration.tr(),
-                              style: AppTypography.sf.s18.w500.black,
+                            AppTextField(
+                              title: LocaleKeys.taskDuration.tr(),
+                              controller: model.durationController,
                             ),
-                            const SizedBox(height: 5),
-                            DropdownButtonFormField<TaskDuration>(
-                              value: model.taskDuration,
-                              items: TaskDuration.values
-                                  .map((e) => DropdownMenuItem(
-                                        value: e,
-                                        child: Text(
-                                          e.title,
-                                          style:
-                                              AppTypography.sf.s14.w400.black,
-                                        ),
-                                      ))
-                                  .toList(),
-                              onChanged: model.onSelectDuration,
+                            const SizedBox(height: 20),
+                            AppTextField(
+                              title: 'Поинты за задачу'.tr(),
+                              controller: model.priceController,
                             ),
                             const SizedBox(height: 20),
                             Text(
@@ -149,13 +137,11 @@ class AddEditTaskDialog extends ViewModelWidget<DashboardsViewModel> {
                                               ),
                                               title: Text(
                                                 link,
-                                                style: AppTypography
-                                                    .sf.s16.w500.black,
+                                                style: AppTypography.sf.s16.w500.black,
                                                 overflow: TextOverflow.fade,
                                               ),
                                               trailing: AppIconButton(
-                                                onTap: () =>
-                                                    model.onRemoveLink(index),
+                                                onTap: () => model.onRemoveLink(index),
                                                 iconWidget: const Icon(
                                                   CupertinoIcons.clear,
                                                   color: ColorName.red,
@@ -164,8 +150,7 @@ class AddEditTaskDialog extends ViewModelWidget<DashboardsViewModel> {
                                             ),
                                           );
                                         },
-                                        separatorBuilder: (_, __) =>
-                                            const SizedBox(height: 10),
+                                        separatorBuilder: (_, __) => const SizedBox(height: 10),
                                         itemCount: model.links.length,
                                       ),
                                     ),
@@ -208,8 +193,7 @@ class AddEditTaskDialog extends ViewModelWidget<DashboardsViewModel> {
                                       child: ListTile(
                                         title: Text(
                                           user.email,
-                                          style:
-                                              AppTypography.sf.s16.w500.black,
+                                          style: AppTypography.sf.s16.w500.black,
                                         ),
                                         subtitle: Text(
                                           user.userName ?? '',
@@ -218,14 +202,12 @@ class AddEditTaskDialog extends ViewModelWidget<DashboardsViewModel> {
                                         trailing: CupertinoSwitch(
                                           value: model.selectedUser == user,
                                           activeColor: ColorName.purple,
-                                          onChanged: (_) =>
-                                              model.onUserSelected(user),
+                                          onChanged: (_) => model.onUserSelected(user),
                                         ),
                                       ),
                                     );
                                   },
-                                  separatorBuilder: (_, __) =>
-                                      const SizedBox(height: 10),
+                                  separatorBuilder: (_, __) => const SizedBox(height: 10),
                                   itemCount: model.users.length,
                                 ),
                               ),

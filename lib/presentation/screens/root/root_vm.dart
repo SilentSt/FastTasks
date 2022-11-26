@@ -40,6 +40,9 @@ class RootViewModel extends BaseViewModel {
     else if(App.router.currentUrl.contains('settings')){
       selectedPage = 4;
     }
+    else if(App.router.currentUrl.contains('tasks')){
+      selectedPage = 1;
+    }
   }
 
   void hideNavbar() {

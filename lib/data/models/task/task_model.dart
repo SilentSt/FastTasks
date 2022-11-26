@@ -16,12 +16,13 @@ class TaskModel with Mappable {
     required this.isExecutor,
     required this.duration,
     required this.status,
+    required this.price,
     this.note,
   });
   final String id;
   final String title;
   final String description;
-  final int duration;
+  final double duration;
   final bool hidden;
   final UserModel author;
   final UserModel executor;
@@ -31,6 +32,7 @@ class TaskModel with Mappable {
   final DateTime startTime;
   final List<String> links;
   final String? note;
+  final int price;
 
   //TaskDto copyToDto()=>
 }

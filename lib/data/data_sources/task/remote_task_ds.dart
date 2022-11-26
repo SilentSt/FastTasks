@@ -5,17 +5,25 @@ import 'package:tasklet/data/models/models.dart';
 part 'remote_task_ds.chopper.dart';
 
 @ChopperApi(baseUrl: 'Task')
-abstract class RemoteTaskDataSource extends ChopperService
-    implements AppRemoteDataSource {
-  static RemoteTaskDataSource create([ChopperClient? client]) =>
-      _$RemoteTaskDataSource(client);
+abstract class RemoteTaskDataSource extends ChopperService implements AppRemoteDataSource {
+  static RemoteTaskDataSource create([ChopperClient? client]) => _$RemoteTaskDataSource(client);
 
   @Get()
-  Future<Response<List<TaskModel>>> fetch();
+  Future<Response<List<TaskModel>>> fetch(
+    @Query('skip') int skip,
+    @Query('take') int take,
+  );
 
-  @Get(path: r'/{tableId}')
+  @Get(path: r'/table/{tableId}')
   Future<Response<List<TaskModel>>> getByTableId(
     @Path() final String tableId,
+    @Query('skip') int skip,
+    @Query('take') int take,
+  );
+
+  @Get(path: r'/{id}')
+  Future<Response<TaskModel>> getTaskById(
+    @Path() final String id,
   );
 
   @Post()

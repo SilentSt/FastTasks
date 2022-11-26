@@ -15,16 +15,18 @@ class TaskDto with Mappable {
     this.note,
     this.id,
     this.status,
+    this.price,
   });
   final String? id;
   final String title;
   final String description;
   final DateTime? dateTime;
-  final int duration;
+  final double duration;
   final bool hidden;
   final String tableId;
   final String executorId;
   final List<String> links;
   final String? note;
   final int? status;
+  final int? price;
 }
