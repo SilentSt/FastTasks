@@ -32,6 +32,7 @@ class DashboardsViewModel extends BaseViewModel {
   bool addDashVisible = false;
   bool addTaskVisible = false;
   bool isLoadingMore = false;
+  bool dashboardChanging = false;
   TableModel? editableTable;
   TaskModel? ediatableTask;
   Timer? fetcher;
@@ -42,7 +43,8 @@ class DashboardsViewModel extends BaseViewModel {
   }
 
   Future<void> fetchDashboards() async {
-    setBusy(true);
+    dashboardChanging = true;
+    notifyListeners();
     final res = await tableService.fetch();
     if (res.isNotEmpty) {
       tables = res;
@@ -50,7 +52,8 @@ class DashboardsViewModel extends BaseViewModel {
       tasks.clear();
       await fetchTasksFromCurrentTable();
     }
-    setBusy(false);
+    dashboardChanging = false;
+    notifyListeners();
   }
 
   Future<void> fetchTasksFromCurrentTable() async {
@@ -183,10 +186,13 @@ class DashboardsViewModel extends BaseViewModel {
     fetchTasksFromCurrentTable();
   }
 
-  void selectTable(TableModel table) {
+  Future<void> selectTable(TableModel table) async {
+    dashboardChanging = true;
+    notifyListeners();
     currentTable = table;
     tasks.clear();
-    fetchTasksFromCurrentTable();
+    await fetchTasksFromCurrentTable();
+    dashboardChanging = false;
     notifyListeners();
   }
 

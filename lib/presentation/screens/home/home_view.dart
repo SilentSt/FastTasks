@@ -71,7 +71,7 @@ class HomeView extends StatelessWidget {
                         ),
                         const SizedBox(height: 20),
                         Padding(
-                           padding: const EdgeInsets.symmetric(horizontal: 16),
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
                           child: Text(
                             LocaleKeys.myDeskIsEmpty.tr(),
                             textAlign: TextAlign.center,
@@ -81,7 +81,11 @@ class HomeView extends StatelessWidget {
                       ] else
                         Expanded(
                           child: ListView(
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            padding: EdgeInsets.only(
+                              left: 16,
+                              right: 16,
+                              bottom: MediaQuery.of(context).padding.bottom + 90,
+                            ),
                             controller: model.scrollController,
                             children: [
                               for (final item in model.myTasks)
@@ -150,7 +154,6 @@ class HomeView extends StatelessWidget {
                             ],
                           ),
                         ),
-                      const SizedBox(height: 90),
                     ],
                   ),
                 ),

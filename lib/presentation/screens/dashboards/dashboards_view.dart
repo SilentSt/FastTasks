@@ -13,7 +13,6 @@ import 'package:tasklet/presentation/app/app.dart';
 import 'package:tasklet/presentation/navigation/app_router.dart';
 import 'package:tasklet/presentation/screens/dashboards/dashboards_vm.dart';
 import 'package:tasklet/presentation/screens/dashboards/dialogs/task/add_edit_task.dart';
-import 'package:tasklet/presentation/screens/dashboards/widgets/task_view.dart';
 import 'package:tasklet/presentation/theme/app_typography.dart';
 import 'package:tasklet/presentation/widgets/app_button.dart';
 import 'package:tasklet/presentation/widgets/app_icon_button.dart';
@@ -138,137 +137,140 @@ class DashboardsView extends StatelessWidget {
                   ),
                 ),
               ),
-              body: Padding(
-                padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).padding.bottom + 90,
-                ),
-                child: Center(
-                  child: model.currentTable?.tasks == null || model.currentTable!.tasks!.isEmpty
-                      ? Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              LottieBuilder.asset(
-                                Assets.animations.empty,
-                                height: 200,
+              body: model.dashboardChanging
+                  ? const Center(
+                      child: AppLoading(),
+                    )
+                  : Center(
+                      child: model.currentTable?.tasks == null || model.currentTable!.tasks!.isEmpty
+                          ? Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 16),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  LottieBuilder.asset(
+                                    Assets.animations.empty,
+                                    height: 200,
+                                  ),
+                                  const SizedBox(height: 20),
+                                  Text(
+                                    model.tables.isEmpty
+                                        ? LocaleKeys.emptyDashboardList.tr()
+                                        : LocaleKeys.emptyDashboard.tr(),
+                                    textAlign: TextAlign.center,
+                                    style: AppTypography.sf.grey.s18.w400,
+                                  ),
+                                  const SizedBox(height: 20),
+                                  if (model.tables.isEmpty)
+                                    AppButton(
+                                      onTap: model.onAddDashShow,
+                                      buttonColor: ColorName.purple,
+                                      text: LocaleKeys.addDashboard.tr(),
+                                    )
+                                  else if (model.tasks.isEmpty)
+                                    AppButton(
+                                      onTap: model.onAddTaskShow,
+                                      buttonColor: ColorName.purple,
+                                      text: LocaleKeys.addTask.tr(),
+                                    ),
+                                ],
                               ),
-                              const SizedBox(height: 20),
-                              Text(
-                                model.tables.isEmpty
-                                    ? LocaleKeys.emptyDashboardList.tr()
-                                    : LocaleKeys.emptyDashboard.tr(),
-                                textAlign: TextAlign.center,
-                                style: AppTypography.sf.grey.s18.w400,
-                              ),
-                              const SizedBox(height: 20),
-                              if (model.tables.isEmpty)
-                                AppButton(
-                                  onTap: model.onAddDashShow,
-                                  buttonColor: ColorName.purple,
-                                  text: LocaleKeys.addDashboard.tr(),
-                                )
-                              else if (model.tasks.isEmpty)
-                                AppButton(
-                                  onTap: model.onAddTaskShow,
-                                  buttonColor: ColorName.purple,
-                                  text: LocaleKeys.addTask.tr(),
+                            )
+                          : SizedBox(
+                              height: MediaQuery.of(context).size.height,
+                              child: ListView(
+                                padding: EdgeInsets.only(
+                                  left: 16,
+                                  right: 16,
+                                  bottom: MediaQuery.of(context).padding.bottom + 90,
                                 ),
-                            ],
-                          ),
-                        )
-                      : SizedBox(
-                          height: MediaQuery.of(context).size.height,
-                          child: ListView(
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
-                            children: [
-                              for (final item in model.currentTable!.tasks!)
-                                ListTile(
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                                  onTap: () => App.router.push(TaskViewRoute(id: item.id)),
-                                  title: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      ConstrainedBox(
-                                        constraints: BoxConstraints(
-                                          maxWidth: MediaQuery.of(context).size.width * .4,
-                                        ),
-                                        child: Text(
-                                          item.title,
-                                          overflow: TextOverflow.fade,
-                                          style: AppTypography.sf.s24.w600.black.copyWith(
-                                            color: model.colorBuilder(
-                                              taskStatusfromInt(
-                                                item.status,
+                                children: [
+                                  for (final item in model.currentTable!.tasks!)
+                                    ListTile(
+                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                                      onTap: () => App.router.push(TaskViewRoute(id: item.id)),
+                                      title: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          ConstrainedBox(
+                                            constraints: BoxConstraints(
+                                              maxWidth: MediaQuery.of(context).size.width * .4,
+                                            ),
+                                            child: Text(
+                                              item.title,
+                                              overflow: TextOverflow.fade,
+                                              style: AppTypography.sf.s24.w600.black.copyWith(
+                                                color: model.colorBuilder(
+                                                  taskStatusfromInt(
+                                                    item.status,
+                                                  ),
+                                                ),
                                               ),
                                             ),
                                           ),
-                                        ),
+                                          Row(children: [
+                                            if (item.isAuthor)
+                                              AppIconButton(
+                                                onTap: () => model.onAddTaskShow(task: item),
+                                                iconWidget: const Icon(
+                                                  Icons.edit_note,
+                                                  size: 30,
+                                                  color: ColorName.red,
+                                                ),
+                                              ),
+                                            if (item.isExecutor)
+                                              AppIconButton(
+                                                onTap: () => model.addNote(
+                                                  context,
+                                                  item,
+                                                ),
+                                                iconWidget: const Padding(
+                                                  padding: EdgeInsets.only(top: 3),
+                                                  child: Icon(
+                                                    size: 20,
+                                                    CupertinoIcons.pin,
+                                                    color: ColorName.green,
+                                                  ),
+                                                ),
+                                              ),
+                                          ]),
+                                        ],
                                       ),
-                                      Row(children: [
-                                        if (item.isAuthor)
-                                          AppIconButton(
-                                            onTap: () => model.onAddTaskShow(task: item),
-                                            iconWidget: const Icon(
-                                              Icons.edit_note,
-                                              size: 30,
-                                              color: ColorName.red,
-                                            ),
-                                          ),
-                                        if (item.isExecutor)
-                                          AppIconButton(
-                                            onTap: () => model.addNote(
-                                              context,
-                                              item,
-                                            ),
-                                            iconWidget: const Padding(
-                                              padding: EdgeInsets.only(top: 3),
-                                              child: Icon(
-                                                size: 20,
-                                                CupertinoIcons.pin,
-                                                color: ColorName.green,
+                                      contentPadding: const EdgeInsets.symmetric(vertical: 5),
+                                      minLeadingWidth: 20,
+                                      leading: item.links.isNotEmpty
+                                          ? SizedBox(
+                                              width: 40,
+                                              child: AppIconButton(
+                                                onTap: () => model.downloadAll(item.links),
+                                                iconWidget: Icon(
+                                                  Icons.file_download,
+                                                  color: ColorName.red.withOpacity(0.7),
+                                                ),
                                               ),
+                                            )
+                                          : const SizedBox(
+                                              width: 40,
                                             ),
-                                          ),
-                                      ]),
-                                    ],
-                                  ),
-                                  contentPadding: const EdgeInsets.symmetric(vertical: 5),
-                                  minLeadingWidth: 20,
-                                  leading: item.links.isNotEmpty
-                                      ? SizedBox(
-                                          width: 40,
-                                          child: AppIconButton(
-                                            onTap: () => model.downloadAll(item.links),
-                                            iconWidget: Icon(
-                                              Icons.file_download,
-                                              color: ColorName.red.withOpacity(0.7),
-                                            ),
-                                          ),
-                                        )
-                                      : const SizedBox(
-                                          width: 40,
-                                        ),
-                                  subtitle: Text(
-                                    '${item.executor.userName} (${item.executor.email})',
-                                    style: AppTypography.sf.s14.black,
-                                  ),
-                                ),
-                              if (model.isLoadingMore)
-                                const AppLoading()
-                              else
-                                AppTextButton(
-                                  onTap: model.fetchTasksFromCurrentTable,
-                                  text: 'Загрузить больше задач',
-                                  textStyle: AppTypography.sf.s20.red,
-                                ),
-                            ],
-                          ),
-                        ),
-                ),
-              ),
+                                      subtitle: Text(
+                                        '${item.executor.userName} (${item.executor.email})',
+                                        style: AppTypography.sf.s14.black,
+                                      ),
+                                    ),
+                                  if (model.isLoadingMore)
+                                    const AppLoading()
+                                  else
+                                    AppTextButton(
+                                      onTap: model.fetchTasksFromCurrentTable,
+                                      text: 'Загрузить больше задач',
+                                      textStyle: AppTypography.sf.s20.red,
+                                    ),
+                                ],
+                              ),
+                            ),
+                    ),
             ),
             const AddEditDashDialog(),
             const AddEditTaskDialog(),

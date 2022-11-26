@@ -52,7 +52,7 @@ class UserDependency extends AppAsyncDependency {
         FirebaseMessaging.instance,
         pushRds,
       );
-      await _pushNotificationsService.init();
+      _pushNotificationsService.init();
       // ignore: empty_catches
     } catch (e) {
       
