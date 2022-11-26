@@ -73,7 +73,6 @@ class DashboardsView extends StatelessWidget {
                       children: [
                         Expanded(
                           child: ListView.separated(
-                            controller: model.scrollController,
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (_, index) {
                               final item = model.tables[index];
@@ -252,6 +251,14 @@ class DashboardsView extends StatelessWidget {
                                     '${item.executor.userName} (${item.executor.email})',
                                     style: AppTypography.sf.s14.black,
                                   ),
+                                ),
+                              if (model.isLoadingMore)
+                                const AppLoading()
+                              else
+                                AppTextButton(
+                                  onTap: model.fetchTasksFromCurrentTable,
+                                  text: 'Загрузить больше задач',
+                                  textStyle: AppTypography.sf.s20.red,
                                 ),
                             ],
                           ),

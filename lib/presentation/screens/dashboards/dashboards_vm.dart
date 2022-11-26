@@ -28,7 +28,6 @@ class DashboardsViewModel extends BaseViewModel {
   final TaskService taskService;
   final AuthService authService;
   final TextEditingController noteController = TextEditingController();
-  final ScrollController scrollController = ScrollController();
 
 
   bool addDashVisible = false;
@@ -39,15 +38,10 @@ class DashboardsViewModel extends BaseViewModel {
   Timer? fetcher;
   TableModel? currentTable;
 
-  
+
 
   Future<void> onReady() async {
     await fetchDashboards();
-    scrollController.addListener(() {
-      if (!(scrollController.offset >= scrollController.position.maxScrollExtent &&
-          !scrollController.position.outOfRange)) return;
-      fetchTasksFromCurrentTable();
-    });
   }
 
   Future<void> fetchDashboards() async {
@@ -56,6 +50,7 @@ class DashboardsViewModel extends BaseViewModel {
     if (res.isNotEmpty) {
       tables = res;
       currentTable = tables.first;
+      tasks.clear();
       await fetchTasksFromCurrentTable();
     }
     setBusy(false);
@@ -189,7 +184,8 @@ class DashboardsViewModel extends BaseViewModel {
   }
 
   void selectTable(TableModel table) {
-    currentTable = table;
+    currentTable = table;    
+    tasks.clear();
     fetchTasksFromCurrentTable();
     notifyListeners();
   }
@@ -197,7 +193,6 @@ class DashboardsViewModel extends BaseViewModel {
   @override
   void dispose() {
     noteController.dispose();
-    scrollController.dispose();
     fetcher?.cancel();
     fetcher = null;
     //_signalRConnection.stop();
