@@ -23,8 +23,11 @@ class TaskView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<TaskViewModel>.reactive(
-      viewModelBuilder: () => TaskViewModel(taskService: context.user.taskService, id: id),
+    return ViewModelBuilder<
+        TaskViewModel>.reactive(
+      viewModelBuilder: () => TaskViewModel(
+          taskService: context.user.taskService,
+          id: id),
       onModelReady: (model) => model.onReady(),
       builder: (context, model, child) {
         return Scaffold(
@@ -33,180 +36,72 @@ class TaskView extends StatelessWidget {
               onTap: () => context.router.pop(),
             ),
           ),
-          body: Column(
+          body: ListView(
+            padding: EdgeInsets.fromLTRB(
+              16,
+              0,
+              16,
+              MediaQuery.of(context)
+                      .padding
+                      .bottom +
+                  100,
+            ),
             children: [
-              ListTile(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ConstrainedBox(
-                      constraints: BoxConstraints(
-                        maxWidth: MediaQuery.of(context).size.width * .4,
-                      ),
-                      child: Text(
-                        model.task?.title ?? '',
-                        overflow: TextOverflow.fade,
-                        style: AppTypography.sf.s24.w600.black.copyWith(
-                          color: model.colorBuilder(
-                            taskStatusfromInt(
-                              model.task?.status ?? 0,
-                            ),
-                          ),
-                        ),
-                      ),
+              Text(
+                model.task?.title ?? '',
+                overflow: TextOverflow.fade,
+                style: AppTypography
+                    .sf.s24.w600.black
+                    .copyWith(
+                  color: model.colorBuilder(
+                    taskStatusfromInt(
+                      model.task?.status ?? 0,
                     ),
-                    Row(children: [
-                      // if (model.task?.isAuthor??false)
-                      //   AppIconButton(
-                      //     onTap: () => model.onAddTaskShow(task: model.task?),
-                      //     iconWidget: const Icon(
-                      //       Icons.edit_note,
-                      //       size: 30,
-                      //       color: ColorName.red,
-                      //     ),
-                      //   ),
-                      if (model.task?.isExecutor ?? false)
-                        AppIconButton(
-                          onTap: () => model.addNote(context),
-                          iconWidget: const Padding(
-                            padding: EdgeInsets.only(top: 3),
-                            child: Icon(
-                              size: 20,
-                              CupertinoIcons.pin,
-                              color: ColorName.green,
-                            ),
-                          ),
-                        ),
-                    ]),
-                  ],
-                ),
-                contentPadding: const EdgeInsets.symmetric(vertical: 5),
-                minLeadingWidth: 20,
-                leading: (model.task?.links.isNotEmpty ?? false)
-                    ? SizedBox(
-                        width: 40,
-                        child: AppIconButton(
-                          onTap: () => model.downloadAll(model.task?.links ?? []),
-                          iconWidget: Icon(
-                            Icons.file_download,
-                            color: ColorName.red.withOpacity(0.7),
-                          ),
-                        ),
-                      )
-                    : const SizedBox(
-                        width: 40,
-                      ),
-                subtitle: Text(
-                  '${model.task?.executor.userName} (${model.task?.executor.email})',
-                  style: AppTypography.sf.s14.black,
+                  ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 36),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      LocaleKeys.description.tr(),
-                      style: AppTypography.sf.s18,
-                    ),
-                    const SizedBox(height: 5),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30),
-                      child: Text(
-                        model.task?.description ?? '-',
-                        style: AppTypography.sf.s14.black,
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    Text(
-                      LocaleKeys.files.tr(),
-                      style: AppTypography.sf.s18,
-                    ),
-                    const SizedBox(height: 5),
-                    for (final link in model.task?.links ?? [])
-                      ListTile(
-                        leading: AppIconButton(
-                          onTap: () => model.downloadOne(link),
-                          iconWidget: const Icon(
-                            Icons.file_download,
-                            color: ColorName.purple,
-                          ),
-                        ),
-                        title: Text(
-                          link,
-                          style: AppTypography.sf.s12,
-                        ),
-                      ),
-                    const SizedBox(height: 20),
-                    if (model.task?.note != null && (model.task?.note!.isNotEmpty ?? false)) ...[
-                      Text(
-                        LocaleKeys.note.tr(),
-                        style: AppTypography.sf.s18,
-                      ),
-                      const SizedBox(height: 5),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 30),
-                        child: Text(
-                          model.task?.note ?? '-',
-                          style: AppTypography.sf.s14,
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                    ],
-                    Text(
-                      LocaleKeys.status.tr(),
-                      style: AppTypography.sf.s18,
-                    ),
-                    const SizedBox(height: 5),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30),
-                      child: Row(
-                        children: [
-                          if (model.task?.status != 0)
-                            AppIconButton(
-                              onTap: () {
-                                if (model.task?.status == null || model.task?.id == null) return;
-                                model.updateTaskStatus(
-                                  model.task!.status - 1,
-                                  model.task!.id,
-                                );
-                              },
-                              iconWidget: const Icon(
-                                Icons.arrow_back_ios,
-                                color: ColorName.green,
-                                size: 30,
-                              ),
-                            ),
-                          Text(
-                            taskStatusfromInt(
-                              model.task?.status ?? 0,
-                            ).title,
-                            style: AppTypography.sf.s14,
-                          ),
-                          if (model.task?.status != 4)
-                            AppIconButton(
-                              onTap: () {
-                                if (model.task?.status == null || model.task?.id == null) return;
-                                model.updateTaskStatus(
-                                  model.task!.status + 1,
-                                  model.task!.id,
-                                );
-                              },
-                              iconWidget: const Icon(
-                                Icons.arrow_forward_ios,
-                                color: ColorName.green,
-                                size: 30,
-                              ),
-                            )
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+              Text(
+                'Автор: ${model.task?.author.userName ?? ''}(${model.task?.author.email ?? ''})',
+                style: AppTypography
+                    .sf.s18.w500.black,
               ),
+              Row(children: [
+                Text(
+                  'Исполнитель: ',
+                  style: AppTypography
+                      .sf.s18.w500.black,
+                ),
+                Text(
+                    '${model.task?.executor.userName ?? ''}(${model.task?.executor.email ?? ''})',
+                    style: AppTypography
+                        .sf.s18.w500.black)
+              ]),
+              const SizedBox(height: 30),
+              Text(
+                model.task?.description ??
+                    'Нет описаия'.tr(),
+                style: AppTypography
+                    .sf.s15.w400.black,
+              ),
+              const SizedBox(height: 30),
+              SizedBox(
+                height: 200,
+                child: GridView(
+                  gridDelegate:
+                      const SliverGridDelegateWithMaxCrossAxisExtent(
+                          maxCrossAxisExtent: 90),
+                  children: (model.task?.links ??
+                          [])
+                      .map((e) => const SizedBox(
+                            width: 90,
+                            height: 90,
+                            child: ColoredBox(
+                                color: ColorName
+                                    .purple),
+                          ))
+                      .toList(),
+                ),
+              )
             ],
           ),
         );

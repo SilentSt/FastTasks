@@ -51,7 +51,7 @@ extension AppTextExtensions on TextStyle {
 
   //Decorations
   TextStyle get underlined => copyWith(decoration: TextDecoration.underline);
-  TextStyle get italic => copyWith(decoration: TextDecoration.underline);
+  TextStyle get italic => copyWith(fontStyle: FontStyle.italic);
   TextStyle get overline => copyWith(decoration: TextDecoration.overline);
   TextStyle get lineThrough => copyWith(decoration: TextDecoration.lineThrough);
 }
