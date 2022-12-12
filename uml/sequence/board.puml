@@ -1,0 +1,28 @@
+@startuml boardemail
+'https://plantuml.com/sequence-diagram
+
+Client -> Server: Create Board Request 
+Server --> Client: Create Board Response
+
+Client -> Server: Update Board Request
+Server --> Client: Update Board Response
+
+Client -> Server: Create Task Request 
+Server --> Firebase: Send command to create push
+Firebase --> Task_workers: Send push
+Server --> Task_workers: Send email
+
+Server --> Client: Create Task Response
+
+Client -> Server: Update Task Request
+Server --> Client: Update Task Response
+
+Client -> Server: Update Task`s status Request
+Server --> Firebase: Send command to create push
+Firebase --> Task_workers: Send push
+Server --> Task_workers: Send email
+
+Server --> Client: Update Task Status Response
+
+
+@enduml

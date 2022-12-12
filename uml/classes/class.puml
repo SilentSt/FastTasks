@@ -1,0 +1,55 @@
+@startuml models
+
+entity User{
+*Id
+*NickName
+*Login
+*Password
+*CompanyId
+}
+entity Tables{
+*Id
+*Title
+*Users
+}
+entity Tasks{
+*Id
+*Title
+*Description
+*Status
+*TableId
+*Duration
+*Price
+*StartTime
+*Author
+*Executor
+Note
+Hidden
+EndTime
+Links
+}
+entity Chats{
+*Id
+Title.
+*Private
+}
+entity Messages{
+*Id
+*User
+*ChatId
+*Text
+*UtcTime
+Reply
+}
+
+Tables -right-o{ Tasks
+Tables --|{ User
+Tasks --|{ User
+Chats ||-up-o{ Messages
+Chats ||-right-o{ User
+Messages --|{ User
+
+
+
+
+@enduml

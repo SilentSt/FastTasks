@@ -1,0 +1,66 @@
+@startgantt gant
+'https://plantuml.com/gantt-diagram
+
+language ru
+Project starts 2022-10-01
+
+[Разработка архитектуры\nприложения] as [PLAN] lasts 10 days and is colored in White/Black
+[Разработка UX] as [UX] lasts 3 days
+[Разработка архитектуры\nклиент-сервера] as [CS] lasts 5 days and is colored in Lavender/LightBlue
+[Выбор стека технологий] as [CST] lasts 2 days and is colored in LightGreen/LightBlue
+
+[Разработка UI] as [UI] lasts 10 days and is colored in White/Black
+[Выбор направления дизайна] as [DES] lasts 1 days and is colored in Lavender/LightBlue
+[Разработка UI в FIGMA] as [FIGMA] lasts 2 days and is colored in Lavender/LightBlue
+[Написание UI\nпри помощи ЯП (верстка)] as [VERST] lasts 7 days and is colored in Lavender/LightBlue
+[Тестирование UI] as [UIT] starts at 2022-10-21  and lasts 3 days and is colored in LightGrey/Black
+[Доработка UI] as [UIR] lasts 3 days and is colored in Grey/Black
+
+[Разработка модуля\nвзаимодействия с API] as [MAPI] lasts 15 days and is colored in White/Black and starts at 2022-10-27
+[Разработка запросов API] as [REQ] lasts 5 days and is colored in Lavender/LightBlue
+[Разработка моделей данных] as [MODEL] lasts 7 days and is colored in Lavender/LightBlue
+[Разработка модуля локального хранилища] as [STOR] lasts 3 days and is colored in Lavender/LightBlue
+
+[Тестрирование модуля API] as [TAPI] lasts 5 days and is colored in LightGrey/Black
+[Доработка модуля API] as [DAPI] lasts 5 days and is colored in Grey/Black
+
+[Разработка модуля коннектора UI с\nмодулем взаимодействия с API] as [LOGIC] lasts 15 days and is colored in White/Black and starts at 2022-11-16
+
+[Тестрирование коннектора] as [TLOGIC] lasts 5 days and is colored in LightGrey/Black
+[Доработка коннектора] as [DLOGIC] lasts 5 days and is colored in Grey/Black
+
+[Тестрирование прототипа] as [TPROT] lasts 5 days and is colored in LightGrey/Black
+[Доработка прототипа] as [DPROT] lasts 5 days and is colored in Grey/Black
+
+[Написание отчета по проекту] as [OTCH] lasts 10 days and is colored in White/Black and starts at 2022-12-11
+
+
+
+
+[UX] is colored in Lavender/LightBlue and starts at [PLAN]`s start
+[CS] starts 3 days after [PLAN]`s start
+[CST] starts 8 days after [PLAN]`s start
+
+[UI] starts at 2022-10-11
+[DES] starts at [UI]`s start
+[FIGMA] starts 1 days after [UI]`s start
+[VERST] starts 3 days after [UI]`s start
+
+[REQ] starts at [MAPI]`s start
+[MODEL] starts 5 days after [MAPI]`s start
+[STOR] starts 12 days after [MAPI]`s start
+[UIT] starts at [UIR]`s start
+[UIR] ends at [UIT]`s end
+
+[TAPI] starts at 2022-11-11 and starts at [DAPI]`s start
+[DAPI] ends at [TAPI]`s end
+
+[TLOGIC] starts at 2022-12-1 and starts at [DLOGIC]`s start
+[DLOGIC] ends at [TLOGIC]`s end
+
+[TPROT] starts at 2022-12-6 and starts at [DPROT]`s start
+[DPROT] ends at [TPROT]`s end
+
+
+
+@endgantt

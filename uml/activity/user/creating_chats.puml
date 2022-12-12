@@ -1,0 +1,14 @@
+@startuml creatingChats
+'https://plantuml.com/activity-diagram-beta
+start
+    :Нажатие кнопки\n'создания чата'<
+    :Создание нового чата|
+
+    :Выбор участников чата<
+    if(колличество участников > 1)is (да) then
+        :Ввод названия чата<
+
+        else
+    endif
+    :Добавление нового чата/
+@enduml

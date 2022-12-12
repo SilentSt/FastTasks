@@ -1,0 +1,14 @@
+@startuml chat
+'https://plantuml.com/sequence-diagram
+
+
+
+Client -> Server: Creating Chat Request
+Server --> Client: Creating Chat Response
+
+Client -> Server: Send Message Request
+Server --> Firebase: Send command to create push
+Firebase --> Other_users: Send push
+Server --> Other_users: Send email
+Server --> Client: Send Message Response
+@enduml

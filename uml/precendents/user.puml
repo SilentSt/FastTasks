@@ -1,0 +1,27 @@
+@startuml Прецедентов
+'https://plantuml.com/use-case-diagram
+
+
+:Пользователь: as User
+
+(Чаты) as UserTask1
+(Задачи) as UserTask2
+(Создание личных чатов) as UserTask3
+(Создание групповых чатов) as UserTask4
+(Общение в чатах) as UserTask4.1
+(Создание досок) as UserTask5
+(Создание и назначение задач ) as UserTask6
+(Выполнение задач) as UserTask7
+
+User --> UserTask1
+User --> UserTask2
+UserTask1 -> UserTask3
+UserTask1 --> UserTask4
+UserTask1 --> UserTask4.1
+UserTask2 --> UserTask5
+UserTask2 --> UserTask6
+UserTask2 -> UserTask7
+
+
+
+@enduml
