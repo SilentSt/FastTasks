@@ -1,0 +1,12 @@
+@startuml chat
+User --> ChatView: Заполняет поле\nввода текста\nсообщения и нажимает\nна кнопку отправить
+ChatView --> ChatViewModel: Передает данные\nв переменные
+ChatViewModel --> ChatService: Вызывает метод\nсервиса для создания\nзапроса к серверу
+ChatService --> ChatDataSource: Отправляет данные\nдля отправки запроса\nна сервер
+ChatDataSource --> Server: Отправляет\nзапрос
+Server --> ChatDataSource: Возвращает\nответ\nсервера
+ChatDataSource --> ChatService: Возвращает\nинформацию\nоб ответе
+ChatService --> ChatViewModel: Проверяет ответ\nна ошибки\nи возвращает\nмодель сообщения
+ChatViewModel --> ChatView: Затрагивает тригер\nдля отображения\nошибки или добавляет\nсообщение в\nсписок сообщений
+
+@enduml

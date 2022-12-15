@@ -1,0 +1,14 @@
+@startuml boardemail
+'https://plantuml.com/sequence-diagram
+
+User --> BoardView: Нажимает на кнопку\nредактирования задачи\nи редактирует необходимые\nвсе поля
+BoardView --> BoardViewModel: Передает данные\nв переменные
+BoardViewModel --> BoardService: Вызывает метод\nсервиса для создания\nзапроса к серверу
+BoardService --> BoardDataSource: Отправляет данные\nдля отправки запроса\nна сервер
+BoardDataSource --> Server: Отправляет\nзапрос
+Server --> BoardDataSource: Возвращает\nответ\nсервера
+BoardDataSource --> BoardService: Возвращает\nинформацию\nоб ответе
+BoardService --> BoardViewModel: Проверяет ответ\nна ошибки\nи возвращает\nмодель задачи
+BoardViewModel --> BoardView: Затрагивает тригер\nдля отображения\nошибки или обновляет\nзадачу на доске
+
+@enduml
