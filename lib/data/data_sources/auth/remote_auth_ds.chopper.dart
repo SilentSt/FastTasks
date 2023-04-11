@@ -18,7 +18,7 @@ class _$RemoteAuthDataSource extends RemoteAuthDataSource {
 
   @override
   Future<Response<UserAuthModel>> auth(UserAuthDto dto) {
-    final String $url = 'User/auth';
+    final Uri $url = Uri.parse('User/auth');
     final $body = dto;
     final Request $request = Request(
       'POST',
@@ -31,7 +31,7 @@ class _$RemoteAuthDataSource extends RemoteAuthDataSource {
 
   @override
   Future<Response<UserConfirmModel>> confirm(UserConfirmDto dto) {
-    final String $url = 'User/confirm';
+    final Uri $url = Uri.parse('User/confirm');
     final $body = dto;
     final Request $request = Request(
       'POST',
@@ -44,7 +44,7 @@ class _$RemoteAuthDataSource extends RemoteAuthDataSource {
 
   @override
   Future<Response<List<UserModel>>> fetchUsers() {
-    final String $url = 'User';
+    final Uri $url = Uri.parse('User');
     final Request $request = Request(
       'GET',
       $url,

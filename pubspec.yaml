@@ -60,7 +60,9 @@ dependencies:
   easy_localization: ^3.0.1
 
   #utils
-  flutter_svg: ^1.1.5
+  flutter_svg: 
+    git:
+      url: https://github.com/4Whiskas/flutter_svg-2.0.3
   file_picker: ^5.2.1
   image_picker: ^0.8.6
   simple_downloader: ^0.0.3+1

@@ -22,7 +22,7 @@ class AppBackButton extends StatelessWidget {
       borderRadius: BorderRadius.circular(12),
       child: Icon(
         Icons.arrow_back_ios,
-        color: color ?? ColorName.black,
+        color: color ?? ColorName.grey,
       ),
     );
   }

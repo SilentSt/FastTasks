@@ -37,12 +37,12 @@ class AddChatDialog extends ViewModelWidget<ChatsViewModel> {
                 borderRadius: BorderRadius.circular(12),
                 boxShadow: [
                   BoxShadow(
-                    color: ColorName.purple.withOpacity(.3),
-                    blurRadius: 80,
-                    spreadRadius: 50,
+                    color: ColorName.black.withOpacity(.2),
+                    blurRadius: 12,
+                    spreadRadius: 20,
                   )
                 ],
-                color: ColorName.white,
+                color: CupertinoColors.darkBackgroundGray
               ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(
@@ -60,7 +60,7 @@ class AddChatDialog extends ViewModelWidget<ChatsViewModel> {
                     ] else ...[
                       Text(
                         LocaleKeys.creatingChat.tr(),
-                        style: AppTypography.sf.s24.w500.black,
+                        style: AppTypography.sf.s24.w500,
                       ),
                       AppTextField(
                         controller: model.titleController,
@@ -84,7 +84,7 @@ class AddChatDialog extends ViewModelWidget<ChatsViewModel> {
                                   child: ListTile(
                                     title: Text(
                                       user.email,
-                                      style: AppTypography.sf.s16.w500.black,
+                                      style: AppTypography.sf.s16.w500,
                                     ),
                                     subtitle: Text(
                                       user.userName ?? '',
@@ -114,7 +114,7 @@ class AddChatDialog extends ViewModelWidget<ChatsViewModel> {
                             onTap: ()=>viewModel.hideDialog(),
                             text: LocaleKeys.cancel.tr(),
                             textStyle: AppTypography.sf.s18.w600.copyWith(
-                              color: CupertinoColors.destructiveRed,
+                              color: ColorName.darkGrey,
                             ),
                           ),
                           const SizedBox(width: 20),
@@ -122,7 +122,7 @@ class AddChatDialog extends ViewModelWidget<ChatsViewModel> {
                             onTap: model.createChat,
                             text: LocaleKeys.yes.tr(),
                             textStyle: AppTypography.sf.s18.w600.copyWith(
-                              color: ColorName.black,
+                              color: ColorName.purple,
                             ),
                           ),
                         ],

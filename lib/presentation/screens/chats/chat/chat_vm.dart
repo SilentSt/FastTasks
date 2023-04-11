@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:stacked/stacked.dart';
+import 'package:stacked/stacked.dart' hide StackedRouterExtensions;
 import 'package:tasklet/data/models/models.dart';
 import 'package:tasklet/domain/services/chat_service.dart';
 import 'package:tasklet/presentation/app/app.dart';

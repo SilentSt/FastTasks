@@ -40,14 +40,14 @@ class AddEditDashDialog extends ViewModelWidget<DashboardsViewModel> {
             child: DecoratedBox(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
-                boxShadow: [
+                 boxShadow: [
                   BoxShadow(
-                    color: ColorName.purple.withOpacity(.3),
-                    blurRadius: 80,
-                    spreadRadius: 50,
+                    color: ColorName.black.withOpacity(.2),
+                    blurRadius: 12,
+                    spreadRadius: 20,
                   )
                 ],
-                color: ColorName.white,
+                color: CupertinoColors.darkBackgroundGray
               ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(
@@ -62,7 +62,7 @@ class AddEditDashDialog extends ViewModelWidget<DashboardsViewModel> {
                       viewModel.editableTable != null
                           ? LocaleKeys.editDashboard.tr()
                           : LocaleKeys.addDashboard.tr(),
-                      style: AppTypography.sf.s24.w500.black,
+                      style: AppTypography.sf.s24.w500,
                     ),
                     AppTextField(
                       controller: model.titleController,
@@ -86,7 +86,7 @@ class AddEditDashDialog extends ViewModelWidget<DashboardsViewModel> {
                                 child: ListTile(
                                   title: Text(
                                     user.email,
-                                    style: AppTypography.sf.s16.w500.black,
+                                    style: AppTypography.sf.s16.w500,
                                   ),
                                   subtitle: Text(
                                     user.userName ?? '',
@@ -116,7 +116,7 @@ class AddEditDashDialog extends ViewModelWidget<DashboardsViewModel> {
                           onTap: () => viewModel.onAddDashHide(),
                           text: LocaleKeys.cancel.tr(),
                           textStyle: AppTypography.sf.s18.w600.copyWith(
-                            color: CupertinoColors.destructiveRed,
+                            color: ColorName.darkGrey,
                           ),
                         ),
                         const SizedBox(width: 20),

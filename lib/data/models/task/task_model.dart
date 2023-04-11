@@ -22,7 +22,7 @@ class TaskModel with Mappable {
   final String id;
   final String title;
   final String description;
-  final double duration;
+  final int duration;
   final bool hidden;
   final UserModel author;
   final UserModel executor;

@@ -71,7 +71,7 @@ class RootView extends StatelessWidget {
                                       iconWidget: Icon(
                                         model.icons[index],
                                         color: model.selectedPage == index
-                                            ? ColorName.red.withOpacity(0.9)
+                                            ? ColorName.purple.withOpacity(0.9)
                                             : ColorName.white,
                                         size: 32,
                                       ),
@@ -120,7 +120,7 @@ class RootView extends StatelessWidget {
                                       child: Icon(
                                         model.icons[index],
                                         color: model.selectedPage == index
-                                            ? ColorName.red.withOpacity(0.9)
+                                            ? ColorName.purple.withOpacity(0.9)
                                             : ColorName.white,
                                         size: 32,
                                       ),

@@ -18,7 +18,7 @@ class _$RemotePushDataSource extends RemotePushDataSource {
 
   @override
   Future<Response<dynamic>> setToken(PushTokenDto dto) {
-    final String $url = 'User/hookPush';
+    final Uri $url = Uri.parse('User/hookPush');
     final $body = dto;
     final Request $request = Request(
       'POST',

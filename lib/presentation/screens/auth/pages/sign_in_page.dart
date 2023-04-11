@@ -77,7 +77,7 @@ class SignInPage extends ViewModelWidget<AuthViewModel> {
             secondCurve: Curves.easeIn,
             alignment: Alignment.topCenter,
           ),
-          AppButton.black(
+          AppButton.purple(
             onTap: viewModel.codeSended ? viewModel.approveCode : viewModel.requestCode,
             text: viewModel.codeSended ? LocaleKeys.signIn.tr() : LocaleKeys.sendCode.tr(),
           ),

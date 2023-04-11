@@ -20,6 +20,22 @@ class AppButton extends StatelessWidget {
   final Color? buttonColor;
   final double? borderRadius;
 
+  factory AppButton.purple({
+    required VoidCallback onTap,
+    required String text,
+    TextStyle? textStyle,
+    SvgGenImage? icon,
+    double? borderRadius,
+  }) =>
+      AppButton(
+        onTap: onTap,
+        text: text,
+        borderRadius: borderRadius,
+        buttonColor: ColorName.purple,
+        icon: icon,
+        textStyle: textStyle == null ? AppTypography.sf.s18.white.w500 : textStyle.copyWith(color: ColorName.white),
+      );
+
   factory AppButton.black({
     required VoidCallback onTap,
     required String text,
@@ -33,9 +49,7 @@ class AppButton extends StatelessWidget {
         borderRadius: borderRadius,
         buttonColor: ColorName.black,
         icon: icon,
-        textStyle: textStyle == null
-            ? AppTypography.sf.s18.white.w500
-            : textStyle.copyWith(color: ColorName.white),
+        textStyle: textStyle == null ? AppTypography.sf.s18.white.w500 : textStyle.copyWith(color: ColorName.white),
       );
 
   @override
@@ -48,7 +62,7 @@ class AppButton extends StatelessWidget {
       ),
       minSize: 0,
       borderRadius: BorderRadius.circular(borderRadius ?? 12),
-      color: ColorName.red,
+      color: buttonColor,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,

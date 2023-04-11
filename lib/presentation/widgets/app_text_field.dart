@@ -84,8 +84,8 @@ class _AppTextFieldState extends State<AppTextField> {
         },
         decoration: InputDecoration(
           labelText: widget.title,
-          floatingLabelStyle: AppTypography.sf.s16.w400.red,
-          labelStyle: AppTypography.sf.s16.w400.red,
+          floatingLabelStyle: AppTypography.sf.s16.w400.lightGrey,
+          labelStyle: AppTypography.sf.s16.w400.lightGrey,
           hintStyle: AppTypography.sf.s16.w400,
           focusColor: ColorName.black,
           fillColor: ColorName.black,
@@ -127,13 +127,13 @@ class _AppTextFieldState extends State<AppTextField> {
                   ? const OutlineInputBorder(
                       borderSide: BorderSide(
                         width: 2,
-                        color: ColorName.red,
+                        color: ColorName.purple,
                       ),
                     )
                   : const UnderlineInputBorder(
                       borderSide: BorderSide(
                         width: 2,
-                        color: ColorName.red,
+                        color: ColorName.purple,
                       ),
                     )),
           enabledBorder: widget.outlinedBorder ??
@@ -155,13 +155,13 @@ class _AppTextFieldState extends State<AppTextField> {
                   ? const OutlineInputBorder(
                       borderSide: BorderSide(
                         width: 2,
-                        color: ColorName.red,
+                        color: ColorName.purple,
                       ),
                     )
                   : const UnderlineInputBorder(
                       borderSide: BorderSide(
                         width: 2,
-                        color: ColorName.red,
+                        color: ColorName.purple,
                       ),
                     )),
           disabledBorder: widget.outlinedBorder ??
@@ -183,13 +183,13 @@ class _AppTextFieldState extends State<AppTextField> {
                   ? const OutlineInputBorder(
                       borderSide: BorderSide(
                         width: 2,
-                        color: ColorName.red,
+                        color: ColorName.purple,
                       ),
                     )
                   : const UnderlineInputBorder(
                       borderSide: BorderSide(
                         width: 2,
-                        color: ColorName.red,
+                        color: ColorName.purple,
                       ),
                     )),
         ),

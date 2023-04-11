@@ -44,16 +44,15 @@ class AddEditTaskDialog extends ViewModelWidget<DashboardsViewModel> {
               height: MediaQuery.of(context).size.height - 200,
               child: DecoratedBox(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  boxShadow: [
-                    BoxShadow(
-                      color: ColorName.purple.withOpacity(.3),
-                      blurRadius: 80,
-                      spreadRadius: 50,
-                    )
-                  ],
-                  color: ColorName.white,
-                ),
+                    borderRadius: BorderRadius.circular(12),
+                    boxShadow: [
+                      BoxShadow(
+                        color: ColorName.black.withOpacity(.2),
+                        blurRadius: 12,
+                        spreadRadius: 20,
+                      )
+                    ],
+                    color: CupertinoColors.darkBackgroundGray),
                 child: Column(
                   children: [
                     if (model.isBusy) ...[
@@ -67,7 +66,7 @@ class AddEditTaskDialog extends ViewModelWidget<DashboardsViewModel> {
                           alignment: Alignment.centerLeft,
                           child: Text(
                             model.taskModel != null ? LocaleKeys.editTask.tr() : LocaleKeys.addTask.tr(),
-                            style: AppTypography.sf.s24.w500.black,
+                            style: AppTypography.sf.s24.w500,
                           ),
                         ),
                       ),
@@ -80,7 +79,7 @@ class AddEditTaskDialog extends ViewModelWidget<DashboardsViewModel> {
                           children: [
                             Text(
                               LocaleKeys.title.tr(),
-                              style: AppTypography.sf.s18.w500.black,
+                              style: AppTypography.sf.s18.w500,
                             ),
                             const SizedBox(height: 5),
                             AppTextField.auth(
@@ -90,7 +89,7 @@ class AddEditTaskDialog extends ViewModelWidget<DashboardsViewModel> {
                             const SizedBox(height: 20),
                             Text(
                               LocaleKeys.description.tr(),
-                              style: AppTypography.sf.s18.w500.black,
+                              style: AppTypography.sf.s18.w500,
                             ),
                             const SizedBox(height: 5),
                             AppTextField.auth(
@@ -111,7 +110,7 @@ class AddEditTaskDialog extends ViewModelWidget<DashboardsViewModel> {
                             const SizedBox(height: 20),
                             Text(
                               LocaleKeys.files.tr(),
-                              style: AppTypography.sf.s18.w500.black,
+                              style: AppTypography.sf.s18.w500,
                             ),
                             const SizedBox(height: 5),
                             SizedBox(
@@ -137,7 +136,7 @@ class AddEditTaskDialog extends ViewModelWidget<DashboardsViewModel> {
                                               ),
                                               title: Text(
                                                 link,
-                                                style: AppTypography.sf.s16.w500.black,
+                                                style: AppTypography.sf.s16.w500,
                                                 overflow: TextOverflow.fade,
                                               ),
                                               trailing: AppIconButton(
@@ -174,7 +173,7 @@ class AddEditTaskDialog extends ViewModelWidget<DashboardsViewModel> {
                             const SizedBox(height: 20),
                             Text(
                               LocaleKeys.executor.tr(),
-                              style: AppTypography.sf.s18.w500.black,
+                              style: AppTypography.sf.s18.w500,
                             ),
                             const SizedBox(height: 5),
                             SizedBox(
@@ -193,7 +192,7 @@ class AddEditTaskDialog extends ViewModelWidget<DashboardsViewModel> {
                                       child: ListTile(
                                         title: Text(
                                           user.email,
-                                          style: AppTypography.sf.s16.w500.black,
+                                          style: AppTypography.sf.s16.w500,
                                         ),
                                         subtitle: Text(
                                           user.userName ?? '',
@@ -216,7 +215,7 @@ class AddEditTaskDialog extends ViewModelWidget<DashboardsViewModel> {
                             ListTile(
                               title: Text(
                                 LocaleKeys.hidden.tr(),
-                                style: AppTypography.sf.s18.w500.black,
+                                style: AppTypography.sf.s18.w500,
                               ),
                               trailing: CupertinoSwitch(
                                 value: model.hidden,
@@ -235,7 +234,7 @@ class AddEditTaskDialog extends ViewModelWidget<DashboardsViewModel> {
                               onTap: () => viewModel.onAddTaskHide(),
                               text: LocaleKeys.cancel.tr(),
                               textStyle: AppTypography.sf.s18.w600.copyWith(
-                                color: CupertinoColors.destructiveRed,
+                                color: ColorName.darkGrey,
                               ),
                             ),
                             const SizedBox(width: 20),

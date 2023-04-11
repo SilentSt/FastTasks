@@ -20,7 +20,7 @@ class AppTextButton extends StatelessWidget {
       minSize: 0,
       child: Text(
         text,
-        style: textStyle ?? AppTypography.sf.s14.w400.black,
+        style: textStyle ?? AppTypography.sf.s14.w400.purple,
       ),
     );
   }

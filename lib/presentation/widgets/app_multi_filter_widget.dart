@@ -67,7 +67,7 @@ class _AppMultiFilterWidgetState<T> extends State<AppMultiFilterWidget<T>> {
           width: 140,
           child: Text(
             widget.title,
-            style: AppTypography.sf.s14.w600.black,
+            style: AppTypography.sf.s14.w600,
           ),
         ),
         SizedBox(
@@ -79,14 +79,17 @@ class _AppMultiFilterWidgetState<T> extends State<AppMultiFilterWidget<T>> {
             ),
             tooltip: widget.tooltip,
             position: PopupMenuPosition.over,
-            color: ColorName.lightGrey,
+            color: CupertinoColors.darkBackgroundGray,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
             ),
             itemBuilder: (context) => [
               PopupMenuItem(
                 enabled: false,
-                child: CupertinoSearchTextField(controller: searchController),
+                child: CupertinoSearchTextField(
+                  controller: searchController,
+                  style: AppTypography.sf.s14.w400.lightGrey,
+                ),
               ),
               PopupMenuItem(
                 enabled: false,
@@ -117,17 +120,17 @@ class _AppMultiFilterWidgetState<T> extends State<AppMultiFilterWidget<T>> {
                                 children: [
                                   Text(
                                     widget.buildName(e),
-                                    style: AppTypography.sf.s16.w600.black,
+                                    style: AppTypography.sf.s16.w600,
                                   ),
                                   SizedBox(
                                     height: 20,
                                     width: 20,
                                     child: DecoratedBox(
                                       decoration: BoxDecoration(
-                                        color: selectedItems.contains(e) ? ColorName.red : ColorName.white,
+                                        color: selectedItems.contains(e) ? ColorName.purple : ColorName.white,
                                         borderRadius: BorderRadius.circular(3),
                                         border: Border.all(
-                                          color: selectedItems.contains(e) ? ColorName.red : ColorName.grey,
+                                          color: selectedItems.contains(e) ? ColorName.purple : ColorName.grey,
                                         ),
                                       ),
                                       child: const Icon(
@@ -155,7 +158,7 @@ class _AppMultiFilterWidgetState<T> extends State<AppMultiFilterWidget<T>> {
                 decoration: const BoxDecoration(
                   border: Border(
                     bottom: BorderSide(
-                      color: ColorName.red,
+                      color: ColorName.purple,
                     ),
                   ),
                 ),
@@ -166,13 +169,13 @@ class _AppMultiFilterWidgetState<T> extends State<AppMultiFilterWidget<T>> {
                       width: 130,
                       child: Text(
                         widget.buildTitle(widget.selectedItems),
-                        style: AppTypography.sf.s14.w400.grey,
+                        style: AppTypography.sf.s14.w400,
                         overflow: TextOverflow.fade,
                       ),
                     ),
                     const Icon(
                       Icons.arrow_drop_down,
-                      color: ColorName.black,
+                      color: ColorName.purple,
                     ),
                   ],
                 ),
@@ -190,7 +193,7 @@ class _AppMultiFilterWidgetState<T> extends State<AppMultiFilterWidget<T>> {
           minSize: 0,
           child: const Icon(
             Icons.clear,
-            color: ColorName.black,
+            color: ColorName.purple,
             size: 32,
           ),
         ),

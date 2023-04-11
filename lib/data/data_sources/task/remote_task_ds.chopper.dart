@@ -21,7 +21,7 @@ class _$RemoteTaskDataSource extends RemoteTaskDataSource {
     int skip,
     int take,
   ) {
-    final String $url = 'Task';
+    final Uri $url = Uri.parse('Task');
     final Map<String, dynamic> $params = <String, dynamic>{
       'skip': skip,
       'take': take,
@@ -41,7 +41,7 @@ class _$RemoteTaskDataSource extends RemoteTaskDataSource {
     int skip,
     int take,
   ) {
-    final String $url = 'Task/table/${tableId}';
+    final Uri $url = Uri.parse('Task/table/${tableId}');
     final Map<String, dynamic> $params = <String, dynamic>{
       'skip': skip,
       'take': take,
@@ -57,7 +57,7 @@ class _$RemoteTaskDataSource extends RemoteTaskDataSource {
 
   @override
   Future<Response<TaskModel>> getTaskById(String id) {
-    final String $url = 'Task/${id}';
+    final Uri $url = Uri.parse('Task/${id}');
     final Request $request = Request(
       'GET',
       $url,
@@ -68,7 +68,7 @@ class _$RemoteTaskDataSource extends RemoteTaskDataSource {
 
   @override
   Future<Response<dynamic>> add(TaskDto dto) {
-    final String $url = 'Task';
+    final Uri $url = Uri.parse('Task');
     final $body = dto;
     final Request $request = Request(
       'POST',
@@ -81,7 +81,7 @@ class _$RemoteTaskDataSource extends RemoteTaskDataSource {
 
   @override
   Future<Response<dynamic>> addNote(NoteDto dto) {
-    final String $url = 'Task/note';
+    final Uri $url = Uri.parse('Task/note');
     final $body = dto;
     final Request $request = Request(
       'POST',
@@ -94,7 +94,7 @@ class _$RemoteTaskDataSource extends RemoteTaskDataSource {
 
   @override
   Future<Response<dynamic>> edit(TaskDto dto) {
-    final String $url = 'Task';
+    final Uri $url = Uri.parse('Task');
     final $body = dto;
     final Request $request = Request(
       'PATCH',
@@ -107,7 +107,7 @@ class _$RemoteTaskDataSource extends RemoteTaskDataSource {
 
   @override
   Future<Response<dynamic>> updateStatus(StatusDto dto) {
-    final String $url = 'Task';
+    final Uri $url = Uri.parse('Task');
     final $body = dto;
     final Request $request = Request(
       'PATCH',

@@ -18,7 +18,7 @@ class _$RemoteChatDataSource extends RemoteChatDataSource {
 
   @override
   Future<Response<List<ChatModel>>> fetch() {
-    final String $url = 'Chat';
+    final Uri $url = Uri.parse('Chat');
     final Request $request = Request(
       'GET',
       $url,
@@ -29,7 +29,7 @@ class _$RemoteChatDataSource extends RemoteChatDataSource {
 
   @override
   Future<Response<dynamic>> add(ChatDto dto) {
-    final String $url = 'Chat';
+    final Uri $url = Uri.parse('Chat');
     final $body = dto;
     final Request $request = Request(
       'POST',
@@ -42,7 +42,7 @@ class _$RemoteChatDataSource extends RemoteChatDataSource {
 
   @override
   Future<Response<ChatModel>> getById(String chatId) {
-    final String $url = 'Chat/${chatId}';
+    final Uri $url = Uri.parse('Chat/${chatId}');
     final Request $request = Request(
       'GET',
       $url,
@@ -53,7 +53,7 @@ class _$RemoteChatDataSource extends RemoteChatDataSource {
 
   @override
   Future<Response<dynamic>> sendMessage(MessageDto messageDto) {
-    final String $url = 'Chat/message';
+    final Uri $url = Uri.parse('Chat/message');
     final $body = messageDto;
     final Request $request = Request(
       'POST',

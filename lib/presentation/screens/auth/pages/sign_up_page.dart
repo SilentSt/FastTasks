@@ -18,7 +18,8 @@ class SignUpPage extends ViewModelWidget<AuthViewModel> {
   @override
   Widget build(BuildContext context, AuthViewModel viewModel) {
     return Scaffold(
-      appBar: AppBar(automaticallyImplyLeading: false,
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
         leading: AppBackButton(onTap: viewModel.pop),
       ),
       body: ListView(
@@ -73,9 +74,7 @@ class SignUpPage extends ViewModelWidget<AuthViewModel> {
                 const SizedBox(height: 25),
               ],
             ),
-            crossFadeState: viewModel.codeSended
-                ? CrossFadeState.showSecond
-                : CrossFadeState.showFirst,
+            crossFadeState: viewModel.codeSended ? CrossFadeState.showSecond : CrossFadeState.showFirst,
             duration: const Duration(milliseconds: 300),
             reverseDuration: const Duration(milliseconds: 300),
             firstCurve: Curves.easeIn,
@@ -83,13 +82,9 @@ class SignUpPage extends ViewModelWidget<AuthViewModel> {
             secondCurve: Curves.easeIn,
             alignment: Alignment.topCenter,
           ),
-          AppButton.black(
-            onTap: viewModel.codeSended
-                ? viewModel.approveCode
-                : viewModel.requestCodeWithSignUp,
-            text: viewModel.codeSended
-                ? LocaleKeys.signIn.tr()
-                : LocaleKeys.sendCode.tr(),
+          AppButton.purple(
+            onTap: viewModel.codeSended ? viewModel.approveCode : viewModel.requestCodeWithSignUp,            
+            text: viewModel.codeSended ? LocaleKeys.signIn.tr() : LocaleKeys.sendCode.tr(),
           ),
         ],
       ),

@@ -48,24 +48,24 @@ class SettingsView extends StatelessWidget {
                       ListTile(
                         leading: const Icon(
                           CupertinoIcons.bell,
-                          color: ColorName.black,
+                          color: ColorName.lightGrey,
                           size: 30,
                         ),
                         title: Text(
                           LocaleKeys.notifications.tr(),
-                          style: AppTypography.sf.s18.w500.black,
+                          style: AppTypography.sf.s18.w500.lightGrey,
                         ),
                         subtitle: Padding(
                           padding: const EdgeInsets.only(top: 10),
                           child: Text(
                             LocaleKeys.notificationsInfo.tr(),
-                            style: AppTypography.sf.s14.w400.black,
+                            style: AppTypography.sf.s14.w400.lightGrey,
                           ),
                         ),
                         trailing: CupertinoSwitch(
                           value: model.notificationsEnabled,
                           onChanged: model.onNotificationsValueChanged,
-                          activeColor: ColorName.red.withOpacity(0.7),
+                          activeColor: ColorName.purple.withOpacity(0.7),
                         ),
                       ),
                     Padding(
@@ -75,7 +75,7 @@ class SettingsView extends StatelessWidget {
                           const Icon(
                             Icons.language,
                             size: 30,
-                            color: ColorName.black,
+                            color: ColorName.lightGrey,
                           ),
                           const SizedBox(width: 25),
                           Column(
@@ -86,7 +86,7 @@ class SettingsView extends StatelessWidget {
                                 child: DropdownButtonFormField<Locale>(
                                   hint: Text(
                                     LocaleKeys.language.tr(),
-                                    style: AppTypography.sf.s16.w500.black,
+                                    style: AppTypography.sf.s16.w500.lightGrey,
                                   ),
                                   elevation: 1,
                                   decoration: const InputDecoration(
@@ -97,9 +97,9 @@ class SettingsView extends StatelessWidget {
                                     disabledBorder: InputBorder.none,
                                     focusedErrorBorder: InputBorder.none,
                                   ),
-                                  dropdownColor: ColorName.white,
+                                  dropdownColor: ColorName.black.withOpacity(.9),
                                   borderRadius: BorderRadius.circular(12),
-                                  style: AppTypography.sf.s18.w500.black,
+                                  style: AppTypography.sf.s18.w500.lightGrey,
                                   value: context.locale,
                                   items: context.supportedLocales.map((e) {
                                     String res = e.toLanguageTag();
@@ -115,7 +115,7 @@ class SettingsView extends StatelessWidget {
                                       value: e,
                                       child: Text(
                                         res,
-                                        style: AppTypography.sf.s18.w500.black,
+                                        style: AppTypography.sf.s18.w500.lightGrey,
                                       ),
                                     );
                                   }).toList(),
@@ -126,7 +126,7 @@ class SettingsView extends StatelessWidget {
                                 width: 200,
                                 child: Text(
                                   LocaleKeys.languageInfo.tr(),
-                                  style: AppTypography.sf.s14.w400.black,
+                                  style: AppTypography.sf.s14.w400.lightGrey,
                                 ),
                               ),
                             ],
@@ -144,9 +144,8 @@ class SettingsView extends StatelessWidget {
                 child: Center(
                   child: SizedBox(
                     width: 250,
-                    child: AppButton(
+                    child: AppButton.purple(
                       onTap: model.onLogout,
-                      buttonColor: ColorName.purple,
                       text: LocaleKeys.logout.tr(),
                     ),
                   ),

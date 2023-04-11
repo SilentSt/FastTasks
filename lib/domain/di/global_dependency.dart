@@ -33,7 +33,7 @@ class GlobalDependency extends AppAsyncDependency {
   }
 
   final ChopperClient _chopper = ChopperClient(
-    baseUrl: 'https://sbeusilent.space/',
+    baseUrl: Uri.parse('https://sbeusilent.space/'),
     converter: JsonMappableConverter(),
     errorConverter: JsonMappableConverter(),
     interceptors: [

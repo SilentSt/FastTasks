@@ -21,7 +21,7 @@ class TaskDto with Mappable {
   final String title;
   final String description;
   final DateTime? dateTime;
-  final double duration;
+  final int duration;
   final bool hidden;
   final String tableId;
   final String executorId;

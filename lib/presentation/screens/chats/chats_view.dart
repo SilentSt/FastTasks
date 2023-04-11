@@ -25,7 +25,7 @@ class ChatsView extends StatelessWidget {
       viewModelBuilder: () => ChatsViewModel(
         chatService: context.user.chatService,
       ),
-      onModelReady: (model) => model.onReady(),
+      onViewModelReady: (model) => model.onReady(),
       builder: (context, model, child) {
         if (model.isBusy) {
           return Scaffold(
@@ -45,7 +45,7 @@ class ChatsView extends StatelessWidget {
                 onTap: model.showDialog,
                 iconWidget: const Icon(
                   CupertinoIcons.add_circled,
-                  color: ColorName.red,
+                  color: ColorName.purple,
                   size: 28,
                 ),
               ),
@@ -93,7 +93,7 @@ class ChatsView extends StatelessWidget {
                         child: DecoratedBox(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
-                            color: ColorName.red.withOpacity(.15),
+                            color: ColorName.purple.withOpacity(.15),
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(15),

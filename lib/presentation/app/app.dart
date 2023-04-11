@@ -50,12 +50,9 @@ class App extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
         appBarTheme: AppBarTheme(
-          backgroundColor: ColorName.white,
           elevation: 0,
-          foregroundColor: ColorName.white,
-          titleTextStyle: AppTypography.sf.s24.w600.black,
+          titleTextStyle: AppTypography.sf.s24.w600.white,
           shadowColor: Colors.transparent,
-          surfaceTintColor: ColorName.white,
         ),
         tabBarTheme: TabBarTheme(
           labelStyle: AppTypography.sf.s16.w500,
@@ -76,9 +73,9 @@ class App extends StatelessWidget {
         cupertinoOverrideTheme: const NoDefaultCupertinoThemeData(
           primaryColor: ColorName.blue,
           primaryContrastingColor: ColorName.purple,
+          brightness: Brightness.dark
         ),
-        backgroundColor: ColorName.white,
-        scaffoldBackgroundColor: ColorName.white,
+        colorScheme: const ColorScheme.dark(),
       ),
       //navigation
       routerDelegate: router.delegate(),

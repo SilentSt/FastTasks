@@ -67,7 +67,7 @@ class AddEditTaskViewModel extends BaseViewModel {
       await errorService.showEror(error: 'Нельзя создать задачу, не оценив ее'.tr());
       return;
     }
-    final duration = double.tryParse(durationController.text.trim());
+    final duration = int.tryParse(durationController.text.trim());
     if (duration == null || duration < 1) {
       await errorService.showEror(error: 'Нельзя создать задачу, без выделенного времени на нее'.tr());
       return;

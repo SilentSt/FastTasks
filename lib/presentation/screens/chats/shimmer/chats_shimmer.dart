@@ -13,8 +13,8 @@ class _ChatsShimmerState extends State<ChatsShimmer> {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-      baseColor: ColorName.lightGrey,
-      highlightColor: ColorName.white,
+      baseColor: ColorName.black.withOpacity(.4),
+      highlightColor: ColorName.black.withOpacity(.2),
       child: ListView.separated(
         itemBuilder: (_, __) => SizedBox(
           height: 90,

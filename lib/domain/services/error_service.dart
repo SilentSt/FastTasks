@@ -31,7 +31,7 @@ class ErrorService {
                 ),
                 Text(
                   error ?? LocaleKeys.unhadledError.tr(),
-                  style: AppTypography.sf.w400.s14.black,
+                  style: AppTypography.sf.w400.s14.lightGrey,
                 ),
               ],
             ),

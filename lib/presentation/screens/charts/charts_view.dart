@@ -46,7 +46,7 @@ class ChartsView extends StatelessWidget {
             children: [
               Text(
                 LocaleKeys.mainChart.tr(),
-                style: AppTypography.sf.s18.w500.black,
+                style: AppTypography.sf.s18.w500,
               ),
               SizedBox(
                 height: 400,
@@ -100,7 +100,7 @@ class ChartsView extends StatelessWidget {
               const SizedBox(height: 40),
               Text(
                 LocaleKeys.userStatsChart.tr(),
-                style: AppTypography.sf.s18.w500.black,
+                style: AppTypography.sf.s18.w500,
               ),
               const SizedBox(height: 20),
               AppMultiFilterWidget<ChartsUserChartModel>(
@@ -185,7 +185,7 @@ class ChartsView extends StatelessWidget {
                                     width: (MediaQuery.of(context).size.width - 32) * .4 - 35,
                                     child: Text(
                                       '${item.user?.userName ?? ''}\n${'Всего поинтов'.tr()}:${item.chart?.totalPrice ?? 0}',
-                                      style: AppTypography.sf.s14.w400.black,
+                                      style: AppTypography.sf.s14.w400,
                                     ),
                                   ),
                                 ],
@@ -210,7 +210,7 @@ class ChartsView extends StatelessWidget {
               const SizedBox(height: 60),
               Text(
                 LocaleKeys.deskStats.tr(),
-                style: AppTypography.sf.s18.w500.black,
+                style: AppTypography.sf.s18.w500,
               ),
               const SizedBox(height: 20),
               AppMultiFilterWidget<TabledChartModel>(
@@ -288,7 +288,7 @@ class ChartsView extends StatelessWidget {
                                   SizedBox(
                                     child: Text(
                                       table.table?.title ?? '',
-                                      style: AppTypography.sf.s18.w500.black,
+                                      style: AppTypography.sf.s18.w500,
                                     ),
                                   ),
                                   Column(
@@ -338,7 +338,7 @@ class ChartsView extends StatelessWidget {
               const SizedBox(height: 60),
               Text(
                 LocaleKeys.timeStats.tr(),
-                style: AppTypography.sf.s18.w500.black,
+                style: AppTypography.sf.s18.w500,
               ),
               const SizedBox(height: 20),
               AppSingleFilterWidget<ChartTimeduserstotalModel>(
@@ -366,12 +366,12 @@ class ChartsView extends StatelessWidget {
                         width: 120,
                         child: Text(
                           LocaleKeys.getedTasks.tr(),
-                          style: AppTypography.sf.s14.w400.black,
+                          style: AppTypography.sf.s14.w400,
                         ),
                       ),
                       CupertinoSwitch(
                         value: model.totalTaskCountEnabled,
-                        activeColor: ColorName.red,
+                        activeColor: ColorName.purple,
                         onChanged: (_) => model.enableDisabeTotal(),
                       ),
                     ],
@@ -388,12 +388,12 @@ class ChartsView extends StatelessWidget {
                         width: 120,
                         child: Text(
                           LocaleKeys.doneTasks.tr(),
-                          style: AppTypography.sf.s14.w400.black,
+                          style: AppTypography.sf.s14.w400,
                         ),
                       ),
                       CupertinoSwitch(
                         value: model.completedTaskCounEnabled,
-                        activeColor: ColorName.red,
+                        activeColor: ColorName.purple,
                         onChanged: (_) => model.enableDisabeCompleted(),
                       ),
                     ],
@@ -410,12 +410,12 @@ class ChartsView extends StatelessWidget {
                         width: 120,
                         child: Text(
                           LocaleKeys.closedTasks.tr(),
-                          style: AppTypography.sf.s14.w400.black,
+                          style: AppTypography.sf.s14.w400,
                         ),
                       ),
                       CupertinoSwitch(
                         value: model.closedTaskCountEnabled,
-                        activeColor: ColorName.red,
+                        activeColor: ColorName.purple,
                         onChanged: (_) => model.enableDisabeClosed(),
                       ),
                     ],
@@ -432,12 +432,12 @@ class ChartsView extends StatelessWidget {
                         width: 120,
                         child: Text(
                           LocaleKeys.authoredTasks.tr(),
-                          style: AppTypography.sf.s14.w400.black,
+                          style: AppTypography.sf.s14.w400,
                         ),
                       ),
                       CupertinoSwitch(
                         value: model.authoredTaskCountEnabled,
-                        activeColor: ColorName.red,
+                        activeColor: ColorName.purple,
                         onChanged: (_) => model.enableDisabeAuthored(),
                       ),
                     ],

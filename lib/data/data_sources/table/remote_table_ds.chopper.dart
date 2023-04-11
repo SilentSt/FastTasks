@@ -18,7 +18,7 @@ class _$RemoteTableDataSource extends RemoteTableDataSource {
 
   @override
   Future<Response<List<TableModel>>> fetch() {
-    final String $url = 'Table';
+    final Uri $url = Uri.parse('Table');
     final Request $request = Request(
       'GET',
       $url,
@@ -29,7 +29,7 @@ class _$RemoteTableDataSource extends RemoteTableDataSource {
 
   @override
   Future<Response<dynamic>> add(TableDto dto) {
-    final String $url = 'Table';
+    final Uri $url = Uri.parse('Table');
     final $body = dto;
     final Request $request = Request(
       'POST',
@@ -42,7 +42,7 @@ class _$RemoteTableDataSource extends RemoteTableDataSource {
 
   @override
   Future<Response<dynamic>> edit(TableDto dto) {
-    final String $url = 'Table';
+    final Uri $url = Uri.parse('Table');
     final $body = dto;
     final Request $request = Request(
       'PATCH',

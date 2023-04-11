@@ -18,7 +18,7 @@ class _$RemoteChartDataSource extends RemoteChartDataSource {
 
   @override
   Future<Response<TotalChartModel>> userstotal() {
-    final String $url = 'Charts/userstotal';
+    final Uri $url = Uri.parse('Charts/userstotal');
     final Request $request = Request(
       'GET',
       $url,
@@ -29,7 +29,7 @@ class _$RemoteChartDataSource extends RemoteChartDataSource {
 
   @override
   Future<Response<TotalProgressChartModel>> total() {
-    final String $url = 'Charts/total';
+    final Uri $url = Uri.parse('Charts/total');
     final Request $request = Request(
       'GET',
       $url,
@@ -41,7 +41,7 @@ class _$RemoteChartDataSource extends RemoteChartDataSource {
 
   @override
   Future<Response<TotalTabledChartModel>> userstabledtotal() {
-    final String $url = 'Charts/userstabledtotal';
+    final Uri $url = Uri.parse('Charts/userstabledtotal');
     final Request $request = Request(
       'GET',
       $url,
@@ -52,7 +52,7 @@ class _$RemoteChartDataSource extends RemoteChartDataSource {
 
   @override
   Future<Response<List<ChartTimeduserstotalModel>>> timeduserstotal() {
-    final String $url = 'Charts/timeduserstotal';
+    final Uri $url = Uri.parse('Charts/timeduserstotal');
     final Request $request = Request(
       'GET',
       $url,

@@ -67,7 +67,7 @@ class _AppSingleFilterWidgetState<T> extends State<AppSingleFilterWidget<T>> {
           width: 140,
           child: Text(
             widget.title,
-            style: AppTypography.sf.s14.w600.black,
+            style: AppTypography.sf.s14.w600,
           ),
         ),
         SizedBox(
@@ -75,7 +75,7 @@ class _AppSingleFilterWidgetState<T> extends State<AppSingleFilterWidget<T>> {
           child: PopupMenuButton<T>(
             initialValue: widget.value,
             splashRadius: 0,
-            color: ColorName.lightGrey,
+            color: CupertinoColors.darkBackgroundGray,
             constraints: const BoxConstraints(
               minWidth: 158,
             ),
@@ -87,7 +87,10 @@ class _AppSingleFilterWidgetState<T> extends State<AppSingleFilterWidget<T>> {
             itemBuilder: (context) => [
               PopupMenuItem(
                 enabled: false,
-                child: CupertinoSearchTextField(controller: searchController),
+                child: CupertinoSearchTextField(
+                  controller: searchController,
+                  style: AppTypography.sf.s14.w400.lightGrey,
+                ),
               ),
               PopupMenuItem(
                 enabled: false,
@@ -121,7 +124,7 @@ class _AppSingleFilterWidgetState<T> extends State<AppSingleFilterWidget<T>> {
                                   child: Text(
                                     widget.buildName(displayedItems[i]),
                                     textAlign: TextAlign.start,
-                                    style: AppTypography.sf.s16.w600.black,
+                                    style: AppTypography.sf.s16.w600,
                                   ),
                                 ),
                               ),
@@ -141,7 +144,7 @@ class _AppSingleFilterWidgetState<T> extends State<AppSingleFilterWidget<T>> {
                 decoration: const BoxDecoration(
                   border: Border(
                     bottom: BorderSide(
-                      color: ColorName.red,
+                      color: ColorName.purple,
                     ),
                   ),
                 ),
@@ -152,12 +155,12 @@ class _AppSingleFilterWidgetState<T> extends State<AppSingleFilterWidget<T>> {
                       width: 130,
                       child: Text(
                         widget.buildName(widget.value),
-                        style: AppTypography.sf.s14.w400.grey,
+                        style: AppTypography.sf.s14.w400,
                       ),
                     ),
                     const Icon(
                       Icons.arrow_drop_down,
-                      color: ColorName.black,
+                      color: ColorName.purple,
                     ),
                   ],
                 ),
@@ -173,7 +176,7 @@ class _AppSingleFilterWidgetState<T> extends State<AppSingleFilterWidget<T>> {
             minSize: 0,
             child: const Icon(
               Icons.clear,
-              color: ColorName.black,
+              color: ColorName.purple,
               size: 32,
             ),
           ),

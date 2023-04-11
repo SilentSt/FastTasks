@@ -61,7 +61,7 @@ class DashboardsView extends StatelessWidget {
                       onTap: model.onAddDashShow,
                       iconWidget: const Icon(
                         CupertinoIcons.add_circled,
-                        color: ColorName.red,
+                        color: ColorName.purple,
                       ),
                     ),
                 ],
@@ -91,7 +91,7 @@ class DashboardsView extends StatelessWidget {
                                             onTap: () => model.selectTable(item),
                                             text: item.title,
                                             textStyle: item.id == model.currentTable?.id
-                                                ? AppTypography.sf.black.s26.w500
+                                                ? AppTypography.sf.lightGrey.s26.w500
                                                 : AppTypography.sf.grey.s24.w400,
                                           ),
                                         ),
@@ -99,7 +99,7 @@ class DashboardsView extends StatelessWidget {
                                           iconWidget: const Icon(
                                             Icons.edit_note,
                                             size: 29,
-                                            color: ColorName.red,
+                                            color: ColorName.purple,
                                           ),
                                           onTap: () => model.onAddDashShow(task: item),
                                         ),
@@ -108,7 +108,7 @@ class DashboardsView extends StatelessWidget {
                                             onTap: model.onAddTaskShow,
                                             iconWidget: const Icon(
                                               CupertinoIcons.add_circled,
-                                              color: ColorName.red,
+                                              color: ColorName.purple,
                                             ),
                                           )
                                       ],

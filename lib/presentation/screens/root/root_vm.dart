@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:stacked/stacked.dart';
+import 'package:stacked/stacked.dart' hide PageRouteInfo;
 import 'package:tasklet/presentation/app/app.dart';
 import 'package:tasklet/presentation/navigation/app_router.dart';
 
