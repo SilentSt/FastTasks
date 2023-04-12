@@ -31,6 +31,7 @@ class HomeViewModel extends BaseViewModel {
   final TaskService taskService;
   final TextEditingController noteController = TextEditingController();
   final ScrollController scrollController = ScrollController();
+  final List<String> statuses = ["New","Doing","Review","Done","Closed"];
   bool isLoadingMore = false;
   List<TaskModel> myTasks = [];
   List<bool> expansions = [];
@@ -127,7 +128,7 @@ class HomeViewModel extends BaseViewModel {
   }
 
   Future<void> updateTaskStatus(int taskStatus, String id) async {
-    await taskService.patchStatus(StatusDto(status: taskStatus, id: id));
+    await taskService.patchStatus(StatusDto(status:statuses[taskStatus], id: id));
     fetchMyTasks();
   }
 

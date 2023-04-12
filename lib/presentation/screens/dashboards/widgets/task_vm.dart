@@ -18,6 +18,7 @@ class TaskViewModel extends BaseViewModel {
   final ErrorService errorService;
   final TextEditingController noteController = TextEditingController();
   final String id;
+  final List<String> statuses = ["New","Doing","Review","Done","Closed"];
   TaskModel? task;
 
   Future<void> onReady() async {
@@ -68,7 +69,7 @@ class TaskViewModel extends BaseViewModel {
   }
 
   Future<void> updateTaskStatus(int taskStatus, String id) async {
-    await taskService.patchStatus(StatusDto(status: taskStatus, id: id));
+    await taskService.patchStatus(StatusDto(status: statuses[taskStatus], id: id));
     fetchtask();
   }
 

@@ -27,7 +27,8 @@ class DashboardsViewModel extends BaseViewModel {
   final TableService tableService;
   final TaskService taskService;
   final AuthService authService;
-  final TextEditingController noteController = TextEditingController();
+  final TextEditingController noteController = TextEditingController();  
+  final List<String> statuses = ["New","Doing","Review","Done","Closed"];
 
   bool addDashVisible = false;
   bool addTaskVisible = false;
@@ -182,7 +183,7 @@ class DashboardsViewModel extends BaseViewModel {
   }
 
   Future<void> updateTaskStatus(int taskStatus, String id) async {
-    await taskService.patchStatus(StatusDto(status: taskStatus, id: id));
+    await taskService.patchStatus(StatusDto(status: statuses[taskStatus], id: id));
     fetchTasksFromCurrentTable();
   }
 

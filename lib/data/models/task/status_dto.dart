@@ -9,5 +9,5 @@ class StatusDto with Mappable {
   });
 
   final String id;
-  final int status;
+  final String status;
 }

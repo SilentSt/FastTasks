@@ -26,7 +26,7 @@ class TaskModel with Mappable {
   final bool hidden;
   final UserModel author;
   final UserModel executor;
-  final int status;
+  final String status;
   final bool isAuthor;
   final bool isExecutor;
   final DateTime startTime;

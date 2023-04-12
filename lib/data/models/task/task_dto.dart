@@ -27,6 +27,6 @@ class TaskDto with Mappable {
   final String executorId;
   final List<String> links;
   final String? note;
-  final int? status;
+  final String? status;
   final int? price;
 }

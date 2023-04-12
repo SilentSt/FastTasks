@@ -42,8 +42,15 @@ extension ToString on TaskStatus {
   }
 }
 
-TaskStatus taskStatusfromInt(int st) {
-  return TaskStatus.values[st];
+TaskStatus taskStatusfromStr(String st) {
+  switch(st){
+    case "New":return TaskStatus.values[0];
+    case "Doing":return TaskStatus.values[0];
+    case "Review":return TaskStatus.values[0];
+    case "Done":return TaskStatus.values[0];
+    case "Closed":return TaskStatus.values[0];
+  }
+  return TaskStatus.values[0];
 }
 
 extension ToApi on TaskDuration {

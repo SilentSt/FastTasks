@@ -530,7 +530,7 @@ extension TaskDtoMapperExtension  on TaskDto {
 
 abstract class TaskDtoCopyWith<$R> {
   factory TaskDtoCopyWith(TaskDto value, Then<TaskDto, $R> then) = _TaskDtoCopyWithImpl<$R>;
-  $R call({String? executorId, String? title, bool? hidden, List<String>? links, String? description, String? tableId, int? duration, DateTime? dateTime, String? note, String? id, int? status, int? price});
+  $R call({String? executorId, String? title, bool? hidden, List<String>? links, String? description, String? tableId, int? duration, DateTime? dateTime, String? note, String? id, String? status, int? price});
   $R apply(TaskDto Function(TaskDto) transform);
 }
 
@@ -568,7 +568,7 @@ abstract class TaskModelCopyWith<$R> {
   factory TaskModelCopyWith(TaskModel value, Then<TaskModel, $R> then) = _TaskModelCopyWithImpl<$R>;
   UserModelCopyWith<$R> get author;
   UserModelCopyWith<$R> get executor;
-  $R call({String? id, UserModel? author, UserModel? executor, String? title, String? description, DateTime? startTime, bool? hidden, List<String>? links, bool? isAuthor, bool? isExecutor, int? duration, int? status, int? price, String? note});
+  $R call({String? id, UserModel? author, UserModel? executor, String? title, String? description, DateTime? startTime, bool? hidden, List<String>? links, bool? isAuthor, bool? isExecutor, int? duration, String? status, int? price, String? note});
   $R apply(TaskModel Function(TaskModel) transform);
 }
 
@@ -577,7 +577,7 @@ class _TaskModelCopyWithImpl<$R> extends BaseCopyWith<TaskModel, $R> implements 
 
   @override UserModelCopyWith<$R> get author => UserModelCopyWith($value.author, (v) => call(author: v));
   @override UserModelCopyWith<$R> get executor => UserModelCopyWith($value.executor, (v) => call(executor: v));
-  @override $R call({String? id, UserModel? author, UserModel? executor, String? title, String? description, DateTime? startTime, bool? hidden, List<String>? links, bool? isAuthor, bool? isExecutor, int? duration, int? status, int? price, Object? note = $none}) => $then(TaskModel(id: id ?? $value.id, author: author ?? $value.author, executor: executor ?? $value.executor, title: title ?? $value.title, description: description ?? $value.description, startTime: startTime ?? $value.startTime, hidden: hidden ?? $value.hidden, links: links ?? $value.links, isAuthor: isAuthor ?? $value.isAuthor, isExecutor: isExecutor ?? $value.isExecutor, duration: duration ?? $value.duration, status: status ?? $value.status, price: price ?? $value.price, note: or(note, $value.note)));
+  @override $R call({String? id, UserModel? author, UserModel? executor, String? title, String? description, DateTime? startTime, bool? hidden, List<String>? links, bool? isAuthor, bool? isExecutor, int? duration, String? status, int? price, Object? note = $none}) => $then(TaskModel(id: id ?? $value.id, author: author ?? $value.author, executor: executor ?? $value.executor, title: title ?? $value.title, description: description ?? $value.description, startTime: startTime ?? $value.startTime, hidden: hidden ?? $value.hidden, links: links ?? $value.links, isAuthor: isAuthor ?? $value.isAuthor, isExecutor: isExecutor ?? $value.isExecutor, duration: duration ?? $value.duration, status: status ?? $value.status, price: price ?? $value.price, note: or(note, $value.note)));
 }
 
 class StatusDtoMapper extends BaseMapper<StatusDto> {
@@ -606,14 +606,14 @@ extension StatusDtoMapperExtension  on StatusDto {
 
 abstract class StatusDtoCopyWith<$R> {
   factory StatusDtoCopyWith(StatusDto value, Then<StatusDto, $R> then) = _StatusDtoCopyWithImpl<$R>;
-  $R call({String? id, int? status});
+  $R call({String? id, String? status});
   $R apply(StatusDto Function(StatusDto) transform);
 }
 
 class _StatusDtoCopyWithImpl<$R> extends BaseCopyWith<StatusDto, $R> implements StatusDtoCopyWith<$R> {
   _StatusDtoCopyWithImpl(StatusDto value, Then<StatusDto, $R> then) : super(value, then);
 
-  @override $R call({String? id, int? status}) => $then(StatusDto(id: id ?? $value.id, status: status ?? $value.status));
+  @override $R call({String? id, String? status}) => $then(StatusDto(id: id ?? $value.id, status: status ?? $value.status));
 }
 
 class PushTokenDtoMapper extends BaseMapper<PushTokenDto> {

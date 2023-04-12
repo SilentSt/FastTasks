@@ -133,7 +133,7 @@ class TaskView extends StatelessWidget {
               if (model.task?.isAuthor ?? false || (model.task?.isExecutor ?? false))
                 AppSingleFilterWidget<TaskStatus>(
                   availableValues: TaskStatus.values,
-                  value: taskStatusfromInt(model.task?.status ?? 0),
+                  value: taskStatusfromStr(model.task?.status ?? "New"),
                   callback: (item) {
                     if (item?.index == null) return;
                     model.updateTaskStatus(item!.index, id);
@@ -153,7 +153,7 @@ class TaskView extends StatelessWidget {
                       style: AppTypography.sf.s18.w500.black,
                     ),
                     Text(
-                      taskStatusfromInt(model.task?.status ?? 0).title,
+                      taskStatusfromStr(model.task?.status ?? "New").title,
                       style: AppTypography.sf.s18.w500.black,
                     )
                   ],

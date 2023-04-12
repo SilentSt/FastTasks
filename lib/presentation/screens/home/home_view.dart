@@ -105,7 +105,7 @@ class HomeView extends StatelessWidget {
                                           overflow: TextOverflow.fade,
                                           style: AppTypography.sf.s24.w600.black.copyWith(
                                             color: model.colorBuilder(
-                                              taskStatusfromInt(
+                                              taskStatusfromStr(
                                                 item.status,
                                               ),
                                             ),
