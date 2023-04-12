@@ -114,12 +114,12 @@ class DashboardsViewModel extends BaseViewModel {
 
   Future<void> downloadAll(List<String> urls) async {
     for (final uri in urls) {
-      await launchUrlString(uri, mode: LaunchMode.externalApplication);
+      await launchUrlString("https://sbeusilent.space/Media/$uri", mode: LaunchMode.externalApplication);
     }
   }
 
   Future<void> downloadOne(String url) async {
-    await launchUrlString(url, mode: LaunchMode.externalApplication);
+    await launchUrlString("https://sbeusilent.space/Media/$url", mode: LaunchMode.externalApplication);
   }
 
   Future<void> addNote(BuildContext context, TaskModel task) async {
