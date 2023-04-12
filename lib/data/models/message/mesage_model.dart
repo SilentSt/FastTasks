@@ -13,7 +13,7 @@ class MessageModel with Mappable {
     this.taskId,
     this.self,
   });
-  final String id;
+  final int id;
   final String text;
   final DateTime time;
   final UserModel? from;

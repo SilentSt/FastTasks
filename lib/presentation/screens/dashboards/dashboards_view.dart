@@ -201,7 +201,7 @@ class DashboardsView extends StatelessWidget {
                                             child: Text(
                                               item.title,
                                               overflow: TextOverflow.fade,
-                                              style: AppTypography.sf.s24.w600.black.copyWith(
+                                              style: AppTypography.sf.s24.w600.lightGrey.copyWith(
                                                 color: model.colorBuilder(
                                                   taskStatusfromStr(
                                                     item.status,
@@ -217,7 +217,7 @@ class DashboardsView extends StatelessWidget {
                                                 iconWidget: const Icon(
                                                   Icons.edit_note,
                                                   size: 30,
-                                                  color: ColorName.red,
+                                                  color: ColorName.purple,
                                                 ),
                                               ),
                                             if (item.isExecutor)
@@ -247,7 +247,7 @@ class DashboardsView extends StatelessWidget {
                                                 onTap: () => model.downloadAll(item.links),
                                                 iconWidget: Icon(
                                                   Icons.file_download,
-                                                  color: ColorName.red.withOpacity(0.7),
+                                                  color: ColorName.purple.withOpacity(0.7),
                                                 ),
                                               ),
                                             )
@@ -256,7 +256,7 @@ class DashboardsView extends StatelessWidget {
                                             ),
                                       subtitle: Text(
                                         '${item.executor.userName} (${item.executor.email})',
-                                        style: AppTypography.sf.s14.black,
+                                        style: AppTypography.sf.s14.lightGrey,
                                       ),
                                     ),
                                   if (model.isLoadingMore)
@@ -265,7 +265,7 @@ class DashboardsView extends StatelessWidget {
                                     AppTextButton(
                                       onTap: model.fetchTasksFromCurrentTable,
                                       text: 'Загрузить больше задач',
-                                      textStyle: AppTypography.sf.s20.red,
+                                      textStyle: AppTypography.sf.s20.purple,
                                     ),
                                 ],
                               ),

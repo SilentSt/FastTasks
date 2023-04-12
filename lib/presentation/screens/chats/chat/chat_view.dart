@@ -102,7 +102,7 @@ class ChatView extends StatelessWidget {
                       child: DecoratedBox(
                         decoration: BoxDecoration(
                           color:
-                              (message.self ?? false) ? ColorName.red.withOpacity(.1) : ColorName.red.withOpacity(.2),
+                              (message.self ?? false) ? ColorName.purple.withOpacity(.2) : ColorName.purple.withOpacity(.3),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Padding(
@@ -117,7 +117,7 @@ class ChatView extends StatelessWidget {
                                 Text(
                                   message.from?.userName ?? '-',
                                   textAlign: TextAlign.left,
-                                  style: AppTypography.sf.s15.w600.black,
+                                  style: AppTypography.sf.s15.w600.grey,
                                 ),
                               Row(
                                 mainAxisSize: MainAxisSize.min,
@@ -151,9 +151,9 @@ class ChatView extends StatelessWidget {
             Positioned(
               bottom: 10 + MediaQuery.of(context).padding.bottom + MediaQuery.of(context).viewInsets.bottom,
               child: Card(
-                shadowColor: ColorName.red.withOpacity(.5),
+                shadowColor: ColorName.purple.withOpacity(.5),
                 color: ColorName.white,
-                surfaceTintColor: ColorName.red.withOpacity(.8),
+                surfaceTintColor: ColorName.purple.withOpacity(.8),
                 elevation: 5,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -163,7 +163,8 @@ class ChatView extends StatelessWidget {
                       child: TextField(
                         maxLines: model.maxLines,
                         controller: model.messageController,
-                        decoration: const InputDecoration(
+                        style: AppTypography.sf.black.s18.w300,
+                        decoration:  InputDecoration(
                           border: InputBorder.none,
                           errorBorder: InputBorder.none,
                           enabledBorder: InputBorder.none,
@@ -171,7 +172,8 @@ class ChatView extends StatelessWidget {
                           disabledBorder: InputBorder.none,
                           focusedErrorBorder: InputBorder.none,
                           hintText: 'Text',
-                          contentPadding: EdgeInsets.only(
+                          hintStyle: AppTypography.sf.grey.w200.s18,                          
+                          contentPadding: const EdgeInsets.only(
                             left: 8,
                             top: 8,
                             right: 8,

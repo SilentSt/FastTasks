@@ -147,7 +147,7 @@ class HomeView extends StatelessWidget {
                                         ),
                                   subtitle: Text(
                                     '${item.executor.userName} (${item.executor.email})',
-                                    style: AppTypography.sf.s14.black,
+                                    style: AppTypography.sf.s14.lightGrey,
                                   ),
                                 ),
                               if (model.isLoadingMore) const AppLoading(),

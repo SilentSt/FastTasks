@@ -420,13 +420,15 @@ extension ChatModelMapperExtension  on ChatModel {
 
 abstract class ChatModelCopyWith<$R> {
   factory ChatModelCopyWith(ChatModel value, Then<ChatModel, $R> then) = _ChatModelCopyWithImpl<$R>;
-  $R call({String? id, String? title, bool? private, String? lastMessage});
+  MessageModelCopyWith<$R>? get lastMessage;
+  $R call({String? id, String? title, bool? private, MessageModel? lastMessage});
   $R apply(ChatModel Function(ChatModel) transform);
 }
 
 class _ChatModelCopyWithImpl<$R> extends BaseCopyWith<ChatModel, $R> implements ChatModelCopyWith<$R> {
   _ChatModelCopyWithImpl(ChatModel value, Then<ChatModel, $R> then) : super(value, then);
 
+  @override MessageModelCopyWith<$R>? get lastMessage => $value.lastMessage != null ? MessageModelCopyWith($value.lastMessage!, (v) => call(lastMessage: v)) : null;
   @override $R call({String? id, Object? title = $none, bool? private, Object? lastMessage = $none}) => $then(ChatModel(id: id ?? $value.id, title: or(title, $value.title), private: private ?? $value.private, lastMessage: or(lastMessage, $value.lastMessage)));
 }
 
@@ -457,7 +459,7 @@ extension MessageModelMapperExtension  on MessageModel {
 abstract class MessageModelCopyWith<$R> {
   factory MessageModelCopyWith(MessageModel value, Then<MessageModel, $R> then) = _MessageModelCopyWithImpl<$R>;
   UserModelCopyWith<$R>? get from;
-  $R call({String? id, String? text, DateTime? time, UserModel? from, String? chatId, String? tableId, String? taskId, bool? self});
+  $R call({int? id, String? text, DateTime? time, UserModel? from, String? chatId, String? tableId, String? taskId, bool? self});
   $R apply(MessageModel Function(MessageModel) transform);
 }
 
@@ -465,7 +467,7 @@ class _MessageModelCopyWithImpl<$R> extends BaseCopyWith<MessageModel, $R> imple
   _MessageModelCopyWithImpl(MessageModel value, Then<MessageModel, $R> then) : super(value, then);
 
   @override UserModelCopyWith<$R>? get from => $value.from != null ? UserModelCopyWith($value.from!, (v) => call(from: v)) : null;
-  @override $R call({String? id, String? text, DateTime? time, Object? from = $none, Object? chatId = $none, Object? tableId = $none, Object? taskId = $none, Object? self = $none}) => $then(MessageModel(id: id ?? $value.id, text: text ?? $value.text, time: time ?? $value.time, from: or(from, $value.from), chatId: or(chatId, $value.chatId), tableId: or(tableId, $value.tableId), taskId: or(taskId, $value.taskId), self: or(self, $value.self)));
+  @override $R call({int? id, String? text, DateTime? time, Object? from = $none, Object? chatId = $none, Object? tableId = $none, Object? taskId = $none, Object? self = $none}) => $then(MessageModel(id: id ?? $value.id, text: text ?? $value.text, time: time ?? $value.time, from: or(from, $value.from), chatId: or(chatId, $value.chatId), tableId: or(tableId, $value.tableId), taskId: or(taskId, $value.taskId), self: or(self, $value.self)));
 }
 
 class MessageDtoMapper extends BaseMapper<MessageDto> {

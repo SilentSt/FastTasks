@@ -70,32 +70,32 @@ class TaskView extends StatelessWidget {
               Text(
                 model.task?.title ?? '',
                 overflow: TextOverflow.fade,
-                style: AppTypography.sf.s24.w600.black,
+                style: AppTypography.sf.s24.w600.lightGrey,
               ),
               const SizedBox(height: 15),
               Text(
                 '${LocaleKeys.author.tr()}: ${model.task?.author.userName ?? ''}(${model.task?.author.email ?? ''})',
-                style: AppTypography.sf.s18.w500.black,
+                style: AppTypography.sf.s18.w500.lightGrey,
               ),
               Text(
                 '${LocaleKeys.executor.tr()}: ${model.task?.executor.userName ?? ''}(${model.task?.executor.email ?? ''})',
-                style: AppTypography.sf.s18.w500.black,
+                style: AppTypography.sf.s18.w500.lightGrey,
               ),
               const SizedBox(height: 30),
               Text(
                 '${LocaleKeys.description.tr()}: ${model.task?.description ?? '-'.tr()}',
-                style: AppTypography.sf.s15.w400.black,
+                style: AppTypography.sf.s15.w400.lightGrey,
               ),
               const SizedBox(height: 10),
               Row(
                 children: [
                   Text(
                     '${LocaleKeys.timeToDo.tr()}: ',
-                    style: AppTypography.sf.s18.w500.black,
+                    style: AppTypography.sf.s18.w500.lightGrey,
                   ),
                   Text(
                     '${model.task?.duration ?? 0} ${LocaleKeys.hours.tr()}',
-                    style: AppTypography.sf.s18.w500.black,
+                    style: AppTypography.sf.s18.w500.lightGrey,
                   )
                 ],
               ),
@@ -104,11 +104,11 @@ class TaskView extends StatelessWidget {
                 children: [
                   Text(
                     '${LocaleKeys.priceInPoints.tr()}: ',
-                    style: AppTypography.sf.s18.w500.black,
+                    style: AppTypography.sf.s18.w500.lightGrey,
                   ),
                   Text(
                     '${model.task?.price ?? 0} points',
-                    style: AppTypography.sf.s18.w500.black,
+                    style: AppTypography.sf.s18.w500.lightGrey,
                   )
                 ],
               ),
@@ -117,7 +117,7 @@ class TaskView extends StatelessWidget {
                 children: [
                   Text(
                     '${LocaleKeys.createdAt.tr()}: ',
-                    style: AppTypography.sf.s18.w500.black,
+                    style: AppTypography.sf.s18.w500.lightGrey,
                   ),
                   Text(
                     model.task?.startTime == null
@@ -125,7 +125,7 @@ class TaskView extends StatelessWidget {
                         : DateFormat('mm:hh dd.MM.yyyy').format(
                             model.task!.startTime.toUtc(),
                           ),
-                    style: AppTypography.sf.s18.w500.black,
+                    style: AppTypography.sf.s18.w500.lightGrey,
                   )
                 ],
               ),
@@ -150,11 +150,11 @@ class TaskView extends StatelessWidget {
                   children: [
                     Text(
                       LocaleKeys.status.tr(),
-                      style: AppTypography.sf.s18.w500.black,
+                      style: AppTypography.sf.s18.w500.lightGrey,
                     ),
                     Text(
                       taskStatusfromStr(model.task?.status ?? "New").title,
-                      style: AppTypography.sf.s18.w500.black,
+                      style: AppTypography.sf.s18.w500.lightGrey,
                     )
                   ],
                 ),
@@ -163,7 +163,7 @@ class TaskView extends StatelessWidget {
               if (model.task?.links.isNotEmpty ?? false) ...[
                 Text(
                   LocaleKeys.taskMaterials.tr(),
-                  style: AppTypography.sf.s18.w500.black,
+                  style: AppTypography.sf.s18.w500.lightGrey,
                 ),
                 const SizedBox(height: 5),
                 SizedBox(
@@ -214,7 +214,7 @@ class TaskView extends StatelessWidget {
               if (model.task?.isExecutor ?? false) ...[
                 Text(
                   LocaleKeys.note.tr(),
-                  style: AppTypography.sf.s16.w500.black,
+                  style: AppTypography.sf.s16.w500.lightGrey,
                 ),
                 const SizedBox(height: 5),
                 SizedBox(
@@ -233,7 +233,7 @@ class TaskView extends StatelessWidget {
                     width: 200,
                     child: AppButton(
                       onTap: () => model.addNote(context),
-                      buttonColor: model.noteController.text == model.task?.note ? ColorName.darkGrey : ColorName.red,
+                      buttonColor: model.noteController.text == model.task?.note ? ColorName.darkGrey : ColorName.purple,
                       textStyle: AppTypography.sf.s18.w500.white,
                       text: LocaleKeys.save.tr(),
                     ),

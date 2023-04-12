@@ -106,24 +106,53 @@ class ChatsView extends StatelessWidget {
                                   children: [
                                     Column(
                                       mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         SizedBox(
                                           width: 200,
                                           child: Text(
                                             chat.title ?? '',
-                                            style: AppTypography.sf.s24.w600.black,
+                                            style: AppTypography
+                                                .sf.s24.w700.lightGrey,
                                             overflow: TextOverflow.fade,
                                           ),
                                         ),
                                         SizedBox(
-                                          width: 200,
-                                          child: Text(
-                                            (chat.lastMessage ?? '').trim(),
-                                            maxLines: 1,
-                                            style: AppTypography.sf.s22.w400.black,
-                                            overflow: TextOverflow.fade,
-                                          ),
+                                          width: 199,
+                                          child: (chat.lastMessage?.id == -1 || !(chat.lastMessage?.self??false))
+                                              ? Text(
+                                                  (chat.lastMessage?.text ?? '')
+                                                      .trim(),
+                                                  maxLines: 1,
+                                                  style: AppTypography
+                                                      .sf.s22.w400.lightGrey,
+                                                  overflow: TextOverflow.fade,
+                                                )
+                                              : Row(
+                                                  children: [
+                                                    Text(
+                                                      "You: ",
+                                                      maxLines: 1,
+                                                      style: AppTypography
+                                                          .sf.s20.w500.purple,
+                                                      overflow:
+                                                          TextOverflow.fade,
+                                                    ),
+                                                    const SizedBox(
+                                                      width: 6,
+                                                    ),
+                                                    Text(
+                                                      chat.lastMessage?.text ??
+                                                          "",
+                                                      maxLines: 1,
+                                                      style: AppTypography.sf
+                                                          .s18.w400.lightGrey,
+                                                      overflow:
+                                                          TextOverflow.fade,
+                                                    ),
+                                                  ],
+                                                ),
                                         ),
                                       ],
                                     ),

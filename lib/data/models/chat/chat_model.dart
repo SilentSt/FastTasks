@@ -12,5 +12,5 @@ class ChatModel with Mappable {
   final String id;
   final String? title;
   final bool private;
-  final String? lastMessage;
+  final MessageModel? lastMessage;
 }
