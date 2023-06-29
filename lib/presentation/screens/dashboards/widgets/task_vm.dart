@@ -69,7 +69,7 @@ class TaskViewModel extends BaseViewModel {
   }
 
   Future<void> updateTaskStatus(int taskStatus, String id) async {
-    await taskService.patchStatus(StatusDto(status: statuses[taskStatus], id: id));
+    await taskService.patchStatus(StatusModel(status: statuses[taskStatus], id: id));
     fetchtask();
   }
 

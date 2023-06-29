@@ -204,7 +204,7 @@ class DashboardsView extends StatelessWidget {
                                               style: AppTypography.sf.s24.w600.lightGrey.copyWith(
                                                 color: model.colorBuilder(
                                                   taskStatusfromStr(
-                                                    item.status,
+                                                    item.status.status,
                                                   ),
                                                 ),
                                               ),

@@ -72,7 +72,7 @@ class DashboardsViewModel extends BaseViewModel {
     ]);
     tasks.addAll(currentTable?.tasks ?? []);
     tasks.sort(
-      (a, b) => a.status.compareTo(b.status),
+      (a, b) => a.status.status.compareTo(b.status.status),
     );
     expansions.clear();
     for (final _ in tasks) {
@@ -183,7 +183,7 @@ class DashboardsViewModel extends BaseViewModel {
   }
 
   Future<void> updateTaskStatus(int taskStatus, String id) async {
-    await taskService.patchStatus(StatusDto(status: statuses[taskStatus], id: id));
+    await taskService.patchStatus(StatusModel(status: statuses[taskStatus], id: id));
     fetchTasksFromCurrentTable();
   }
 

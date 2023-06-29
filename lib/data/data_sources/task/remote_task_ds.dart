@@ -36,5 +36,5 @@ abstract class RemoteTaskDataSource extends ChopperService implements AppRemoteD
   Future<Response<dynamic>> edit(@Body() final TaskDto dto);
 
   @Patch()
-  Future<Response<dynamic>> updateStatus(@Body() final StatusDto dto);
+  Future<Response<dynamic>> updateStatus(@Body() final StatusModel dto);
 }

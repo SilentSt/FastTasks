@@ -1,0 +1,99 @@
+@startuml classgpt
+class DeletableEntity {
+    +bool IsDeleted
+    +DateTime? DeletedOn
+}
+
+interface IEntity {
+    +long Id
+}
+
+class XTask {
+    +string Title
+    +string Description
+    +DateTime StartTime
+    +DateTime? EndTime
+    +TimeSpan Duration
+    +long StatusId
+    +bool Hidden
+    +List<string> Links
+    +uint Price
+    +XTable Table
+    +XIdentityUser Author
+    +XIdentityUser Executor
+    +ICollection<XContent> Contents
+    +ICollection<Note> Notes
+    +ICollection<XHistory> History
+}
+
+class XTable {
+    +string Id
+    +string Title
+    +ICollection<XTask> Tasks
+    +ICollection<XIdentityUser> Users
+}
+
+class XHistory {
+    +long Id
+    +XTask Task
+    +DateTime UpdateDate
+    +XIdentityUser Updater
+    +string? Title
+    +string? Description
+    +TaskProgress? Status
+    +XIdentityUser? Executor
+    +ICollection<XContent> Contents
+}
+
+class XContent {
+    +string Id
+    +string Name
+    +string Extension
+    +XContentType ContentType
+}
+
+class Note {
+    +long Id
+    +string Text
+    +XTask Task
+    +XIdentityUser User
+    +DateTime CreatedOn
+}
+
+class XIdentityUser {
+    +string Id
+    +string Email
+    +string UserName
+    +bool EmailConfirmed
+}
+
+class TaskProgress {
+    +long Id
+    +string Name
+    +string Description
+}
+
+enum XContentType {
+    Text,
+    Image,
+    Audio,
+    Video,
+    Other
+}
+
+DeletableEntity --|> IEntity
+XTask -- XTable
+XTask -- XIdentityUser: Author
+XTask -- XIdentityUser: Executor
+XTask -- XHistory
+XTask -- Note
+XHistory -- XIdentityUser: Updater
+XHistory -- XTask
+XContent --|> DeletableEntity
+Note --|> IEntity
+Note -- XTask
+Note -- XIdentityUser
+XTable --|> DeletableEntity
+XTable -- XTask
+XTable -- XIdentityUser
+@enduml

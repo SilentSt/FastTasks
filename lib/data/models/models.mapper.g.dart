@@ -49,7 +49,7 @@ var _mappers = <BaseMapper>{
   MessageDtoMapper._(),
   TaskDtoMapper._(),
   TaskModelMapper._(),
-  StatusDtoMapper._(),
+  StatusModelMapper._(),
   PushTokenDtoMapper._(),
   TableDtoMapper._(),
   TableModelMapper._(),
@@ -570,7 +570,8 @@ abstract class TaskModelCopyWith<$R> {
   factory TaskModelCopyWith(TaskModel value, Then<TaskModel, $R> then) = _TaskModelCopyWithImpl<$R>;
   UserModelCopyWith<$R> get author;
   UserModelCopyWith<$R> get executor;
-  $R call({String? id, UserModel? author, UserModel? executor, String? title, String? description, DateTime? startTime, bool? hidden, List<String>? links, bool? isAuthor, bool? isExecutor, int? duration, String? status, int? price, String? note});
+  StatusModelCopyWith<$R> get status;
+  $R call({String? id, UserModel? author, UserModel? executor, String? title, String? description, DateTime? startTime, bool? hidden, List<String>? links, bool? isAuthor, bool? isExecutor, int? duration, StatusModel? status, int? price, String? note});
   $R apply(TaskModel Function(TaskModel) transform);
 }
 
@@ -579,43 +580,44 @@ class _TaskModelCopyWithImpl<$R> extends BaseCopyWith<TaskModel, $R> implements 
 
   @override UserModelCopyWith<$R> get author => UserModelCopyWith($value.author, (v) => call(author: v));
   @override UserModelCopyWith<$R> get executor => UserModelCopyWith($value.executor, (v) => call(executor: v));
-  @override $R call({String? id, UserModel? author, UserModel? executor, String? title, String? description, DateTime? startTime, bool? hidden, List<String>? links, bool? isAuthor, bool? isExecutor, int? duration, String? status, int? price, Object? note = $none}) => $then(TaskModel(id: id ?? $value.id, author: author ?? $value.author, executor: executor ?? $value.executor, title: title ?? $value.title, description: description ?? $value.description, startTime: startTime ?? $value.startTime, hidden: hidden ?? $value.hidden, links: links ?? $value.links, isAuthor: isAuthor ?? $value.isAuthor, isExecutor: isExecutor ?? $value.isExecutor, duration: duration ?? $value.duration, status: status ?? $value.status, price: price ?? $value.price, note: or(note, $value.note)));
+  @override StatusModelCopyWith<$R> get status => StatusModelCopyWith($value.status, (v) => call(status: v));
+  @override $R call({String? id, UserModel? author, UserModel? executor, String? title, String? description, DateTime? startTime, bool? hidden, List<String>? links, bool? isAuthor, bool? isExecutor, int? duration, StatusModel? status, int? price, Object? note = $none}) => $then(TaskModel(id: id ?? $value.id, author: author ?? $value.author, executor: executor ?? $value.executor, title: title ?? $value.title, description: description ?? $value.description, startTime: startTime ?? $value.startTime, hidden: hidden ?? $value.hidden, links: links ?? $value.links, isAuthor: isAuthor ?? $value.isAuthor, isExecutor: isExecutor ?? $value.isExecutor, duration: duration ?? $value.duration, status: status ?? $value.status, price: price ?? $value.price, note: or(note, $value.note)));
 }
 
-class StatusDtoMapper extends BaseMapper<StatusDto> {
-  StatusDtoMapper._();
+class StatusModelMapper extends BaseMapper<StatusModel> {
+  StatusModelMapper._();
 
   @override Function get decoder => decode;
-  StatusDto decode(dynamic v) => checked(v, (Map<String, dynamic> map) => fromMap(map));
-  StatusDto fromMap(Map<String, dynamic> map) => StatusDto(id: Mapper.i.$get(map, 'id'), status: Mapper.i.$get(map, 'status'));
+  StatusModel decode(dynamic v) => checked(v, (Map<String, dynamic> map) => fromMap(map));
+  StatusModel fromMap(Map<String, dynamic> map) => StatusModel(id: Mapper.i.$get(map, 'id'), status: Mapper.i.$get(map, 'status'));
 
-  @override Function get encoder => (StatusDto v) => encode(v);
-  dynamic encode(StatusDto v) => toMap(v);
-  Map<String, dynamic> toMap(StatusDto s) => {'id': Mapper.i.$enc(s.id, 'id'), 'status': Mapper.i.$enc(s.status, 'status')};
+  @override Function get encoder => (StatusModel v) => encode(v);
+  dynamic encode(StatusModel v) => toMap(v);
+  Map<String, dynamic> toMap(StatusModel s) => {'id': Mapper.i.$enc(s.id, 'id'), 'status': Mapper.i.$enc(s.status, 'status')};
 
-  @override String stringify(StatusDto self) => 'StatusDto(id: ${Mapper.asString(self.id)}, status: ${Mapper.asString(self.status)})';
-  @override int hash(StatusDto self) => Mapper.hash(self.id) ^ Mapper.hash(self.status);
-  @override bool equals(StatusDto self, StatusDto other) => Mapper.isEqual(self.id, other.id) && Mapper.isEqual(self.status, other.status);
+  @override String stringify(StatusModel self) => 'StatusModel(id: ${Mapper.asString(self.id)}, status: ${Mapper.asString(self.status)})';
+  @override int hash(StatusModel self) => Mapper.hash(self.id) ^ Mapper.hash(self.status);
+  @override bool equals(StatusModel self, StatusModel other) => Mapper.isEqual(self.id, other.id) && Mapper.isEqual(self.status, other.status);
 
-  @override Function get typeFactory => (f) => f<StatusDto>();
+  @override Function get typeFactory => (f) => f<StatusModel>();
 }
 
-extension StatusDtoMapperExtension  on StatusDto {
+extension StatusModelMapperExtension  on StatusModel {
   String toJson() => Mapper.toJson(this);
   Map<String, dynamic> toMap() => Mapper.toMap(this);
-  StatusDtoCopyWith<StatusDto> get copyWith => StatusDtoCopyWith(this, $identity);
+  StatusModelCopyWith<StatusModel> get copyWith => StatusModelCopyWith(this, $identity);
 }
 
-abstract class StatusDtoCopyWith<$R> {
-  factory StatusDtoCopyWith(StatusDto value, Then<StatusDto, $R> then) = _StatusDtoCopyWithImpl<$R>;
+abstract class StatusModelCopyWith<$R> {
+  factory StatusModelCopyWith(StatusModel value, Then<StatusModel, $R> then) = _StatusModelCopyWithImpl<$R>;
   $R call({String? id, String? status});
-  $R apply(StatusDto Function(StatusDto) transform);
+  $R apply(StatusModel Function(StatusModel) transform);
 }
 
-class _StatusDtoCopyWithImpl<$R> extends BaseCopyWith<StatusDto, $R> implements StatusDtoCopyWith<$R> {
-  _StatusDtoCopyWithImpl(StatusDto value, Then<StatusDto, $R> then) : super(value, then);
+class _StatusModelCopyWithImpl<$R> extends BaseCopyWith<StatusModel, $R> implements StatusModelCopyWith<$R> {
+  _StatusModelCopyWithImpl(StatusModel value, Then<StatusModel, $R> then) : super(value, then);
 
-  @override $R call({String? id, String? status}) => $then(StatusDto(id: id ?? $value.id, status: status ?? $value.status));
+  @override $R call({String? id, String? status}) => $then(StatusModel(id: id ?? $value.id, status: status ?? $value.status));
 }
 
 class PushTokenDtoMapper extends BaseMapper<PushTokenDto> {

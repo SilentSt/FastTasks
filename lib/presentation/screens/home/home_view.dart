@@ -106,7 +106,7 @@ class HomeView extends StatelessWidget {
                                           style: AppTypography.sf.s24.w600.black.copyWith(
                                             color: model.colorBuilder(
                                               taskStatusfromStr(
-                                                item.status,
+                                                item.status.status,
                                               ),
                                             ),
                                           ),

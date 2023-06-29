@@ -20,7 +20,7 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.18.2 <3.0.0"
+  sdk: ">3.0.0"
 
 dependencies:
   flutter:
@@ -34,7 +34,7 @@ dependencies:
   shimmer: ^2.0.0
   grouped_list: ^5.1.2
   multi_dropdown: ^1.0.2
-  charts_flutter: any
+  echart_flutter: ^0.1.0+2
 
   #navigation
   auto_route: ^5.0.2

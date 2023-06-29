@@ -106,7 +106,7 @@ class _$RemoteTaskDataSource extends RemoteTaskDataSource {
   }
 
   @override
-  Future<Response<dynamic>> updateStatus(StatusDto dto) {
+  Future<Response<dynamic>> updateStatus(StatusModel dto) {
     final Uri $url = Uri.parse('Task');
     final $body = dto;
     final Request $request = Request(

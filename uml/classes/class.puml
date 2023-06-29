@@ -1,55 +1,114 @@
-@startuml models
+@startuml
 
-entity User{
-*Id
-*NickName
-*Login
-*Password
-*CompanyId
-}
-entity Tables{
-*Id
-*Title
-*Users
-}
-entity Tasks{
-*Id
-*Title
-*Description
-*Status
-*TableId
-*Duration
-*Price
-*StartTime
-*Author
-*Executor
-Note
-Hidden
-EndTime
-Links
-}
-entity Chats{
-*Id
-Title.
-*Private
-}
-entity Messages{
-*Id
-*User
-*ChatId
-*Text
-*UtcTime
-Reply
+class XIdentityUser {
+    +long Id [PK]
+    +string Email
+    +string PushToken
+    +bool IsPushOn
+    +bool IsMailNotify
+    -List<Chat> Chats
+    -List<XIdentityUserConfirm> Confirmations
+    -List<XTable> Tables
+    -List<XTask> Tasks
+    -List<XTask> AuthoredTasks
+    -List<Note> Notes
+    -List<XMessage> SentMessages
 }
 
-Tables -right-o{ Tasks
-Tables --|{ User
-Tasks --|{ User
-Chats ||-up-o{ Messages
-Chats ||-right-o{ User
-Messages --|{ User
+class XIdentityUserConfirm {
+    +string Id [PK]
+    +XIdentityUser User [FK]
+    +string HashCode
+    +string MailCode
+}
+
+class XTask {
+    +string Id [PK]
+    +string Title
+    +string Description
+    +DateTime StartTime
+    +DateTime? EndTime
+    +TimeSpan Duration
+    +int StatusId
+    +XStatus Status [FK]
+    +bool Hidden
+    +List<string> Links
+    +int Price
+    +XTable Table [FK]
+    +XIdentityUser Author [FK]
+    +XIdentityUser Executor [FK]
+    -List<XContent> Contents
+    -List<Note> Notes
+    -List<XHistory> History
+    -List<XMessage> Messages
+}
+
+class XTable {
+    +string Id [PK]
+    +string Title
+    -List<XTask> Tasks
+    -List<XIdentityUser> Users
+}
+
+class XHistory {
+    +long Id [PK]
+    +XTask Task [FK]
+    +DateTime UpdateDate
+    +XIdentityUser Updater [FK]
+    +string Title
+    +string Description
+    +XStatus Status [FK]
+    +XIdentityUser Executor [FK]
+    -List<XContent> Contents
+}
+
+class XContent {
+    +long Id [PK]
+    +string Name
+    +string Extension
+    +XContentType ContentType
+}
+
+class Note {
+    +long Id [PK]
+    +string Text
+    +XTask Task [FK]
+    +XIdentityUser User [FK]
+    +DateTime CreatedOn
+}
+
+class Chat {
+    +string Id [PK]
+    +string? Title
+    +bool Private
+    -List<XIdentityUser> Users
+    -List<XMessage> Messages
+}
+
+class XMessage {
+    +long Id [PK]
+    +string Text
+    +DateTime Time
+    +XIdentityUser From [FK]
+    +Chat Chat [FK]
+    +XTable? Table [FK]
+    +XTask? Task [FK]
+}
 
 
-
+XIdentityUser --{ Chat : Users
+XIdentityUser -left-{ XIdentityUserConfirm : User
+XIdentityUser }--{ XTask : Author, Executor
+XIdentityUser }--{ XTable : Users
+XIdentityUser --{ XMessage : From
+XTask -left-{ XContent : Contents
+XTable --{ XTask : Tasks
+XHistory -- XTask : Task
+XHistory -up- XIdentityUser : Updater, Executor
+Note -left- XTask : Task
+Note -- XIdentityUser : User
+Chat -- XMessage : Messages
+XMessage -left- XTable : Table
+XMessage -left- XTask : Task
 
 @enduml

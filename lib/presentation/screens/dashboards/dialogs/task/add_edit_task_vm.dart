@@ -94,7 +94,7 @@ class AddEditTaskViewModel extends BaseViewModel {
           links: links,
           description: descriptionController.text.trim(),
           tableId: table.id,
-          status: taskModel!.status,
+          status: taskModel!.status.status,
           id: taskModel!.id,
           duration: duration,
           price: price,

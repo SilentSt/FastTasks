@@ -55,7 +55,7 @@ class TaskService extends AppService<BaseLocalDataSource, RemoteTaskDataSource> 
     }
   }
 
-  Future<void> patchStatus(StatusDto dto) async {
+  Future<void> patchStatus(StatusModel dto) async {
     final res = await rds.updateStatus(dto);
     final checked = errorChecker(res);
     if (!checked) {

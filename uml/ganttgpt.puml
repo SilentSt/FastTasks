@@ -1,0 +1,50 @@
+@startgantt
+'https://plantuml.com/gantt-diagram
+
+title Разработка приложения (февраль-июнь 2023)
+
+[Разработка архитектуры\nприложения] as PLAN starts at 2023-02-01 lasts 10 days
+
+[Разработка UX] as UX starts at 2023-02-11 lasts 3 days
+
+[Разработка архитектуры\nклиент-сервера] as CS starts at 2023-02-14 lasts 5 days
+
+[Выбор стека технологий] as CST starts at 2023-02-19 lasts 2 days
+
+[Разработка UI] as UI starts at 2023-02-21 lasts 10 days
+
+[Выбор направления дизайна] as DES starts at 2023-02-21 lasts 1 days
+
+[Разработка UI в FIGMA] as FIGMA starts at 2023-02-22 lasts 2 days
+
+[Написание UI\nпри помощи ЯП (верстка)] as VERST starts at 2023-02-24 lasts 7 days
+
+[Тестирование UI] as UIT starts at 2023-03-03 lasts 3 days
+
+[Доработка UI] as UIR starts at 2023-03-06 lasts 3 days
+
+[Разработка модуля\nвзаимодействия с API] as MAPI starts at 2023-03-08 lasts 15 days
+
+[Разработка запросов API] as REQ starts at 2023-03-23 lasts 5 days
+
+[Разработка моделей данных] as MODEL starts at 2023-03-28 lasts 7 days
+
+[Разработка модуля локального хранилища] as STOR starts at 2023-04-04 lasts 3 days
+
+[Тестрирование модуля API] as TAPI starts at 2023-04-12 lasts 5 days
+
+[Доработка модуля API] as DAPI starts at 2023-04-12 lasts 5 days
+
+[Разработка модуля коннектора UI с\nмодулем взаимодействия с API] as LOGIC starts at 2023-04-26 lasts 15 days
+
+[Тестрирование коннектора] as TLOGIC starts at 2023-05-16 lasts 5 days
+
+[Доработка коннектора] as DLOGIC starts at 2023-05-16 lasts 5 days
+
+[Тестрирование прототипа] as TPROT starts at 2023-05-21 lasts 5 days
+
+[Доработка прототипа] as DPROT starts at 2023-05-21 lasts 5 days
+
+[Написание отчета по проекту] as OTCH starts at 2023-06-05 lasts 10 days
+
+@endgantt

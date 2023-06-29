@@ -158,8 +158,9 @@ class ChatView extends StatelessWidget {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    IconButton(onPressed: () {}, icon: const Icon(Icons.attach_file_rounded,color: ColorName.black,)),
                     SizedBox(
-                      width: 340 > MediaQuery.of(context).size.width ? MediaQuery.of(context).size.width : 340,
+                      width: 340 > MediaQuery.of(context).size.width ? MediaQuery.of(context).size.width : 300,
                       child: TextField(
                         maxLines: model.maxLines,
                         controller: model.messageController,

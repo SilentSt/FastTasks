@@ -43,7 +43,7 @@ class HomeViewModel extends BaseViewModel {
     final newTasks = await taskService.fetch(myTasks.length, 30);
     myTasks.addAll(newTasks);
     myTasks.sort(
-      (a, b) => a.status.compareTo(b.status),
+      (a, b) => a.status.status.compareTo(b.status.status),
     );
     for (final _ in myTasks) {
       expansions.add(false);
@@ -128,7 +128,7 @@ class HomeViewModel extends BaseViewModel {
   }
 
   Future<void> updateTaskStatus(int taskStatus, String id) async {
-    await taskService.patchStatus(StatusDto(status:statuses[taskStatus], id: id));
+    await taskService.patchStatus(StatusModel(status:statuses[taskStatus], id: id));
     fetchMyTasks();
   }
 
