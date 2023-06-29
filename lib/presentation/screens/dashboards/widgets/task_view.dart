@@ -190,7 +190,7 @@ class TaskView extends StatelessWidget {
                               minSize: 0,
                               child: const Icon(
                                 Icons.file_open,
-                                color: ColorName.red,
+                                color: ColorName.purple,
                                 size: 32,
                               ),
                             ),
@@ -205,7 +205,7 @@ class TaskView extends StatelessWidget {
                   alignment: Alignment.centerLeft,
                   child: AppTextButton(
                     onTap: model.downloadAll,
-                    textStyle: AppTypography.sf.s16.w500.red,
+                    textStyle: AppTypography.sf.s16.w500.purple,
                     text: LocaleKeys.downloadAll.tr(),
                   ),
                 ),

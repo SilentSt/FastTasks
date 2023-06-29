@@ -1,0 +1,15 @@
+@startuml creatingTask
+'https://plantuml.com/activity-diagram-beta
+
+
+start
+    :Нажатие кнопки\n'создания новой доски'<
+    :Создание новой доски|
+    :Ввод названия доски<
+    :Выбор участников<
+    :Нажатие кнопки 'создать'<
+end
+
+
+
+@enduml

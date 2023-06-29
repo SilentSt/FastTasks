@@ -45,10 +45,10 @@ extension ToString on TaskStatus {
 TaskStatus taskStatusfromStr(String st) {
   switch(st){
     case "New":return TaskStatus.values[0];
-    case "Doing":return TaskStatus.values[0];
-    case "Review":return TaskStatus.values[0];
-    case "Done":return TaskStatus.values[0];
-    case "Closed":return TaskStatus.values[0];
+    case "Doing":return TaskStatus.values[1];
+    case "Review":return TaskStatus.values[2];
+    case "Done":return TaskStatus.values[3];
+    case "Closed":return TaskStatus.values[4];
   }
   return TaskStatus.values[0];
 }

@@ -138,7 +138,7 @@ class HomeView extends StatelessWidget {
                                             onTap: () => model.downloadAll(item.links),
                                             iconWidget: Icon(
                                               Icons.file_download,
-                                              color: ColorName.red.withOpacity(0.7),
+                                              color: ColorName.purple.withOpacity(0.7),
                                             ),
                                           ),
                                         )

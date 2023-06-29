@@ -1,11 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:stacked/stacked.dart';
-import 'package:tasklet/data/data_sources/auth/local_auth_ds.dart';
 import 'package:tasklet/data/models/models.dart';
-import 'package:tasklet/data/models/user/user_auth_model.dart';
 import 'package:tasklet/domain/services/auth_service.dart';
-import 'package:tasklet/presentation/app/app.dart';
-import 'package:tasklet/presentation/navigation/app_router.dart';
 import 'package:tasklet/presentation/screens/auth/enums/auth_enum.dart';
 
 class AuthViewModel extends BaseViewModel {
@@ -80,9 +76,6 @@ class AuthViewModel extends BaseViewModel {
       ),
     );
     if (res == null) return;
-
-    // LocalAuthDataSource.authState.value = AuthState.authorized;
-    // App.router.replace(const RootViewRoute());
   }
 
   @override

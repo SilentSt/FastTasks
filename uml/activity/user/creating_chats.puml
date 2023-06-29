@@ -1,7 +1,7 @@
 @startuml creatingChats
 'https://plantuml.com/activity-diagram-beta
 start
-    :Нажатие кнопки\n'создания чата'<
+    :Нажатие кнопки\n'Создать чата'<
     :Создание нового чата|
 
     :Выбор участников чата<

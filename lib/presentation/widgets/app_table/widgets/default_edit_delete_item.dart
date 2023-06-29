@@ -36,7 +36,7 @@ class DefaultEditDeleteItem extends TableItem {
           minSize: 0,
           child:  const Icon(
             Icons.close,
-            color: ColorName.red,
+            color: ColorName.purple,
             size: 15,
           ),
         ),
